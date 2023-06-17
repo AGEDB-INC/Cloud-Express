@@ -30,8 +30,12 @@ module.exports = (sequelize, DataTypes) => {
             allowNull: false
           },
           companyName: {
-            type: DataTypes.STRING
+            type: DataTypes.STRING,
+            allowNull: false,
           }
+        },
+         {
+            timestamps: false
         });
 
     return User;
