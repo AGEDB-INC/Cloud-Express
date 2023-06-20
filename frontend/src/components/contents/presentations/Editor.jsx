@@ -30,6 +30,7 @@ import SideBarToggle from '../../editor/containers/SideBarMenuToggleContainer';
 import { setting } from '../../../conf/config';
 import IconPlay from '../../../icons/IconPlay';
 import { getMetaData } from '../../../features/database/MetadataSlice';
+import OpenCSVFileDialog from '../../load_csv/load_csv';
 
 const Editor = ({
   setCommand,
@@ -204,6 +205,19 @@ const Editor = ({
                   size="2x"
                 />
               </button>
+              <OpenCSVFileDialog
+                setPromises={setPromises}
+                dispatch={dispatch}
+                setCommand={setCommand}
+                activeRequests={activeRequests}
+                command={command}
+                update={update}
+                addFrame={addFrame}
+                addAlert={addAlert}
+                database={database}
+                executeCypherQuery={executeCypherQuery}
+                addCommandHistory={addCommandHistory}
+              />
             </div>
           </div>
         </div>
