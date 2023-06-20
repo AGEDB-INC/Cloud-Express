@@ -36,13 +36,12 @@ exports.registerUser = async (req, res) => {
     const [results] = await db.sequelize.query(query, { replacements });
     console.log(results);
 
-    res.send("User registered successfully.");
+    res.status(200).send("User registered successfully.");
 
     } catch(err) {
         console.log(err);
     }
 }
-
 
     // Logging In a User
 exports.login = async (req, res) => {
@@ -50,7 +49,7 @@ exports.login = async (req, res) => {
 
     const { email, password } = req.body;
     if (!email || !password) {
-        return res.status(400).send({ message: "All fields are required." });
+        return res.status(401).send({ message: "All fields are required." });
     }
 
     const query = "SELECT * FROM Users WHERE email = ?";
@@ -59,24 +58,27 @@ exports.login = async (req, res) => {
     });
     console.log(results);
     if (results[0].length === 0) {
-        return res.status(400).send({ message: "Invalid credentials." });
+        return res.status(401).send("Invalid credentials!");
     }
 
     const user = results[0];
     const isPasswordValid = await bcrypt.compare(password, user.password);
     if (!isPasswordValid) {
-        return res.status(400).send({ message: "Invalid credentials." });
+        return res.status(401).send("Invalid credentials!");
     }
 
 
     // Creating Auth Token and Storing it in Cookies 
     const token = jwt.sign({ userEmail: email }, process.env.SECRET_KEY);
-    res.cookie('token', token, { httpOnly: true, secure: true });
-    res.send({ token, message: "User logged in successfully." });
+    // res.cookie('token', token, { httpOnly: true, secure: true });
+    res.cookie('token', token, { sameSite: 'none', secure: true });
+
+    res.status(200).send({ token, message: "User logged in successfully." });
 
 } catch(err) {
+    res.status(500).send({ message: "An error occurred." });
     console.log(err);
-}
+    }
 }
 
 

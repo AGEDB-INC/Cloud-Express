@@ -1,14 +1,38 @@
-import React, { useState } from 'react';
 // eslint-disable-next-line import/no-extraneous-dependencies
-import { Link } from 'react-router-dom';
+import React, { useState } from 'react';
+import { Link, useNavigate } from 'react-router-dom';
+import { toast } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
+import api from '../../services/api';
 
 const Login = () => {
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
+  const navigate = useNavigate();
 
-  const handleSubmit = (e) => {
+  const handleSubmit = async (e) => {
     e.preventDefault();
-    // Make API request with email and password
+
+    if (email === '' || password === '') {
+      toast.error('All fields are required!');
+      return;
+    }
+    try {
+      console.log(email, password);
+      // With Credentials allow the browser to store the cookie
+      const response = await api.post('/user/login', { email, password }, { withCredentials: true });
+
+      if (response.status === 200) {
+        toast.success('Successfully Logged In!');
+        navigate('/');
+      }
+    } catch (error) {
+      if (error.response && error.response.status === 401) {
+        toast.error('Invalid Credentials. Try Again!');
+      } else {
+        console.error('An error occurred:', error.message);
+      }
+    }
   };
 
   return (
@@ -151,6 +175,7 @@ const Login = () => {
                 </div>
 
                 <button
+                  onClick={handleSubmit}
                   type="submit"
                   className="btn btn-primary btn-block mb-4 rounded-pill btn-lg"
                 >

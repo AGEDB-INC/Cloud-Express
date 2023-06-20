@@ -8,20 +8,27 @@ require('dotenv').config()
 
 
 const app = express();
-app.use(cors());
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: true }));
 app.use(cookieParser());
 const db = require('./models');
 
+app.use(cors({
+        // Change this to Client URL when deployed
+  origin: 'http://localhost:3000', 
+  credentials: true // allow cookies
+}));
+
+  // Stores JWT in cookies
   app.use(
     expressjwt({
       secret: process.env.SECRET_KEY,
       algorithms: ["HS256"],
       getToken: (req) => req.cookies.token,
-    }).unless({ path: ["/user/login", "/user/register"] })
+    }).unless({ path: ["/user/login", "/user/signup"] })
   );
 
+  // Global Error Handling for JWT
   app.use(function (err, req, res, next) {
     if (err.name === 'UnauthorizedError') {
         res.status(401).send('Invalid or No Authorization Token Provided!');
@@ -30,7 +37,7 @@ const db = require('./models');
 
   app.use('/user', require('./routes/userRoutes'));
 
-  const PORT = process.env.PORT || 3001;
+  const PORT = process.env.PORT || 4001;
 
 db.sequelize.sync().then(() => {
     app.listen(PORT, () => {
