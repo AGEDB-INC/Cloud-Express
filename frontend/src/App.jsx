@@ -1,3 +1,4 @@
+/* eslint-disable import/no-extraneous-dependencies */
 /*
  * Licensed to the Apache Software Foundation (ASF) under one
  * or more contributor license agreements.  See the NOTICE file
@@ -22,11 +23,20 @@ import 'bootstrap/dist/css/bootstrap.min.css';
 import 'antd/dist/antd.css';
 import './static/style.css';
 import './static/navbar-fixed-left.css';
+import { BrowserRouter as Router, Route, Routes } from 'react-router-dom';
 import Login from './components/login/login';
+import SignUp from './components/signup/signup';
+import MainPage from './pages/Main/MainPage';
 
 const App = () => (
   <React.StrictMode>
-    <Login />
+    <Router>
+      <Routes>
+        <Route exact path="/login" element={<Login />} />
+        <Route exact path="/signup" element={<SignUp />} />
+        <Route exact path="/" element={<MainPage />} />
+      </Routes>
+    </Router>
   </React.StrictMode>
 );
 

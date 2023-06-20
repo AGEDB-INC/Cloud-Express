@@ -1,4 +1,6 @@
 import React, { useState } from 'react';
+// eslint-disable-next-line import/no-extraneous-dependencies
+import { Link } from 'react-router-dom';
 
 const SignUpPage = () => {
   const initialFormData = {
@@ -32,7 +34,7 @@ const SignUpPage = () => {
 
   return (
     <>
-      <div className="row">
+      <div className="row overflow-hidden" style={{ overflowY: 'none' }}>
         <div className="col-8">
           <section
             className="background-radial-gradient overflow-hidden"
@@ -61,7 +63,7 @@ const SignUpPage = () => {
   top: -60px;
   left: -130px;
   background: radial-gradient(#44006b, #ad1fff);
-  overflow: hidden;
+  overflow: hidden !important;;
 }
 #radius-shape-2 {
   border-radius: 38% 62% 63% 37% / 70% 33% 67% 30%;
@@ -70,7 +72,7 @@ const SignUpPage = () => {
   width: 300px;
   height: 300px;
   background: radial-gradient(#44006b, #ad1fff);
-  overflow: hidden;
+  overflow: hidden !important;
 }
 .bg-glass {
   background-color: hsla(0, 0%, 100%, 0.9) !important;
@@ -242,12 +244,14 @@ const SignUpPage = () => {
                 <div className="text-center mt-5">
                   <p>
                     Already Have Account&nbsp;
-                    <span
-                      className="text-primary font-weight-bold"
-                      style={{ cursor: 'pointer' }}
-                    >
-                      Sign In
-                    </span>
+                    <Link to="/login">
+                      <span
+                        className="text-primary font-weight-bold"
+                        style={{ cursor: 'pointer' }}
+                      >
+                        Sign In
+                      </span>
+                    </Link>
                   </p>
                 </div>
               </form>
