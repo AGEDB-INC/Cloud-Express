@@ -19,7 +19,6 @@ exports.registerUser = async (req, res) => {
     const countResult = await db.sequelize.query(countQuery, {
       replacements: [email],
       });
-
     const count = countResult[0][0].count;
     if (count > 0) {
       return res.status(400).send({ message: "User already exists." });
@@ -57,7 +56,7 @@ exports.login = async (req, res) => {
         replacements: [email],
     });
     console.log(results);
-    if (results[0].length === 0) {
+    if (results.length === 0) {
         return res.status(401).send("Invalid credentials!");
     }
 
