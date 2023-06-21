@@ -19,8 +19,47 @@
 const sessionService = require('../services/sessionService');
 const winston = require('winston');
 
+const multer = require('multer');
+const path = require('path');
+const storage = multer.diskStorage({
+    destination: function (req, file, cb) {
+      cb(null, 'uploads');
+    },
+    filename: function (req, file, cb) {
+      cb(null, file.fieldname + '-' + Date.now() + path.extname(file.originalname));
+    },
+  });
+  
+  const upload = multer({ storage: storage });
+
 class DatabaseController {
 
+    constructor() {
+        const upload = multer({ storage: storage });
+        this.uploadFiles = this.uploadFiles.bind(this, upload);
+    }
+    
+    async uploadFiles(upload, req, res) {
+    try {   
+        upload.single('file')(req, res, async (err) => {
+        if (err) {
+            console.error('Error uploading file:', err);
+            res.status(500).json({ error: 'Error uploading file' });
+            return;
+        }
+        if (!req.file) {
+            res.status(400).json({ error: 'No file uploaded' });
+            return;
+        }
+        const filePath = path.join(__dirname, '../../uploads', req.file.filename);
+        res.json({ message: 'File uploaded successfully', filePath });
+        });
+    } catch (error) {
+        console.error('Error uploading file:', error);
+        res.status(500).json({ error: 'Error uploading file' });
+    }
+    }
+    
     async connectDatabase(req, res, next) {
         let databaseService = sessionService.get(req.sessionID);
         if (!databaseService.isConnected()) {

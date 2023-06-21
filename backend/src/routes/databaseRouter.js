@@ -17,6 +17,8 @@
  * under the License.
  */
 const express = require("express");
+const multer = require('multer');
+const upload = multer({ dest: '../../uploads/' }); // Specify the directory where uploaded files will be saved
 const DatabaseController = require('../controllers/databaseController')
 const router = express.Router();
 const databaseController = new DatabaseController();
@@ -28,4 +30,5 @@ router.post("/connect", wrap(databaseController.connectDatabase));
 router.get("/disconnect", wrap(databaseController.disconnectDatabase));
 router.post("/meta", wrap(databaseController.getMetadata));
 router.get("/metaChart", wrap(databaseController.getMetaChart));
++router.post("/upload", wrap(databaseController.uploadFiles));
 module.exports = router;
