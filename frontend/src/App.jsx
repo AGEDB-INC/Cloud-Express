@@ -1,3 +1,5 @@
+/* eslint-disable */
+
 /* eslint-disable import/no-extraneous-dependencies */
 /*
  * Licensed to the Apache Software Foundation (ASF) under one
@@ -18,26 +20,46 @@
  * under the License.
  */
 
-import React from 'react';
+import React, { useEffect } from 'react';
 import 'bootstrap/dist/css/bootstrap.min.css';
 import 'antd/dist/antd.css';
 import './static/style.css';
 import './static/navbar-fixed-left.css';
-import { BrowserRouter as Router, Route, Routes } from 'react-router-dom';
+import { ToastContainer } from 'react-toastify';
+import { BrowserRouter as Router, Route, Routes, useNavigate } from 'react-router-dom';
+import Cookies from 'js-cookie';
 import Login from './components/login/login';
 import SignUp from './components/signup/signup';
 import MainPage from './pages/Main/MainPage';
 
-const App = () => (
-  <React.StrictMode>
-    <Router>
-      <Routes>
-        <Route exact path="/login" element={<Login />} />
-        <Route exact path="/signup" element={<SignUp />} />
-        <Route exact path="/" element={<MainPage />} />
-      </Routes>
-    </Router>
-  </React.StrictMode>
-);
+const CheckAuth = () => {
+  const navigate = useNavigate();
+  
+  useEffect(() => {
+    if (Cookies.get('token')) {
+      navigate('/');
+    } else {
+      navigate('/login');
+    }
+  }, []);
+  
+  return null;
+};
+
+const App = () => {
+  return (
+    <React.StrictMode>
+      <Router>
+        <CheckAuth />
+        <Routes>
+          <Route exact path="/login" element={<Login />} />
+          <Route exact path="/signup" element={<SignUp />} />
+          <Route exact path="/" element={<MainPage />} />
+        </Routes>
+      </Router>
+      <ToastContainer position="bottom-center" autoClose={2000} />
+    </React.StrictMode>
+  );
+};
 
 export default App;

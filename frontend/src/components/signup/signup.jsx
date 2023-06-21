@@ -1,6 +1,9 @@
-import React, { useState } from 'react';
 // eslint-disable-next-line import/no-extraneous-dependencies
-import { Link } from 'react-router-dom';
+import React, { useState } from 'react';
+import { Link, useNavigate } from 'react-router-dom';
+import { toast } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
+import api from '../../services/api';
 
 const SignUpPage = () => {
   const initialFormData = {
@@ -12,6 +15,7 @@ const SignUpPage = () => {
     companyName: '',
   };
   const [formData, setFormData] = useState(initialFormData);
+  const navigate = useNavigate();
 
   const handleInputChange = (event) => {
     setFormData({
@@ -23,10 +27,33 @@ const SignUpPage = () => {
   const handleSubmit = async (event) => {
     event.preventDefault();
 
-    if (formData.password !== formData.confirmPassword) {
+    if (formData.firstName === '' || formData.lastName === '' || formData.email === ''
+    || formData.password === '' || formData.confirmPassword === '' || formData.companyName === '') {
+      toast.error('All fields are required!');
       return;
     }
-    console.log(formData);
+
+    if (formData.password !== formData.confirmPassword) {
+      toast.error('Passwords do not match!');
+      return;
+    }
+    const submitData = { ...formData };
+    delete submitData.confirmPassword;
+    // console.log(submitData);
+    try {
+      //  With Credentials allow the browser to store the cookie
+      const response = await api.post('/user/signup', submitData, { withCredentials: true });
+      if (response.status === 200) {
+        toast.success('Successfully Signed Up!');
+        navigate('/login');
+      } else {
+        console.error('SignUp failed');
+        toast.error('SignUp failed!');
+      }
+    } catch (error) {
+      console.error('An error occurred:', error.response);
+      toast.error('SignUp failed! Please try again');
+    }
   };
   const {
     firstName, lastName, email, password, confirmPassword, companyName,
@@ -235,6 +262,7 @@ const SignUpPage = () => {
                 </div>
 
                 <button
+                  onClick={handleSubmit}
                   type="submit"
                   className="btn btn-primary btn-block mb-4 rounded-pill btn-lg"
                 >
