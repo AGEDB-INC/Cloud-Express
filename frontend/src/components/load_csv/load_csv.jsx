@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useState } from 'react';
 import PropTypes from 'prop-types';
 import uuid from 'react-uuid';
 import { connect } from 'react-redux';
@@ -69,7 +69,6 @@ function OpenCSVFileDialog({
         nodeFiles.push(file);
       }
     }
-    // SELECT create_vlabel('${currentGraph}', '${labelName}');
 
     const uploadNodeFiles = nodeFiles.map((file) => {
       const labelName = file.name.replace('.csv', '');
@@ -124,7 +123,7 @@ function OpenCSVFileDialog({
       console.error('Error uploading files:', error);
     }
   };
-
+  const [dropdownValue, setDropdownValue] = useState('');
   const openCSVFileDialog = () => {
     const input = document.createElement('input');
     input.type = 'file';
@@ -133,16 +132,68 @@ function OpenCSVFileDialog({
     input.addEventListener('change', handleCSVFiles);
     input.click();
   };
-
+  // Placeholder function for option2
+  const handleSampleCSV = () => {
+    fetch('/api/v1/db/Samplefiles')
+      .then((response) => response.json())
+      .then(async (fileInfos) => {
+        const nodeQueries = fileInfos
+          .filter((file) => file.type === 'node')
+          .map((file) => {
+            const labelName = file.name.split('.')[0]; // Assuming label name is the filename without extension
+            const query = `
+              SELECT create_vlabel('${currentGraph}', '${labelName}')
+              WHERE _label_id('${currentGraph}', '${labelName}') = 0;
+              SELECT load_labels_from_file('${currentGraph}', '${labelName}', '${file.path}');
+            `;
+            return sendQueryToDatabase(query); // Replace with your SQL execution function
+          });
+        await Promise.all(nodeQueries);
+        const edgeQueries = fileInfos
+          .filter((file) => file.type === 'edge')
+          .map((file) => {
+            console.log(file);
+            const labelName = file.name.substring(0, file.name.indexOf('['));
+            const query = `
+              SELECT create_elabel('${currentGraph}', '${labelName}')
+              WHERE _label_id('${currentGraph}', '${labelName}') = 0;
+              SELECT load_edges_from_file('${currentGraph}', '${labelName}', '${file.path}');
+            `;
+            return sendQueryToDatabase(query);
+          });
+        return Promise.all(edgeQueries);
+      })
+      .then(() => {
+        console.log('All queries executed');
+      })
+      .catch((error) => console.error('Error:', error));
+  };
+  const handleDropdownChange = (event) => {
+    setDropdownValue(event.target.value);
+    switch (event.target.value) {
+      case 'load_from_system':
+        openCSVFileDialog();
+        setDropdownValue('');
+        break;
+      case 'load_sample_csvs':
+        handleSampleCSV();
+        setDropdownValue('');
+        break;
+      default:
+        break;
+    }
+  };
   return (
-    <button
-      className="frame-head-button btn btn-link"
-      type="button"
-      onClick={openCSVFileDialog}
-      title="Load graph from CSV File"
-    >
-      Load CSV
-    </button>
+    <div className="d-flex justify-content-center align-items-center p-0 m-0">
+      <select
+        value={dropdownValue}
+        onChange={handleDropdownChange}
+        className="frame-head-button btn btn-link"
+      >
+        <option value="load_from_system">Load CSVs</option>
+        <option value="load_sample_csvs">Load sample CSVs</option>
+      </select>
+    </div>
   );
 }
 

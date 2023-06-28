@@ -21,6 +21,7 @@ const winston = require('winston');
 
 const multer = require('multer');
 const path = require('path');
+const fs = require('fs');
 const storage = multer.diskStorage({
     destination: function (req, file, cb) {
       cb(null, 'uploads');
@@ -58,6 +59,53 @@ class DatabaseController {
         console.error('Error uploading file:', error);
         res.status(500).json({ error: 'Error uploading file' });
     }
+    }
+
+    async getFilesInfo(req, res) {
+        try {   
+            const directoryPath = path.join(__dirname, '../../uploads/SampleCSVs');
+            console.log(directoryPath);
+            fs.readdir(directoryPath, (err, files) => {
+                if (err) {
+                    console.error('Error reading directory:', err);
+                    res.status(500).json({ error: 'Error reading directory' });
+                    return;
+                }
+        
+                let fileInfoPromises = files.map(file => {
+                    return new Promise((resolve, reject) => {
+                        let filePath = path.join(directoryPath, file);
+                        
+                        fs.readFile(filePath, 'utf8', (err, data) => {
+                            if (err) {
+                                reject('Error reading file:', err);
+                            }
+                            else {
+                                let type = file.includes('[') && file.includes('&') && file.includes(']') ? 'edge' : 'node';
+                                console.log('File type:', type);
+                                console.log('File name:', file);
+                                console.log('File filePath:', filePath);
+                                resolve({
+                                    name: file,
+                                    path: filePath,
+                                    type: type
+                                });
+                            }
+                        });
+                    });
+                });
+        
+                Promise.all(fileInfoPromises)
+                    .then(fileInfo => res.json(fileInfo))
+                    .catch(error => {
+                        console.error(error);
+                        res.status(500).json({ error: 'Error reading files' });
+                    });
+            });
+        } catch (error) {
+            console.error('Error reading directory:', error);
+            res.status(500).json({ error: 'Error reading directory' });
+        }
     }
     
     async connectDatabase(req, res, next) {
