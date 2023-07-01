@@ -1,0 +1,60 @@
+.page {
+    position: relative;
+    height: 350px;
+    flex-direction: column;
+
+  }
+  
+  .content {
+    margin-bottom: 20px;
+    font-size: 14px;
+    margin-top: 20px;
+    margin-left: 15px;
+    margin-bottom: 50px;
+    height: 200px;
+  }
+  
+
+  .title{
+    font-family: agcfont-regular;
+    font-weight: bold;
+    font-size: 20px;
+    color: black;
+    margin-top: 20px;
+    margin-left: 15px;
+  }
+
+  .subheading{
+    font-family: agcfont-regular;
+    font-weight: bold;
+    font-size: 16px;
+    color: #142b80;
+    margin-top: 20px;
+    margin-left: 15px;
+  }
+
+  .navigation {
+    position: absolute;
+    bottom: 10px;
+    display: flex;
+    justify-content: space-between;
+    width: 100%;
+  }
+  
+  .previousButton,
+  .nextButton {
+    padding: 10px;
+    border: none;
+    background-color: transparent;
+    cursor: pointer;
+  }
+  
+  .previousButton {
+    margin-right: 10px;
+  }
+  
+  .nextButton {
+    margin-left: 10px;
+  }
+
+

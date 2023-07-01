@@ -32,6 +32,12 @@ import Login from './components/login/login';
 import SignUp from './components/signup/signup';
 import MainPage from './pages/Main/MainPage';
 
+import MainHeader from './components/CloudExpress/Header/Header';
+import MainTutorialGuideTab from './components/CloudExpress/tutorialguidetab/tutorialguidetab';
+import MainProjectTab from './components/CloudExpress/MyProjectTab/MyProjectTab';
+
+
+
 const CheckAuth = () => {
   const navigate = useNavigate();
   
@@ -46,6 +52,16 @@ const CheckAuth = () => {
   return null;
 };
 
+function newPage(){
+  return(
+    <div>
+      <MainHeader />
+      <MainProjectTab />
+      <MainTutorialGuideTab />
+    </div>
+  );
+}
+
 const App = () => {
   return (
     <React.StrictMode>
@@ -54,7 +70,9 @@ const App = () => {
         <Routes>
           <Route exact path="/login" element={<Login />} />
           <Route exact path="/signup" element={<SignUp />} />
-          <Route exact path="/" element={<MainPage />} />
+          
+          {/* <Route exact path="/" element={<MainPage />} /> */}
+          <Route exact path="/" element={newPage()} />
         </Routes>
       </Router>
       <ToastContainer position="bottom-center" autoClose={2000} />
@@ -63,3 +81,4 @@ const App = () => {
 };
 
 export default App;
+
