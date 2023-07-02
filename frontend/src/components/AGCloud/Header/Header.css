@@ -1,5 +1,6 @@
 .header-title{
-    background-color: blue;
+    background-color:  #2755ff;
+    /* background-color: #007bff;  */
     height: 75px;
     display: flex;
     flex-direction: row;

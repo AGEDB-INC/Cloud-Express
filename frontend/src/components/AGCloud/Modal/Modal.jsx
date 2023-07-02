@@ -1,11 +1,9 @@
-import React from 'react';
+import React, { useState } from 'react';
+import PropTypes from 'prop-types';
 import './Modal.css'; // Import your CSS file
 
-const MainModal = () => {
-  function selectedBox(id) {
-    const box = document.getElementById(id);
-    box.style.borderColor = 'blue';
-  }
+const MainModal = ({ onSelectProject }) => {
+  const [selectedProject, setSelectedProject] = useState('');
 
   function openModal() {
     document.getElementById('myModal').style.display = 'flex';
@@ -35,6 +33,17 @@ const MainModal = () => {
   const handleButtonLeave = (event) => {
     const updatedEvent = { ...event };
     updatedEvent.target.style.backgroundColor = 'white'; // Reset the background color on leave
+  };
+
+  const handleProjectSelection = (event) => {
+    setSelectedProject(event.target.value);
+  };
+
+  const handleCreateProject = () => {
+    if (selectedProject) {
+      onSelectProject(selectedProject);
+    }
+    closeModal();
   };
 
   return (
@@ -67,13 +76,28 @@ const MainModal = () => {
               <div className="rectangle-radio" onMouseEnter={handleHover} onMouseLeave={handleLeave}>
                 <label className="radio-text" htmlFor="moviesData">
                   Graph for Movies Data
-                  <input style={{ marginTop: '-20px' }} id="moviesData" className="radio-circle" type="radio" name="builtInProjects" value="moviesData" />
+                  <input
+                    style={{ marginTop: '-20px' }}
+                    id="moviesData"
+                    className="radio-circle"
+                    type="radio"
+                    name="builtInProjects"
+                    value="Graph For Movies Data"
+                    onChange={handleProjectSelection}
+                  />
                 </label>
               </div>
               <div className="rectangle-radio" onMouseEnter={handleHover} onMouseLeave={handleLeave}>
                 <label className="radio-text" htmlFor="fraudDetection">
                   Graph for Fraud Detection
-                  <input onClick={selectedBox.bind(null, 'fraudDetection')} id="fraudDetection" className="radio-circle" type="radio" name="builtInProjects" value="fraudDetection" />
+                  <input
+                    id="fraudDetection"
+                    className="radio-circle"
+                    type="radio"
+                    name="builtInProjects"
+                    value="Graph for Fraud Detection"
+                    onChange={handleProjectSelection}
+                  />
                 </label>
               </div>
             </div>
@@ -86,7 +110,14 @@ const MainModal = () => {
               <div className="csv-radio" onMouseEnter={handleHover} onMouseLeave={handleLeave}>
                 <label className="radio-text" htmlFor="importCSV">
                   Import User Data (.CSV)
-                  <input id="importCSV" className="radio-circle" type="radio" name="builtInProjects" value="option1" />
+                  <input
+                    id="importCSV"
+                    className="radio-circle"
+                    type="radio"
+                    name="builtInProjects"
+                    value="Import User Data (.CSV)"
+                    onChange={handleProjectSelection}
+                  />
                 </label>
               </div>
             </div>
@@ -102,7 +133,7 @@ const MainModal = () => {
                 role="button"
                 tabIndex={0}
                 onKeyDown={closeModal}
-                onClick={closeModal}
+                onClick={handleCreateProject}
               >
                 <span className="rectangle-button">+ Create New Project</span>
               </div>
@@ -124,6 +155,10 @@ const MainModal = () => {
       </div>
     </div>
   );
+};
+
+MainModal.propTypes = {
+  onSelectProject: PropTypes.func.isRequired,
 };
 
 export default MainModal;
