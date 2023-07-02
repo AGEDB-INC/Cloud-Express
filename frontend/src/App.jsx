@@ -31,36 +31,29 @@ import Cookies from 'js-cookie';
 import Login from './components/login/login';
 import SignUp from './components/signup/signup';
 import MainPage from './pages/Main/MainPage';
-
-import MainHeader from './components/CloudExpress/Header/Header';
-import MainTutorialGuideTab from './components/CloudExpress/tutorialguidetab/tutorialguidetab';
-import MainProjectTab from './components/CloudExpress/MyProjectTab/MyProjectTab';
-
+import AGCloudPage from './pages/AGCloud/AGCloud';
+import { useLocation } from 'react-router-dom'
 
 
 const CheckAuth = () => {
   const navigate = useNavigate();
-  
+  const location = useLocation();
+
   useEffect(() => {
     if (Cookies.get('token')) {
-      navigate('/');
+      if (location.pathname === '/AGCloud') {
+        navigate('/AGCloud');
+      } else {
+        navigate('/');
+      }
     } else {
       navigate('/login');
     }
-  }, []);
-  
+  }, [navigate, location]);
+
   return null;
 };
 
-function newPage(){
-  return(
-    <div>
-      <MainHeader />
-      <MainProjectTab />
-      <MainTutorialGuideTab />
-    </div>
-  );
-}
 
 const App = () => {
   return (
@@ -71,8 +64,8 @@ const App = () => {
           <Route exact path="/login" element={<Login />} />
           <Route exact path="/signup" element={<SignUp />} />
           
-          {/* <Route exact path="/" element={<MainPage />} /> */}
-          <Route exact path="/" element={newPage()} />
+          <Route exact path="/" element={<MainPage />} />
+          <Route exact path="/AGCloud" element={<AGCloudPage/>} />
         </Routes>
       </Router>
       <ToastContainer position="bottom-center" autoClose={2000} />

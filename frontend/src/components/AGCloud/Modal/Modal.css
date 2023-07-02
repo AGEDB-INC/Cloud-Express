@@ -30,23 +30,15 @@
     cursor: pointer;
   } 
 
-  .div-style{
-    display: flex;
-    width: auto;
-    height: 100px;
-    background-color: #F0F3F8;
-}
-
 .projects-div-style{
   display: flex;
   width: auto;
-  height: 100px;
+  height: 200px;
   background-color: white;
   font-style: agcfont-bold;
 }
 
 .button-div-style{
-  margin-top: 80px;
   display: flex;
   width: auto;
   height: 100px;
@@ -65,9 +57,16 @@
 .first-heading {
   font-weight: bold;
   margin-right: 10px;
-  margin-left: 20px;
   margin-top: 20px;
   font-family: agcfont-bold;
+}
+
+.div-style{
+  width: 600px;
+  display: flex;
+  width: auto;
+  height: 100px;
+  background-color: #F0F3F8;
 }
 
 .second-heading{
@@ -116,10 +115,12 @@
   font-family: agcfont-regular;
   font-size: 20px;
   text-align: center;
+  background-color: transparent;
+  color: gray;
 }
 
 .rectangle-button-div{
-  background-color: lightgray;
+  background-color: white;
   margin-top: 20px;
   margin-left: 20px;
   width: 220px;
@@ -147,13 +148,12 @@
   color: gray;
   font-weight: 20px;
   font-family: agcfont-regular;
-  padding-right: 20px;
   height: auto;
-  width: 150px;
+  width: 180px;
 }
 
 .radio-circle{
-  margin-left: 15px;
+  margin-left: 20px;
   transform: scale(1.5);
 }
 

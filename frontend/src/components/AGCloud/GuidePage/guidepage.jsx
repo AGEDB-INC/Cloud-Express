@@ -34,11 +34,11 @@ function GuidePages() {
         <hr />
         <p className="subheading">{subheading}</p>
         <p className="content">
-          {content.split('\n').map((line, index) => (
-            <React.Fragment key={index}>
+          {content.split('\n').map((line) => (
+            <>
               {line}
               <br />
-            </React.Fragment>
+            </>
           ))}
         </p>
       </div>
