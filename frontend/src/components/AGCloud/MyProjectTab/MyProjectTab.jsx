@@ -32,7 +32,7 @@ const MyProjectTab = () => {
 
   return (
     <div>
-      <div className="div-style">
+      <div className="div-style" style={{ display: 'flex', alignItems: 'flex-start' }}>
         <h2 className="first-heading">My Project</h2>
         <p className="paragraph">Add a project to view its graph visualization in AGEViewer.</p>
       </div>

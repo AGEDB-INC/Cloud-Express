@@ -35,21 +35,23 @@ import AGCloudPage from './pages/AGCloud/AGCloud';
 import { useLocation } from 'react-router-dom'
 
 
+//============we will Uncomment this code once login and signup functionality is done.===========//
+
 const CheckAuth = () => {
   const navigate = useNavigate();
   const location = useLocation();
 
-  useEffect(() => {
-    if (Cookies.get('token')) {
-      if (location.pathname === '/AGCloud') {
-        navigate('/AGCloud');
-      } else {
-        navigate('/');
-      }
-    } else {
-      navigate('/login');
-    }
-  }, [navigate, location]);
+  // useEffect(() => {
+  //   if (Cookies.get('token')) {
+  //     if (location.pathname === '/AGCloud') {
+  //       navigate('/AGCloud');
+  //     } else {
+  //       navigate('/');
+  //     }
+  //   } else {
+  //     navigate('/login');
+  //   }
+  // }, [navigate, location]);
 
   return null;
 };
@@ -63,7 +65,7 @@ const App = () => {
         <Routes>
           <Route exact path="/login" element={<Login />} />
           <Route exact path="/signup" element={<SignUp />} />
-          
+
           <Route exact path="/" element={<MainPage />} />
           <Route exact path="/AGCloud" element={<AGCloudPage/>} />
         </Routes>

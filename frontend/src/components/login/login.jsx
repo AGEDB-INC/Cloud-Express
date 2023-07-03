@@ -1,3 +1,4 @@
+/* eslint-disable import/no-unresolved */
 // eslint-disable-next-line import/no-extraneous-dependencies
 import React, { useState } from 'react';
 import { Link, useNavigate } from 'react-router-dom';
