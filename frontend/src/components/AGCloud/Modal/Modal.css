@@ -1,0 +1,159 @@
+.modal {
+    display: none;
+    justify-content: center;
+    align-items: center;
+    z-index: 1;
+    vertical-align: top;
+
+  }
+  
+  
+  .modal-content {
+    background-color: #fefefe;
+    margin: auto;
+    border: 1px solid #888;
+    width: 400px;
+    height: 600px;
+  }
+
+  .close {
+    color: #aaaaaa;
+    float: right;
+    font-size: 28px;
+    font-weight: bold;
+  }
+  
+  .close:hover,
+  .close:focus {
+    color: #000;
+    text-decoration: none;
+    cursor: pointer;
+  } 
+
+.projects-div-style{
+  display: flex;
+  width: auto;
+  height: 200px;
+  background-color: white;
+  font-style: agcfont-bold;
+}
+
+.button-div-style{
+  display: flex;
+  width: auto;
+  height: 100px;
+  background-color: white;
+  font-style: agcfont-bold;
+}
+
+.paragraph{
+  margin-left: 10px;
+    margin-top: 40px;
+    font-family: agcfont-regular;
+    color: blue;
+    font-size: 14px;
+}
+
+.first-heading {
+  font-weight: bold;
+  margin-right: 10px;
+  margin-top: 20px;
+  font-family: agcfont-bold;
+}
+
+.div-style{
+  width: 600px;
+  display: flex;
+  width: auto;
+  height: 100px;
+  background-color: #F0F3F8;
+}
+
+.second-heading{
+  margin-left: 20px;
+  margin-top: 20px;
+  font-family: agcfont-regular;
+  color: 'black';
+  font-weight:bold;
+  font-size: 20px;
+}
+
+.rectangle-radio{
+  width: 250px;
+  height: 100px;
+  border: 2px solid lightgray;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin-right:20px;
+  border-radius: 7px;
+}
+
+.csv-radio{
+  width: 250px;
+  height: 100px;
+  border: 2px solid lightgray;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  border-radius: 7px;
+  margin-right:310px;
+
+}
+
+.rectangle-display{
+  display: flex;
+  justify-content: center;
+  margin-top: 70px;
+  margin-left:-200px;
+  font-size: 20px;
+  font-weight: bolder;
+}
+
+.rectangle-button{
+  font-weight: bolder;
+  font-family: agcfont-regular;
+  font-size: 20px;
+  text-align: center;
+  background-color: transparent;
+  color: gray;
+}
+
+.rectangle-button-div{
+  background-color: white;
+  margin-top: 20px;
+  margin-left: 20px;
+  width: 220px;
+  height: 80px;
+  border: 2px solid black;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin-right:10px;
+  border-radius: 7px;
+}
+
+.button-display{
+  display: flex;
+  justify-content: center;
+  margin-left:40px;
+  font-size: 20px;
+  font-weight: bolder;
+  color: gray;
+}
+
+
+.radio-text{
+  font-weight: bolder;
+  color: gray;
+  font-weight: 20px;
+  font-family: agcfont-regular;
+  height: auto;
+  width: 180px;
+}
+
+.radio-circle{
+  margin-left: 20px;
+  transform: scale(1.5);
+}
+

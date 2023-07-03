@@ -1,0 +1,22 @@
+.header-title{
+    background-color:  #2755ff;
+    /* background-color: #007bff;  */
+    height: 75px;
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    align-items: center;
+}
+  
+.header-text{
+    font-size: 22pt;
+    margin-left: 90px;
+    margin-top: 15px;
+    color: white;
+}
+
+.account-information{
+    color: white;
+    margin-top: 15px;
+    margin-right: 60px;
+}

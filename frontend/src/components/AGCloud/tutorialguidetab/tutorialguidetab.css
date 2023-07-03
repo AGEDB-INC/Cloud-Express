@@ -1,0 +1,85 @@
+.tab {
+  overflow: hidden;
+  border: 1px solid #ccc;
+  background-color: #f1f1f1;
+  width: 93%;
+  display: flex;
+  justify-content: left;
+  align-items: left;
+  margin-left: 4%;
+  font-family: agcfont-bold;
+  font-size: 14pt;
+  border-bottom: 1px solid gray;
+  font-family: agcfont-regular;
+}
+
+/* Style the buttons that are used to open the tab content */
+.tab button {
+  font-family: agcfont-regular;
+  background-color: inherit;
+  float: left;
+  border: none;
+  outline: none;
+  cursor: pointer;
+  padding: 14px 16px;
+  transition: 0.3s;
+  color: gray;
+}
+
+
+/* Change background color of buttons on hover */
+.tab button:hover {
+  background-color: #ddd;
+}
+
+/* Create an active/current tablink class */
+.tab button.active {
+  color: #142b80;
+  text-decoration:3px underline;
+  font-weight:700;
+  font-family: agcfont-regular;
+}
+
+/* Style the tab content */
+.tabcontent {
+  display: none;
+  padding: 6px 12px;
+  border: 1px solid #ccc;
+  border-top: none;
+  margin-left: 4%;
+  font-family: agcfont-bold;
+  font-size: 14pt;
+  width: 93%;
+  font-family: agcfont-regular;
+  margin-bottom: 40px;
+}
+
+.div1, .div2 {
+  width: 40%;
+
+}
+
+.container {
+  display: flex;
+  margin-left: -10px;
+}
+
+.connectionDetails{
+  width: auto;
+  font-family: agcfont-regular;
+  font-size: 14pt;
+  color: darkblue;
+  padding: 15px;
+}
+
+.containertutorialTab {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 20vh;
+  }
+
+.tutorialtab {
+  text-align: center;
+}
+

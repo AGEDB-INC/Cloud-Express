@@ -31,20 +31,29 @@ import Cookies from 'js-cookie';
 import Login from './components/login/login';
 import SignUp from './components/signup/signup';
 import MainPage from './pages/Main/MainPage';
+import AGCloudPage from './pages/AGCloud/AGCloud';
+import { useLocation } from 'react-router-dom'
+
 
 const CheckAuth = () => {
   const navigate = useNavigate();
-  
+  const location = useLocation();
+
   useEffect(() => {
     if (Cookies.get('token')) {
-      navigate('/');
+      if (location.pathname === '/AGCloud') {
+        navigate('/AGCloud');
+      } else {
+        navigate('/');
+      }
     } else {
       navigate('/login');
     }
-  }, []);
-  
+  }, [navigate, location]);
+
   return null;
 };
+
 
 const App = () => {
   return (
@@ -54,7 +63,9 @@ const App = () => {
         <Routes>
           <Route exact path="/login" element={<Login />} />
           <Route exact path="/signup" element={<SignUp />} />
+          
           <Route exact path="/" element={<MainPage />} />
+          <Route exact path="/AGCloud" element={<AGCloudPage/>} />
         </Routes>
       </Router>
       <ToastContainer position="bottom-center" autoClose={2000} />
@@ -63,3 +74,4 @@ const App = () => {
 };
 
 export default App;
+
