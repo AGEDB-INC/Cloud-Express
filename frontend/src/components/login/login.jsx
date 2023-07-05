@@ -19,17 +19,19 @@ const Login = () => {
       return;
     }
     try {
-      console.log(email, password);
+      // console.log(email, password);
       // With Credentials allow the browser to store the cookie
       const response = await api.post('/user/login', { email, password }, { withCredentials: true });
 
       if (response.status === 200) {
         toast.success('Successfully Logged In!');
-        navigate('/');
+        navigate('/AGCloud');
       }
     } catch (error) {
-      if (error.response && error.response.status === 401) {
+      if (error.response && error.response.status === 400) {
         toast.error('Invalid Credentials. Try Again!');
+      } else if (error.response && error.response.status === 500) {
+        toast.error('Server Error. Try Again!');
       } else {
         console.error('An error occurred:', error.message);
       }

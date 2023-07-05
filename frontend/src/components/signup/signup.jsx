@@ -1,19 +1,21 @@
-/* eslint-disable import/no-unresolved */
 // eslint-disable-next-line import/no-extraneous-dependencies
-import React, { useState } from 'react';
-import { Link, useNavigate } from 'react-router-dom';
-import { toast } from 'react-toastify';
-import 'react-toastify/dist/ReactToastify.css';
-import api from '../../services/api';
+/* eslint-disable quotes,padded-blocks,brace-style, operator-linebreak, object-curly-newline,
+prefer-destructuring, no-shadow, no-trailing-spaces */
+
+import React, { useState } from "react";
+import { Link, useNavigate } from "react-router-dom";
+import { toast } from "react-toastify";
+import "react-toastify/dist/ReactToastify.css";
+import api from "../../services/api";
 
 const SignUpPage = () => {
   const initialFormData = {
-    firstName: '',
-    lastName: '',
-    email: '',
-    password: '',
-    confirmPassword: '',
-    companyName: '',
+    firstName: "",
+    lastName: "",
+    email: "",
+    password: "",
+    confirmPassword: "",
+    companyName: "",
   };
   const [formData, setFormData] = useState(initialFormData);
   const navigate = useNavigate();
@@ -28,49 +30,64 @@ const SignUpPage = () => {
   const handleSubmit = async (event) => {
     event.preventDefault();
 
-    if (formData.firstName === '' || formData.lastName === '' || formData.email === ''
-    || formData.password === '' || formData.confirmPassword === '' || formData.companyName === '') {
-      toast.error('All fields are required!');
+    if (
+      formData.firstName === "" ||
+      formData.lastName === "" ||
+      formData.email === "" ||
+      formData.password === "" ||
+      formData.confirmPassword === "" ||
+      formData.companyName === ""
+    ) {
+      toast.error("All fields are required!");
       return;
     }
 
     if (formData.password !== formData.confirmPassword) {
-      toast.error('Passwords do not match!');
+      toast.error("Passwords do not match!");
       return;
     }
     const submitData = { ...formData };
     delete submitData.confirmPassword;
-    // console.log(submitData);
+    console.log(submitData);
     try {
       //  With Credentials allow the browser to store the cookie
-      const response = await api.post('/user/signup', submitData, { withCredentials: true });
+      const response = await api.post("/user/signup", submitData, {
+        withCredentials: true,
+      });
       if (response.status === 200) {
-        toast.success('Successfully Signed Up!');
-        navigate('/login');
+        toast.success("Successfully Signed Up!");
+        navigate("/login");
       } else {
-        console.error('SignUp failed');
-        toast.error('SignUp failed!');
+        console.error("SignUp failed");
+        toast.error("SignUp failed!");
       }
     } catch (error) {
+
       if (error.response && error.response.status === 400) {
-        toast.error('Email Already Exists! Please try again');
-      } else {
+        const errors = error.response.data.errors;
+        errors.forEach((error) => {
+          toast.error(error.msg);
+        });
+      } else if (error.response && error.response.status === 401) {
+        toast.error("Email Already Exists. Try Again!");
+      }
+      
+      else {
         console.error('An error occurred:', error.response);
         toast.error('SignUp failed! Please try again');
       }
     }
   };
-  const {
-    firstName, lastName, email, password, confirmPassword, companyName,
-  } = formData;
+  const { firstName, lastName, email, password, confirmPassword, companyName } =
+    formData;
 
   return (
     <>
-      <div className="row overflow-hidden" style={{ overflowY: 'none' }}>
+      <div className="row overflow-hidden" style={{ overflowY: "none" }}>
         <div className="col-8">
           <section
             className="background-radial-gradient overflow-hidden"
-            style={{ height: '100vh' }}
+            style={{ height: "100vh" }}
           >
             <style>
               {`
@@ -114,7 +131,10 @@ const SignUpPage = () => {
             </style>
 
             <div className="container px-4 py-5 px-md-5 text-center text-lg-start my-5">
-              <div className="row gx-lg-5 align-items-center mb-5" style={{ overflow: 'visible' }}>
+              <div
+                className="row gx-lg-5 align-items-center mb-5"
+                style={{ overflow: "visible" }}
+              >
                 <div
                   className="col-lg-6 mb-5 mb-lg-0"
                   style={{
@@ -123,14 +143,14 @@ const SignUpPage = () => {
                 >
                   <h1
                     className="my-5 display-5 fw-bold ls-tight"
-                    style={{ color: 'hsl(218, 81%, 75%)' }}
+                    style={{ color: "hsl(218, 81%, 75%)" }}
                   >
                     <br />
-                    <span style={{ color: 'hsl(218, 81%, 95%)' }} />
+                    <span style={{ color: "hsl(218, 81%, 95%)" }} />
                   </h1>
                   <p
                     className="mb-4 opacity-70"
-                    style={{ color: 'hsl(218, 81%, 85%)' }}
+                    style={{ color: "hsl(218, 81%, 85%)" }}
                   />
                 </div>
 
@@ -154,30 +174,30 @@ const SignUpPage = () => {
             >
               <h1
                 className="my-5 display-5 fw-bold ls-tight"
-                style={{ color: 'hsl(218, 81%, 75%)' }}
+                style={{ color: "hsl(218, 81%, 75%)" }}
               >
                 Experience Graph Database
                 <br />
-                <span style={{ color: 'hsl(218, 81%, 95%)' }}>
+                <span style={{ color: "hsl(218, 81%, 95%)" }}>
                   With AGE Viewer
                 </span>
               </h1>
               <p
                 className="mb-4 opacity-70"
-                style={{ color: 'hsl(218, 81%, 85%)' }}
+                style={{ color: "hsl(218, 81%, 85%)" }}
               />
             </div>
           </section>
         </div>
         <div className="col-4">
-          <div className="card bg-glass" style={{ border: 'none' }}>
+          <div className="card bg-glass" style={{ border: "none" }}>
             <div className="card-body px-4 py-5 px-md-5">
               <div className="">
                 <h1>
-                  {' '}
+                  {" "}
                   <strong
                     className="text-center"
-                    style={{ marginLeft: '5rem' }}
+                    style={{ marginLeft: "5rem" }}
                   >
                     Sign Up
                   </strong>
@@ -194,7 +214,7 @@ const SignUpPage = () => {
 
                 <div className="form-outline mb-4">
                   <input
-                    style={{ borderRadius: '50px' }}
+                    style={{ borderRadius: "50px" }}
                     type="text"
                     className="form-control"
                     placeholder="Enter First Name"
@@ -207,7 +227,7 @@ const SignUpPage = () => {
 
                 <div className="form-outline mb-4">
                   <input
-                    style={{ borderRadius: '50px' }}
+                    style={{ borderRadius: "50px" }}
                     type="text"
                     className="form-control"
                     placeholder="Enter Last Name"
@@ -219,7 +239,7 @@ const SignUpPage = () => {
                 </div>
                 <div className="form-outline mb-4">
                   <input
-                    style={{ borderRadius: '50px' }}
+                    style={{ borderRadius: "50px" }}
                     type="email"
                     className="form-control"
                     placeholder="Enter Email here"
@@ -231,7 +251,7 @@ const SignUpPage = () => {
                 </div>
                 <div className="form-outline mb-4">
                   <input
-                    style={{ borderRadius: '50px' }}
+                    style={{ borderRadius: "50px" }}
                     type="password"
                     className="form-control"
                     placeholder="Password"
@@ -243,7 +263,7 @@ const SignUpPage = () => {
                 </div>
                 <div className="form-outline mb-4">
                   <input
-                    style={{ borderRadius: '50px' }}
+                    style={{ borderRadius: "50px" }}
                     type="password"
                     className="form-control"
                     placeholder="Confirm Password"
@@ -255,7 +275,7 @@ const SignUpPage = () => {
                 </div>
                 <div className="form-outline mb-4">
                   <input
-                    style={{ borderRadius: '50px' }}
+                    style={{ borderRadius: "50px" }}
                     type="text"
                     className="form-control"
                     placeholder="Enter Organization Name"
@@ -280,7 +300,7 @@ const SignUpPage = () => {
                     <Link to="/login">
                       <span
                         className="text-primary font-weight-bold"
-                        style={{ cursor: 'pointer' }}
+                        style={{ cursor: "pointer" }}
                       >
                         Sign In
                       </span>
