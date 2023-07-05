@@ -1,5 +1,6 @@
 import React from 'react';
 import './Header.css'; // Import your CSS file
+import ServerConnectionModal from '../ServerConnection/serverconnection';
 
 const Header = () => (
   <div className="header-title">
@@ -7,7 +8,7 @@ const Header = () => (
       <h2 style={{ color: 'white' }}>AGE Viewer</h2>
     </div>
     <div className="account-information">
-      <h3 style={{ color: 'white' }}>Account information</h3>
+      <ServerConnectionModal />
     </div>
   </div>
 );

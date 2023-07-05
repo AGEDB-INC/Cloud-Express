@@ -65,7 +65,7 @@ const MainModal = ({ onSelectProject }) => {
               New Project
             </h2>
             <p className="paragraph" style={{ color: 'blue' }}>
-              Create a new AgensGraph database.
+              Create a new AGCloud database.
             </p>
           </div>
 

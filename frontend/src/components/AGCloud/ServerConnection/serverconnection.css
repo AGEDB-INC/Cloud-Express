@@ -1,0 +1,90 @@
+.Modal {
+  display: none;
+  justify-content: center;
+  align-items: center;
+  z-index: 1;
+  vertical-align: top;
+
+}
+
+
+.serverConnectionModal-content {
+  background-color: #fefefe;
+  margin: auto;
+  border: 1px solid #888;
+  width: 400px;
+  height: 600px;
+}
+
+.connection-button {
+  background-color: #4CAF50;
+  color: white;
+  padding: 10px;
+  font-size: 16px;
+  height: 50px;
+  width: 160px;
+  border-radius: 12px;
+  border-color: transparent;
+  position: fixed;
+  margin-top: -2%;
+  margin-left: -8%;
+}
+
+.connection-button:hover {
+  background-color: #45a049;
+}
+
+.close {
+  color: #aaaaaa;
+  float: right;
+  font-size: 28px;
+  font-weight: bold;
+}
+
+.close:hover,
+.close:focus {
+  color: #000;
+  text-decoration: none;
+  cursor: pointer;
+} 
+
+.projects-div-style{
+display: flex;
+width: auto;
+height: 200px;
+background-color: white;
+font-style: agcfont-bold;
+}
+
+.button-div-style{
+display: flex;
+width: auto;
+height: 100px;
+background-color: white;
+font-style: agcfont-bold;
+}
+
+.serverConnection-paragraph{
+margin-left: 10px;
+  margin-top: 40px;
+  font-family: agcfont-regular;
+  color: blue;
+  font-size: 14px;
+}
+
+.div-style{
+width: 600px;
+display: flex;
+width: auto;
+height: 100px;
+background-color: #F0F3F8;
+}
+
+.FrameWrapper {
+  max-width: 100%;
+  margin-left: 50px;
+}
+
+.FullWidth {
+  width: 100% !important;
+}
