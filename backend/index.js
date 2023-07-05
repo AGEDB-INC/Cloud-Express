@@ -3,18 +3,16 @@ const cors = require('cors');
 const bodyParser = require('body-parser');
 const cookieParser = require('cookie-parser');
 const { expressjwt } = require("express-jwt");
-require('dotenv').config()
-// const mysql = require('mysql2');
-
-
+const { mongoose } = require('./db');
 const app = express();
+require('dotenv').config()
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: true }));
 app.use(cookieParser());
-const db = require('./models');
+
 
 app.use(cors({
-        // Change this to Client URL when deployed
+        // TODO: Change this to Client URL when deployed
   origin: 'http://localhost:3000', 
   credentials: true // allow cookies
 }));
@@ -35,12 +33,25 @@ app.use(cors({
     }
 });
 
+const PORT = process.env.PORT || 4001;
+
+  app.listen(PORT, () => {
+    console.log(`<---Server is running on port 4001--->`);
+  });
+
   app.use('/user', require('./routes/userRoutes'));
 
-  const PORT = process.env.PORT || 4001;
 
-db.sequelize.sync().then(() => {
-    app.listen(PORT, () => {
-    console.log(`Server is running on port ${PORT}`);
-    });
-});
+
+
+
+
+  // // ----------- Sequelize Connection - Commented For Future Use (If Needed) ------------- //
+
+  // const db = require('./models');
+
+// db.sequelize.sync().then(() => {
+//     app.listen(PORT, () => {
+//     console.log(`Server is running on port ${PORT}`);
+//     });
+// });
