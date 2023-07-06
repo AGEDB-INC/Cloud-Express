@@ -36,7 +36,7 @@ import AGCloudPage from './pages/AGCloud/AGCloud';
 
 const CheckAuth = () => {
   const navigate = useNavigate();
-  
+
   useEffect(() => {
     if (!Cookies.get('token')) {
       navigate('/login');
@@ -45,7 +45,7 @@ const CheckAuth = () => {
       navigate('/AGCloud');
     }
   }, []);
-  
+
   return null;
 };
 
@@ -54,7 +54,6 @@ const App = () => {
   return (
     <React.StrictMode>
       <Router>
-        <CheckAuth /> 
         <Routes>
           <Route exact path="/login" element={<Login />} />
           <Route exact path="/signup" element={<SignUp />} />

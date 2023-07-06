@@ -1,19 +1,23 @@
+/* eslint-disable jsx-a11y/label-has-associated-control */
+/* eslint-disable no-unused-vars */
 import React, { useState } from 'react';
 import PropTypes from 'prop-types';
-import './Modal.css'; // Import your CSS file
+import 'bootstrap/dist/css/bootstrap.min.css'; // Import Bootstrap CSS
+import { Modal, Button } from 'react-bootstrap';
+import './Modal.css';
 
 const MainModal = ({ onSelectProject }) => {
+  const [modalVisible, setModalVisible] = useState(false);
+
+  const openModal = () => {
+    setModalVisible(true);
+  };
+
+  const closeModal = () => {
+    setModalVisible(false);
+  };
+
   const [selectedProject, setSelectedProject] = useState('');
-
-  function openModal() {
-    document.getElementById('myModal').style.display = 'flex';
-  }
-
-  function closeModal() {
-    document.getElementById('myModal').style.display = 'none';
-    document.getElementById('closeButton').style.background = 'transparent';
-    document.getElementById('newProjectButton').style.background = 'transparent';
-  }
 
   const handleHover = (event) => {
     const updatedEvent = { ...event };
@@ -48,111 +52,133 @@ const MainModal = ({ onSelectProject }) => {
 
   return (
     <div>
-      <button
-        id="myBtn"
-        type="button"
-        onClick={openModal}
-        style={{
-          background: 'none', border: 'none', color: '#142b80', fontSize: 18,
-        }}
-      >
+      <button className="btn btn-primary" onClick={openModal} type="button">
         + Add a New Project
       </button>
-      <div id="myModal" className="modal">
-        <div className="modal-content" style={{ height: '600px', width: '600px' }}>
-          <div className="div-style" style={{ height: '120px' }}>
-            <h2 className="first-heading" style={{ marginLeft: '40px' }}>
-              New Project
-            </h2>
-            <p className="paragraph" style={{ color: 'blue' }}>
-              Create a new AGCloud database.
-            </p>
-          </div>
 
-          <div className="projects-div-style">
-            <h4 className="second-heading">Built-in database projects</h4>
-
-            <div className="rectangle-display">
-              <div className="rectangle-radio" onMouseEnter={handleHover} onMouseLeave={handleLeave}>
-                <label className="radio-text" htmlFor="moviesData">
-                  Graph for Movies Data
-                  <input
-                    style={{ marginTop: '-20px' }}
-                    id="moviesData"
-                    className="radio-circle"
-                    type="radio"
-                    name="builtInProjects"
-                    value="Graph For Movies Data"
-                    onChange={handleProjectSelection}
-                  />
-                </label>
-              </div>
-              <div className="rectangle-radio" onMouseEnter={handleHover} onMouseLeave={handleLeave}>
-                <label className="radio-text" htmlFor="fraudDetection">
-                  Graph for Fraud Detection
-                  <input
-                    id="fraudDetection"
-                    className="radio-circle"
-                    type="radio"
-                    name="builtInProjects"
-                    value="Graph for Fraud Detection"
-                    onChange={handleProjectSelection}
-                  />
-                </label>
-              </div>
-            </div>
-          </div>
-
-          <div className="projects-div-style" style={{ marginTop: '-30px' }}>
-            <h4 className="second-heading" style={{ width: '100%' }}>Import your own data</h4>
-
-            <div className="rectangle-display">
-              <div className="csv-radio" onMouseEnter={handleHover} onMouseLeave={handleLeave}>
-                <label className="radio-text" htmlFor="importCSV">
-                  Import User Data (.CSV)
-                  <input
-                    id="importCSV"
-                    className="radio-circle"
-                    type="radio"
-                    name="builtInProjects"
-                    value="Import User Data (.CSV)"
-                    onChange={handleProjectSelection}
-                  />
-                </label>
-              </div>
-            </div>
-          </div>
-
-          <div className="button-div-style" style={{ marginTop: '-20px' }}>
-            <div className="button-display">
+      <Modal
+        show={modalVisible}
+        onHide={closeModal}
+        backdrop="static"
+        keyboard={false}
+        size="lg"
+        centered
+      >
+        <Modal.Header closeButton>
+          <Modal.Title>New Project</Modal.Title>
+        </Modal.Header>
+        <Modal.Body>
+          <p>
+            {' '}
+            <strong>Built-in database projects</strong>
+          </p>
+          <div style={{ display: 'flex', justifyContent: 'space-around' }}>
+            <label style={{ marginRight: '20px' }}>
               <div
-                className="rectangle-button-div"
-                id="newProjectButton"
-                onMouseEnter={handleButtonHover}
-                onMouseLeave={handleButtonLeave}
-                role="button"
-                tabIndex={0}
-                onKeyDown={closeModal}
-                onClick={handleCreateProject}
+                style={{
+                  border: '1px solid #e3e6f0',
+                  padding: '30px',
+                  display: 'flex',
+                  borderRadius: '5px',
+                  gap: '5rem',
+                }}
+                onMouseEnter={(e) => {
+                  e.target.style.border = '3px solid blue';
+                }}
+                onMouseLeave={(e) => {
+                  e.target.style.border = '1px solid #e3e6f0';
+                }}
               >
-                <span className="rectangle-button">+ Create New Project</span>
+                Graph for Movie Data
+                <input
+                  type="radio"
+                  name="projectType"
+                  style={{ transform: 'scale(1.5)' }}
+                  onChange={handleProjectSelection}
+                />
               </div>
+            </label>
+            <label>
               <div
-                className="rectangle-button-div"
-                id="closeButton"
-                onMouseEnter={handleButtonHover}
-                onMouseLeave={handleButtonLeave}
-                role="button"
-                tabIndex={0}
-                onKeyDown={closeModal}
-                onClick={closeModal}
+                style={{
+                  border: '1px solid #e3e6f0',
+                  padding: '30px',
+                  display: 'flex',
+                  borderRadius: '5px',
+                  gap: '5rem',
+                }}
+                onMouseEnter={(e) => {
+                  e.target.style.border = '3px solid blue';
+                }}
+                onMouseLeave={(e) => {
+                  e.target.style.border = '1px solid #e3e6f0';
+                }}
               >
-                <span className="rectangle-button">Cancel</span>
+                Graph for Fraud Detection
+                <input
+                  type="radio"
+                  name="projectType"
+                  style={{ transform: 'scale(1.5)' }}
+                  onChange={handleProjectSelection}
+                />
               </div>
-            </div>
+            </label>
           </div>
-        </div>
-      </div>
+          <p className="mt-3">
+            {' '}
+            <strong>Import your own data for a new database project</strong>
+          </p>
+          <div className="container ml-3">
+            <label>
+              <div
+                style={{
+                  border: '1px solid #e3e6f0',
+                  padding: '28px',
+                  display: 'flex',
+                  borderRadius: '5px',
+                  gap: '5rem',
+                }}
+                onMouseEnter={(e) => {
+                  e.target.style.border = '3px solid blue';
+                }}
+                onMouseLeave={(e) => {
+                  e.target.style.border = '1px solid #e3e6f0';
+                }}
+              >
+                Import User Data (.CSV)
+                <input
+                  type="radio"
+                  name="projectType"
+                  style={{ transform: 'scale(1.5)' }}
+                  onChange={handleProjectSelection}
+                />
+              </div>
+            </label>
+          </div>
+        </Modal.Body>
+        <Modal.Footer>
+          <Button
+            variant="secondary"
+            size="lg"
+            onClick={closeModal}
+            style={{
+              width: '30%',
+            }}
+          >
+            Cancel
+          </Button>
+          <Button
+            size="lg"
+            variant="primary"
+            style={{
+              width: '30%',
+            }}
+            onClick={handleCreateProject}
+          >
+            + Create New Project
+          </Button>
+        </Modal.Footer>
+      </Modal>
     </div>
   );
 };
