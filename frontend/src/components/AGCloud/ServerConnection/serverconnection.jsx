@@ -60,7 +60,6 @@ const ServerConnectionModal = () => {
         dispatch(addAlert('NoticeServerConnected'));
         dispatch(trimFrame('ServerConnect'));
         toast.success("Connected successfully!");
-        toast.success("Connected successfully!");
         setConnectionState(true);
         closeModal();
       } else if (response.type === 'database/connectToDatabase/rejected') {
