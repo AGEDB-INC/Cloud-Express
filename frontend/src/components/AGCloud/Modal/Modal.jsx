@@ -1,5 +1,5 @@
 /* eslint-disable jsx-a11y/label-has-associated-control */
-/* eslint-disable no-unused-vars */
+/* eslint-disable */
 import React, { useState } from 'react';
 import PropTypes from 'prop-types';
 import 'bootstrap/dist/css/bootstrap.min.css'; // Import Bootstrap CSS
@@ -8,12 +8,19 @@ import './Modal.css';
 
 const MainModal = ({ onSelectProject }) => {
   const [modalVisible, setModalVisible] = useState(false);
+  const [selectedElement, setSelectedElement] = useState(null);
+
 
   const openModal = () => {
     setModalVisible(true);
   };
 
   const closeModal = () => {
+    if (selectedElement) {
+      selectedElement.style.border = '1px solid #e3e6f0';
+    }
+    setSelectedElement(null); // Clear the selected element when modal closes
+    setSelectedProject(''); // Clear the selected project when modal closes
     setModalVisible(false);
   };
 
@@ -39,16 +46,22 @@ const MainModal = ({ onSelectProject }) => {
     updatedEvent.target.style.backgroundColor = 'white'; // Reset the background color on leave
   };
 
-  const handleProjectSelection = (event) => {
-    setSelectedProject(event.target.value);
+  const handleProjectSelection = (value, event) => {
+    setSelectedProject(value);
+    if (selectedElement) {
+      selectedElement.style.border = '1px solid #e3e6f0';
+    }
+    event.target.parentNode.style.border = '3px solid blue';
+    setSelectedElement(event.target.parentNode);
   };
 
-  const handleCreateProject = () => {
+const handleCreateProject = () => {
     if (selectedProject) {
       onSelectProject(selectedProject);
     }
     closeModal();
   };
+
 
   return (
     <div>
@@ -76,7 +89,7 @@ const MainModal = ({ onSelectProject }) => {
             <label style={{ marginRight: '20px' }}>
               <div
                 style={{
-                  border: '1px solid #e3e6f0',
+                  border: selectedProject === 'Graph for Movie Data' ? '3px solid blue' : '1px solid #e3e6f0',
                   padding: '30px',
                   display: 'flex',
                   borderRadius: '5px',
@@ -86,22 +99,23 @@ const MainModal = ({ onSelectProject }) => {
                   e.target.style.border = '3px solid blue';
                 }}
                 onMouseLeave={(e) => {
-                  e.target.style.border = '1px solid #e3e6f0';
+                  if(selectedProject !== 'Graph for Movie Data') e.target.style.border = '1px solid #e3e6f0';
                 }}
               >
                 Graph for Movie Data
                 <input
-                  type="radio"
-                  name="projectType"
-                  style={{ transform: 'scale(1.5)' }}
-                  onChange={handleProjectSelection}
+                    type="radio"
+                    name="projectType"
+                    value="Graph for Movie Data"
+                    style={{ transform: 'scale(1.5)' }}
+                    onChange={(event) => handleProjectSelection(event.target.value, event)}
                 />
               </div>
             </label>
             <label>
               <div
                 style={{
-                  border: '1px solid #e3e6f0',
+                  border: selectedProject === 'Graph for Fraud Detection' ? '3px solid blue' : '1px solid #e3e6f0',
                   padding: '30px',
                   display: 'flex',
                   borderRadius: '5px',
@@ -111,16 +125,17 @@ const MainModal = ({ onSelectProject }) => {
                   e.target.style.border = '3px solid blue';
                 }}
                 onMouseLeave={(e) => {
-                  e.target.style.border = '1px solid #e3e6f0';
+                  if(selectedProject !== 'Graph for Fraud Detection') e.target.style.border = '1px solid #e3e6f0';
                 }}
               >
                 Graph for Fraud Detection
                 <input
                   type="radio"
                   name="projectType"
+                  value="Graph for Fraud Detection"
                   style={{ transform: 'scale(1.5)' }}
-                  onChange={handleProjectSelection}
-                />
+                  onChange={(event) => handleProjectSelection(event.target.value, event)}
+                  />
               </div>
             </label>
           </div>
@@ -132,7 +147,7 @@ const MainModal = ({ onSelectProject }) => {
             <label>
               <div
                 style={{
-                  border: '1px solid #e3e6f0',
+                  border: selectedProject === 'Import User Data (.CSV)' ? '3px solid blue' : '1px solid #e3e6f0',
                   padding: '28px',
                   display: 'flex',
                   borderRadius: '5px',
@@ -142,7 +157,7 @@ const MainModal = ({ onSelectProject }) => {
                   e.target.style.border = '3px solid blue';
                 }}
                 onMouseLeave={(e) => {
-                  e.target.style.border = '1px solid #e3e6f0';
+                  if(selectedProject !== 'Import User Data (.CSV)') e.target.style.border = '1px solid #e3e6f0';
                 }}
               >
                 Import User Data (.CSV)
@@ -150,8 +165,9 @@ const MainModal = ({ onSelectProject }) => {
                   type="radio"
                   name="projectType"
                   style={{ transform: 'scale(1.5)' }}
-                  onChange={handleProjectSelection}
-                />
+                  value='Import User Data (.CSV)'
+                  onChange={(event) => handleProjectSelection(event.target.value, event)}
+                  />
               </div>
             </label>
           </div>
@@ -174,6 +190,7 @@ const MainModal = ({ onSelectProject }) => {
               width: '30%',
             }}
             onClick={handleCreateProject}
+            disabled={selectedProject === ''}
           >
             + Create New Project
           </Button>

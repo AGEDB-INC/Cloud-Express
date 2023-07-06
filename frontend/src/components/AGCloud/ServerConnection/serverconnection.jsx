@@ -1,4 +1,4 @@
-/* eslint-disable no-unused-vars */
+/* eslint-disable */
 import React, { useState } from 'react'; // Import your CSS file
 import 'bootstrap/dist/css/bootstrap.min.css'; // Import Bootstrap CSS
 import { Modal, Button } from 'react-bootstrap'; // Import Modal and Button components from React Bootstrap
@@ -8,8 +8,13 @@ import {
 import { useDispatch } from 'react-redux';
 import Frame from '../../frame/Frame';
 import { connectToDatabase as connectToDatabaseApi, changeGraph } from '../../../features/database/DatabaseSlice';
+import { getConnectionStatus } from '../../../features/database/DatabaseSlice';
+import { disconnectToDatabase } from '../../../features/database/DatabaseSlice';
+import { useEffect } from 'react';
 import { addAlert } from '../../../features/alert/AlertSlice';
-import { addFrame, trimFrame } from '../../../features/frame/FrameSlice';
+import { trimFrame } from '../../../features/frame/FrameSlice';
+import { toast } from 'react-hot-toast';
+import { Toaster } from 'react-hot-toast';
 import { /* getMetaChartData, */ getMetaData } from '../../../features/database/MetadataSlice';
 
 const FormInitialValue = {
@@ -23,48 +28,71 @@ const FormInitialValue = {
 
 const ServerConnectionModal = () => {
   const [modalVisible, setModalVisible] = useState(false);
+  const [connectionState, setConnectionState] = useState(false); 
+  const dispatch = useDispatch();
 
   const openModal = () => {
     setModalVisible(true);
   };
-
   const closeModal = () => {
     setModalVisible(false);
   };
-  const dispatch = useDispatch();
 
-  const connectToDatabase = (data) => dispatch(connectToDatabaseApi(data)).then((response) => {
-    if (response.type === 'database/connectToDatabase/fulfilled') {
-      dispatch(addAlert('NoticeServerConnected'));
-      dispatch(trimFrame('ServerConnect'));
-      alert('Server Connected');
-      // dispatch(getMetaData({ currentGraph })).then((metadataResponse) => {
-      //   if (metadataResponse.type === 'database/getMetaData/fulfilled') {
-      //     const graphName = Object.keys(metadataResponse.payload)[0];
-      //     /* dispatch(getMetaChartData()); */
-      //     dispatch(changeGraph({ graphName }));
-      //   }
-      //   if (metadataResponse.type === 'database/getMetaData/rejected') {
-      //     dispatch(addAlert('ErrorMetaFail'));
-      //   }
-      // });
+  // Check Database Connection Status
+  useEffect(() => {
+    dispatch(getConnectionStatus()).then((response) => {
+      if (response.type === 'database/getConnectionStatus/fulfilled') {
+        setConnectionState(true);
+      } else if (response.type === 'database/getConnectionStatus/rejected') {
+        setConnectionState(false);
+      }
+    });
+  }, [dispatch]);
 
-      dispatch(addFrame(':server status', 'ServerStatus'));
-    } else if (response.type === 'database/connectToDatabase/rejected') {
-      dispatch(addAlert('ErrorServerConnectFail', response.error.message));
-      alert('Error Server Connect Fail', response.error.message);
+  const connectToDatabase = (data) => {
+    const loadingToastId = toast.loading("Connecting to database...");
+    
+    dispatch(connectToDatabaseApi(data)).then((response) => {
+      toast.dismiss(loadingToastId); 
+      console.log("response", response);
+
+      if (response.type === 'database/connectToDatabase/fulfilled') {
+        dispatch(addAlert('NoticeServerConnected'));
+        dispatch(trimFrame('ServerConnect'));
+        toast.success("Connected successfully!");
+        setConnectionState(true);
+        closeModal();
+      } else if (response.type === 'database/connectToDatabase/rejected') {
+        dispatch(addAlert('ErrorServerConnectFail', response.error.message));
+        toast.error("Error Server Connect Fail", response.error.message);
+      }
+    });
+  };
+
+  const handleConnection = () => {
+    if(connectionState) {
+      // Calling disconnect API 
+      dispatch(disconnectToDatabase()).then((response) => {
+        console.log("response", response);
+        setConnectionState(false);
+        toast.success("Disconnected successfully!");
+      });
+    } else {
+      openModal();
     }
-  });
+  };
+
 
   return (
     <div>
+      <Toaster/>
       <button
         id="serverConnectionBtn"
         type="button"
-        className="btn btn-lg btn-success"
-        onClick={openModal}
+        className={connectionState ? "btn btn-lg btn-danger" : "btn btn-lg btn-success"}
+        onClick={handleConnection}
       >
-        Connect Database
+        {connectionState ? "Disconnect" : "Connect Database"}
       </button>
       <Modal
         show={modalVisible}
