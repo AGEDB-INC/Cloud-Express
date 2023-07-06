@@ -1,94 +1,119 @@
-import React from 'react';
-import './serverconnection.css'; // Import your CSS file
-
+/* eslint-disable no-unused-vars */
+import React, { useState } from 'react'; // Import your CSS file
+import 'bootstrap/dist/css/bootstrap.min.css'; // Import Bootstrap CSS
+import { Modal, Button } from 'react-bootstrap'; // Import Modal and Button components from React Bootstrap
 import {
-  Button, Col, Form, Input, InputNumber, Row,
+  Col, Form, Input, InputNumber, Row,
 } from 'antd';
+import { useDispatch } from 'react-redux';
+import Frame from '../../frame/Frame';
+import { connectToDatabase as connectToDatabaseApi, changeGraph } from '../../../features/database/DatabaseSlice';
+import { addAlert } from '../../../features/alert/AlertSlice';
+import { addFrame, trimFrame } from '../../../features/frame/FrameSlice';
+import { /* getMetaChartData, */ getMetaData } from '../../../features/database/MetadataSlice';
+
+const FormInitialValue = {
+  database: '',
+  graph: '',
+  host: '',
+  password: '',
+  port: null,
+  user: '',
+};
 
 const ServerConnectionModal = () => {
-  function openModal() {
-    document.getElementById('serverConnectionModal').style.display = 'flex';
-    document.getElementById('serverConnectionBtn').style.display = 'none';
-  }
+  const [modalVisible, setModalVisible] = useState(false);
 
-  const connectToDatabase = () => {
-    document.getElementById('serverConnectionModal').style.display = 'none';
-    document.getElementById('serverConnectionBtn').style.display = 'flex';
+  const openModal = () => {
+    setModalVisible(true);
   };
 
   const closeModal = () => {
-    document.getElementById('serverConnectionModal').style.display = 'none';
-    document.getElementById('serverConnectionBtn').style.display = 'flex';
+    setModalVisible(false);
   };
+  const dispatch = useDispatch();
 
-  const FormInitialValue = {
-    database: '',
-    graph: '',
-    host: '',
-    password: '',
-    port: null,
-    user: '',
-  };
+  const connectToDatabase = (data) => dispatch(connectToDatabaseApi(data)).then((response) => {
+    if (response.type === 'database/connectToDatabase/fulfilled') {
+      dispatch(addAlert('NoticeServerConnected'));
+      dispatch(trimFrame('ServerConnect'));
+      alert('Server Connected');
+      // dispatch(getMetaData({ currentGraph })).then((metadataResponse) => {
+      //   if (metadataResponse.type === 'database/getMetaData/fulfilled') {
+      //     const graphName = Object.keys(metadataResponse.payload)[0];
+      //     /* dispatch(getMetaChartData()); */
+      //     dispatch(changeGraph({ graphName }));
+      //   }
+      //   if (metadataResponse.type === 'database/getMetaData/rejected') {
+      //     dispatch(addAlert('ErrorMetaFail'));
+      //   }
+      // });
+
+      dispatch(addFrame(':server status', 'ServerStatus'));
+    } else if (response.type === 'database/connectToDatabase/rejected') {
+      dispatch(addAlert('ErrorServerConnectFail', response.error.message));
+      alert('Error Server Connect Fail', response.error.message);
+    }
+  });
 
   return (
-    <div style={{ zIndex: '2px', position: 'relative' }}>
+    <div>
       <button
         id="serverConnectionBtn"
         type="button"
+        className="btn btn-lg btn-success"
         onClick={openModal}
-        className="connection-button"
       >
         Connect Database
       </button>
-      <div style={{ marginTop: '120%', marginLeft: '-130%' }} id="serverConnectionModal" className="Modal">
-        <div className="serverConnectionModal-content" style={{ height: '600px', width: '600px' }}>
-          <div className="div-style" style={{ height: '120px' }}>
-            <h2 className="first-heading" style={{ marginLeft: '40px' }}>
-              Connection
-            </h2>
-            <p className="serverConnection-paragraph" style={{ color: 'blue' }}>
-              Connect to Database.
-            </p>
-          </div>
-
-          <div>
-            <div>
-              <Row>
-                <Col span={18}>
-                  <div className="FrameWrapper">
-                    <Form
-                      initialValues={FormInitialValue}
-                      layout="vertical"
-                      style={{ width: '500px' }}
-                      onFinish={connectToDatabase}
-                    >
-                      <Form.Item name="host" label="Connect URL" rules={[{ required: true }]}>
-                        <Input placeholder="192.168.0.1" />
-                      </Form.Item>
-                      <Form.Item name="port" label="Connect Port" rules={[{ required: true }]}>
-                        <InputNumber placeholder="5432" className="FullWidth" />
-                      </Form.Item>
-                      <Form.Item name="database" label="Database Name" rules={[{ required: true }]}>
-                        <Input placeholder="postgres" />
-                      </Form.Item>
-                      <Form.Item name="user" label="User Name" rules={[{ required: true }]}>
-                        <Input placeholder="postgres" />
-                      </Form.Item>
-                      <Form.Item name="password" label="Password" rules={[{ required: true }]}>
-                        <Input.Password placeholder="postgres" />
-                      </Form.Item>
-                      <Form.Item>
-                        <Button type="primary" htmlType="submit">Connect</Button>
-                        <Button style={{ marginLeft: '10px' }} type="primary" htmlType="button" onClick={closeModal}>Close </Button>
-                      </Form.Item>
-                    </Form>
-                  </div>
-                </Col>
-              </Row>
-            </div>
-          </div>
-        </div>
-      </div>
+      <Modal
+        show={modalVisible}
+        onHide={closeModal}
+        backdrop="static"
+        keyboard={false}
+        centered
+        size="lg"
+      >
+        <Modal.Header closeButton>
+          <Modal.Title>Connect to Database</Modal.Title>
+        </Modal.Header>
+        <Modal.Body>
+          <Row>
+            <Col span={6}>
+              <h3>Connect to Database</h3>
+              <p>Database access might require an authenticated connection.</p>
+            </Col>
+            <Col span={18}>
+              <div style={{ maxWidth: '450px' }}>
+                <Form
+                  initialValues={FormInitialValue}
+                  layout="vertical"
+                  onFinish={connectToDatabase}
+                >
+                  <Form.Item name="host" label="Connect URL" rules={[{ required: true }]}>
+                    <Input placeholder="192.168.0.1" />
+                  </Form.Item>
+                  <Form.Item name="port" label="Connect Port" rules={[{ required: true }]}>
+                    <InputNumber placeholder="5432" style={{ width: '100% !important' }} />
+                  </Form.Item>
+                  <Form.Item name="database" label="Database Name" rules={[{ required: true }]}>
+                    <Input placeholder="postgres" />
+                  </Form.Item>
+                  <Form.Item name="user" label="User Name" rules={[{ required: true }]}>
+                    <Input placeholder="postgres" />
+                  </Form.Item>
+                  <Form.Item name="password" label="Password" rules={[{ required: true }]}>
+                    <Input.Password placeholder="postgres" />
+                  </Form.Item>
+                  <Form.Item>
+                    <Button type="primary" htmlType="submit">Connect</Button>
+                  </Form.Item>
+                </Form>
+              </div>
+            </Col>
+          </Row>
+        </Modal.Body>
+      </Modal>
     </div>
   );
 };

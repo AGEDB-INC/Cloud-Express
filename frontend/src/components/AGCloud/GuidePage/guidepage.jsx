@@ -66,17 +66,20 @@ function GuidePages() {
         {currentPage !== -1 && (
           <button type="button" className="previousButton" onClick={handlePreviousPage}>
             <b>&lt;</b>
+            {' '}
             Previous
           </button>
         )}
         <h5>
           {currentPage + 1}
           of
+          {' '}
           {maxpages}
         </h5>
         {currentPage !== maxpages && (
           <button type="button" className="nextButton" onClick={handleNextPage}>
             Next
+            {' '}
             <b>&gt;</b>
           </button>
         )}

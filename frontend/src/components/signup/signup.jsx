@@ -5,7 +5,6 @@ prefer-destructuring, no-shadow, no-trailing-spaces */
 import React, { useState } from "react";
 import { Link, useNavigate } from "react-router-dom";
 import { toast } from "react-toastify";
-import "react-toastify/dist/ReactToastify.css";
 import api from "../../services/api";
 
 const SignUpPage = () => {
@@ -71,7 +70,7 @@ const SignUpPage = () => {
       } else if (error.response && error.response.status === 401) {
         toast.error("Email Already Exists. Try Again!");
       }
-      
+
       else {
         console.error('An error occurred:', error.response);
         toast.error('SignUp failed! Please try again');

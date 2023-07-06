@@ -1,9 +1,15 @@
 import React, { useState, useEffect } from 'react';
+import { useNavigate } from 'react-router-dom';
 import MainModal from '../Modal/Modal';
 import './MyProjectTab.css';
 import TutorialGuideTab from '../tutorialguidetab/tutorialguidetab';
 
 const MyProjectTab = () => {
+  const navigate = useNavigate();
+  const handleGoToAgeViewer = () => {
+    navigate('/');
+  };
+
   const [rowCount, setRowCount] = useState(0);
   const [selectedRadioButton, setSelectedRadioButton] = useState('');
   const [selectedTab, setSelectedTab] = useState('');
@@ -51,7 +57,7 @@ const MyProjectTab = () => {
             <th>
               <div>
                 {rowCount > 1 ? (
-                  <button id="ageViewerButton" type="button" className="move-button">
+                  <button id="ageViewerButton" type="button" className="btn btn-success" onClick={handleGoToAgeViewer}>
                     Go to ageviewer
                   </button>
                 ) : (
