@@ -60,6 +60,7 @@ const ServerConnectionModal = () => {
         dispatch(addAlert('NoticeServerConnected'));
         dispatch(trimFrame('ServerConnect'));
         toast.success("Connected successfully!");
+        toast.success("Connected successfully!");
         setConnectionState(true);
         closeModal();
       } else if (response.type === 'database/connectToDatabase/rejected') {
@@ -92,7 +93,7 @@ const ServerConnectionModal = () => {
         className={connectionState ? "btn btn-lg btn-danger" : "btn btn-lg btn-success"}
         onClick={handleConnection}
       >
-        {connectionState ? "Disconnect" : "Connect Database"}
+        {connectionState ? "Disconnect Database" : "Connect Database"}
       </button>
       <Modal
         show={modalVisible}
