@@ -190,8 +190,9 @@ function OpenCSVFileDialog({
         onChange={handleDropdownChange}
         className="frame-head-button btn btn-link"
       >
-        <option value="load_from_system">Load CSVs</option>
-        <option value="load_sample_csvs">Load sample CSVs</option>
+        <option value="">Load CSV...</option>
+        <option value="load_from_system">Load Local CSVs</option>
+        <option value="load_sample_csvs">Load Sample CSVs</option>
       </select>
     </div>
   );
