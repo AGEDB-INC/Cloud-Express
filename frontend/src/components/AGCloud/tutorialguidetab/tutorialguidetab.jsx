@@ -1,7 +1,7 @@
 import React, { useEffect } from 'react';
 import './tutorialguidetab.css';
 import PropTypes from 'prop-types';
-import MainModal from '../Modal/Modal';
+import MainModalContainer from '../../contents/containers/MainModal';
 import GuidePages from '../GuidePage/guidepage';
 
 const TutorialGuideTab = ({ selectedTab }) => {
@@ -55,7 +55,7 @@ const TutorialGuideTab = ({ selectedTab }) => {
                 <div className="tutorialtab">
                   <h5>
                     <div>
-                      <MainModal />
+                      <MainModalContainer />
                       to View
                       <br />
                       Tutorial Guide
