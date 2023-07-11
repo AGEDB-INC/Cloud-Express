@@ -349,30 +349,16 @@ function MainModal({
 
 MainModal.propTypes = {
   setCommand: PropTypes.func.isRequired,
-  activeRequests: PropTypes.arrayOf(PropTypes.string).isRequired,
   command: PropTypes.string.isRequired,
   addFrame: PropTypes.func.isRequired,
-  trimFrame: PropTypes.func.isRequired,
   addAlert: PropTypes.func.isRequired,
-  alertList: PropTypes.arrayOf(PropTypes.shape({
-    alertName: PropTypes.string.isRequired,
-    alertProps: PropTypes.shape({
-      key: PropTypes.string.isRequired,
-      alertType: PropTypes.string.isRequired,
-      errorMessage: PropTypes.string.isRequired,
-    }),
-  })).isRequired,
-  isActive: PropTypes.bool.isRequired,
   database: PropTypes.shape({
     status: PropTypes.string.isRequired,
     host: PropTypes.string.isRequired,
   }).isRequired,
   executeCypherQuery: PropTypes.func.isRequired,
   addCommandHistory: PropTypes.func.isRequired,
-  toggleMenu: PropTypes.func.isRequired,
   update: PropTypes.bool.isRequired,
-  setLabel: PropTypes.func.isRequired,
-  isLabel: PropTypes.bool.isRequired,
   // addCommandFavorites: PropTypes.func.isRequired,
 };
 
