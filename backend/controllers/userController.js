@@ -61,6 +61,8 @@ exports.loginUser = async (req, res) => {
         const token = jwt.sign({ userEmail: email }, process.env.SECRET_KEY);
         // Stores JWT in cookies
         res.cookie('token', token, { sameSite: 'none', secure: true });
+        // Store User ID in cookies
+        res.cookie('userId', user._id, { sameSite: 'none', secure: true });
 
         res.status(200).send({ token, message: "User logged in Successfully!" });
 
@@ -69,6 +71,22 @@ exports.loginUser = async (req, res) => {
         console.log(err);
     }
 };
+
+  
+  // Function to verify if user exists by ID or if  user ID is valid
+exports.verifyUserById = async (id) => {
+    try {
+        const user = await User.findById(id);
+        return user;
+    } catch (err) {
+        console.error(err);
+        return null;
+    }
+};
+
+
+
+
 
 
 
