@@ -40,6 +40,7 @@ const PORT = process.env.PORT || 4001;
   });
 
   app.use('/user', require('./routes/userRoutes'));
+  app.use('/project', require('./routes/projectRoutes'));
 
 
 
