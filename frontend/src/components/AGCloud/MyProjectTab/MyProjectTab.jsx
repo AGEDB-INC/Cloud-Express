@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
-import MainModal from '../Modal/Modal';
+import MainModalContainer from '../../contents/containers/MainModal';
 import './MyProjectTab.css';
 import TutorialGuideTab from '../tutorialguidetab/tutorialguidetab';
 
@@ -61,7 +61,7 @@ const MyProjectTab = () => {
                     Go to ageviewer
                   </button>
                 ) : (
-                  <MainModal onSelectProject={handleRadioButtonChange} />
+                  <MainModalContainer onSelectProject={handleRadioButtonChange} />
                 )}
               </div>
             </th>
