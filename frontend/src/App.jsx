@@ -20,50 +20,43 @@
  * under the License.
  */
 
-import React, { useEffect } from 'react';
+import React, { useEffect, useState } from 'react';
 import 'bootstrap/dist/css/bootstrap.min.css';
 import 'antd/dist/antd.css';
 import './static/style.css';
 import './static/navbar-fixed-left.css';
 import { ToastContainer } from 'react-toastify';
-import { BrowserRouter as Router, Route, Routes, useNavigate } from 'react-router-dom';
+import { Route, Routes, useNavigate } from 'react-router-dom';
 import Cookies from 'js-cookie';
 import Login from './components/login/login';
 import SignUp from './components/signup/signup';
 import MainPage from './pages/Main/MainPage';
 import AGCloudPage from './pages/AGCloud/AGCloud';
 
-
-const CheckAuth = () => {
-  const navigate = useNavigate();
-
-  useEffect(() => {
-    if (!Cookies.get('token')) {
-      navigate('/login');
-    }
-    else {
-      navigate('/AGCloud');
-    }
-  }, []);
-
-  return null;
-};
-
-
 const App = () => {
+  const navigate = useNavigate();
+  const [authenticate, setAuthenticate] = useState(false);
+  const authentication = () => {
+    if (Cookies.get('token')) return setAuthenticate(true);
+    navigate('/login');
+  };
+  useEffect(() => {
+    authentication();
+  }, [authenticate]);
   return (
-    <React.StrictMode>
-      <Router>
-        <Routes>
-          <Route exact path="/login" element={<Login />} />
-          <Route exact path="/signup" element={<SignUp />} />
-
-          <Route exact path="/" element={<MainPage />} />
-          <Route exact path="/AGCloud" element={<AGCloudPage/>} />
-        </Routes>
-      </Router>
+    <>
+      <Routes>
+        <Route exact path="/login" element={<Login />} />
+        <Route exact path="/signup" element={<SignUp />} />
+        {authenticate ? (
+          <>
+            <Route exact path="/" element={<MainPage />} />
+            <Route exact path="/AGCloud" element={<AGCloudPage />} />
+          </>
+        ) : null}
+      </Routes>
       <ToastContainer position="bottom-center" autoClose={2000} />
-    </React.StrictMode>
+    </>
   );
 };
 
