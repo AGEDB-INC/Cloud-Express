@@ -1,9 +1,9 @@
-const User = require("../models/User");
-const db = require("../models/index");
-const jwt = require("jsonwebtoken");
-const bcrypt = require("bcrypt");
-require("dotenv").config();
-const { check, validationResult } = require("express-validator");
+const User = require('../models/User');
+const db = require('../models/index');
+const jwt = require('jsonwebtoken');
+const bcrypt = require('bcrypt');
+require('dotenv').config();
+const { check, validationResult } = require('express-validator');
 
 // Registering a User
 exports.registerUser = async (req, res) => {
@@ -19,7 +19,7 @@ exports.registerUser = async (req, res) => {
     const user = await User.findOne({ email });
 
     if (user) {
-      return res.status(401).json({ message: "Error: User already exists!" });
+      return res.status(401).json({ message: 'Error: User already exists!' });
     }
     // Encrypting password
     const salt = await bcrypt.genSalt(10);
@@ -33,65 +33,53 @@ exports.registerUser = async (req, res) => {
     };
 
     const createdUser = await User.create(newUser);
-    res.status(200).send({ message: "User registered successfully!" });
+    res.status(200).send({ message: 'User registered successfully!' });
   } catch (err) {
     console.log(err);
-    res.status(500).send({ message: "Some error occurred. Try Again!" });
+    res.status(500).send({ message: 'Some error occurred. Try Again!' });
   }
 };
 
-
 // Logging In a User
 exports.loginUser = async (req, res) => {
-    try {
-        const { email, password } = req.body;
+  try {
+    const { email, password } = req.body;
 
-        // Checking if user exists
-        const user = await User.findOne({ email });
-        if (!user) {
-            return res.status(400).json({ message: "Error: Invalid Credentials!" });
-        }
-        // Checking if password is correct
-        const isPasswordValid = await bcrypt.compare(password, user.password);
-        if (!isPasswordValid) {
-            return res.status(400).json({ message: "Error: Invalid Credentials!" });
-        }
-
-        // Creating Auth Token and Storing it in Cookies
-        const token = jwt.sign({ userEmail: email }, process.env.SECRET_KEY);
-        // Stores JWT in cookies
-        res.cookie('token', token, { sameSite: 'none', secure: true });
-        // Store User ID in cookies
-        res.cookie('userId', user._id, { sameSite: 'none', secure: true });
-
-        res.status(200).send({ token, message: "User logged in Successfully!" });
-
-    } catch(err) {
-        res.status(500).send({ message: "An error occurred." });
-        console.log(err);
+    // Checking if user exists
+    const user = await User.findOne({ email });
+    if (!user) {
+      return res.status(400).json({ message: 'Error: Invalid Credentials!' });
     }
+    // Checking if password is correct
+    const isPasswordValid = await bcrypt.compare(password, user.password);
+    if (!isPasswordValid) {
+      return res.status(400).json({ message: 'Error: Invalid Credentials!' });
+    }
+
+    // Creating Auth Token and Storing it in Cookies
+    const token = jwt.sign({ userEmail: email }, process.env.SECRET_KEY);
+    // Stores JWT in cookies
+    res.cookie('token', token, { sameSite: 'none', secure: true });
+    // Store User ID in cookies
+    res.cookie('userId', user._id, { sameSite: 'none', secure: true });
+
+    res.status(200).send({ token, message: 'User logged in Successfully!' });
+  } catch (err) {
+    res.status(500).send({ message: 'An error occurred.' });
+    console.log(err);
+  }
 };
 
-  
-  // Function to verify if user exists by ID or if  user ID is valid
+// Function to verify if user exists by ID or if  user ID is valid
 exports.verifyUserById = async (id) => {
-    try {
-        const user = await User.findById(id);
-        return user;
-    } catch (err) {
-        console.error(err);
-        return null;
-    }
+  try {
+    const user = await User.findById(id);
+    return user;
+  } catch (err) {
+    console.error(err);
+    return null;
+  }
 };
-
-
-
-
-
-
-
-
-
 
 /////  -------- Sequelize Code - Commented For Future Use (If Needed) -------- /////
 

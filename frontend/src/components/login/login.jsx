@@ -22,7 +22,6 @@ const Login = () => {
       // console.log(email, password);
       // With Credentials allow the browser to store the cookie
       const response = await api.post('/user/login', { email, password }, { withCredentials: true });
-
       if (response.status === 200) {
         toast.success('Successfully Logged In!');
         navigate('/AGCloud');
@@ -33,7 +32,7 @@ const Login = () => {
       } else if (error.response && error.response.status === 500) {
         toast.error('Server Error. Try Again!');
       } else {
-        console.error('An error occurred:', error.message);
+        toast.error('An error occurred:', error.message);
       }
     }
   };
