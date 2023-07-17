@@ -1,27 +1,26 @@
-.header-title{
-    background-color:  #2755ff;
-    /* background-color: #007bff;  */
+.header-title {
+    background-color: #1eae63;
     height: 75px;
     display: flex;
     flex-direction: row;
     justify-content: space-between;
     align-items: center;
 }
-  
-.header-text{
-    font-size: 22pt;
+
+.header-text {
+    font-size: 20px !important;
     margin-left: 90px;
     margin-top: 15px;
     color: white;
 }
 
-.account-information{
+.account-information {
     color: white;
     margin-top: 15px;
     margin-right: 60px;
 }
 
-  .connection-button {
+.connection-button {
     background-color: #4CAF50;
     color: white;
     padding: 10px;
@@ -30,8 +29,7 @@
     border-color: transparent;
     margin-right: 20px;
 }
-  
+
 .connection-button:hover {
     background-color: #45a049;
 }
-  

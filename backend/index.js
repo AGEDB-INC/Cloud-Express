@@ -12,13 +12,12 @@ app.use(cookieParser());
 
 app.use(
   cors({
-    // TODO: Change this to Client URL when deployed
-    origin: 'http://localhost:3002',
-    credentials: true, // allow cookies
+    origin: true,
+    methods: 'GET,HEAD,PUT,PATCH,POST,DELETE',
+    preflightContinue: false,
+    credentials: true, // Enable credentials (cookies) to be sent with the request
   })
 );
-
-// Stores JWT in cookies
 app.use(
   expressjwt({
     secret: process.env.SECRET_KEY,

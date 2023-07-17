@@ -1,3 +1,4 @@
+/* eslint-disable no-unused-vars */
 /* eslint-disable import/no-unresolved */
 // eslint-disable-next-line import/no-extraneous-dependencies
 import React, { useState } from 'react';
@@ -24,7 +25,7 @@ const Login = () => {
       const response = await api.post('/user/login', { email, password }, { withCredentials: true });
       if (response.status === 200) {
         toast.success('Successfully Logged In!');
-        navigate('/AGCloud');
+        window.location.assign('/AGCloud');
       }
     } catch (error) {
       if (error.response && error.response.status === 400) {
