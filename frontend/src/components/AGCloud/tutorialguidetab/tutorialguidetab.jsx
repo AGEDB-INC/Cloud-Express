@@ -55,7 +55,7 @@ const TutorialGuideTab = ({ selectedTab }) => {
                 <div className="tutorialtab">
                   <h5>
                     <div>
-                      <MainModalContainer onSelectProject={handleRadioButtonChange}/>
+                      <MainModalContainer />
                       to View
                       <br />
                       Tutorial Guide
