@@ -2,12 +2,13 @@
 import React, { useState } from 'react'; // Import your CSS file
 import 'bootstrap/dist/css/bootstrap.min.css'; // Import Bootstrap CSS
 import { Modal, Button } from 'react-bootstrap'; // Import Modal and Button components from React Bootstrap
-import {
-  Col, Form, Input, InputNumber, Row,
-} from 'antd';
+import { Col, Form, Input, InputNumber, Row } from 'antd';
 import { useDispatch } from 'react-redux';
 import Frame from '../../frame/Frame';
-import { connectToDatabase as connectToDatabaseApi, changeGraph } from '../../../features/database/DatabaseSlice';
+import {
+  connectToDatabase as connectToDatabaseApi,
+  changeGraph,
+} from '../../../features/database/DatabaseSlice';
 import { getConnectionStatus } from '../../../features/database/DatabaseSlice';
 import { disconnectToDatabase } from '../../../features/database/DatabaseSlice';
 import { useEffect } from 'react';
@@ -15,7 +16,9 @@ import { addAlert } from '../../../features/alert/AlertSlice';
 import { trimFrame } from '../../../features/frame/FrameSlice';
 import { toast } from 'react-hot-toast';
 import { Toaster } from 'react-hot-toast';
-import { /* getMetaChartData, */ getMetaData } from '../../../features/database/MetadataSlice';
+import {
+  /* getMetaChartData, */ getMetaData,
+} from '../../../features/database/MetadataSlice';
 
 const FormInitialValue = {
   database: '',
@@ -28,7 +31,7 @@ const FormInitialValue = {
 
 const ServerConnectionModal = () => {
   const [modalVisible, setModalVisible] = useState(false);
-  const [connectionState, setConnectionState] = useState(false); 
+  const [connectionState, setConnectionState] = useState(false);
   const dispatch = useDispatch();
 
   const openModal = () => {
@@ -50,49 +53,50 @@ const ServerConnectionModal = () => {
   }, [dispatch]);
 
   const connectToDatabase = (data) => {
-    const loadingToastId = toast.loading("Connecting to database...");
-    
+    const loadingToastId = toast.loading('Connecting to database...');
+
     dispatch(connectToDatabaseApi(data)).then((response) => {
-      toast.dismiss(loadingToastId); 
-      console.log("response", response);
+      toast.dismiss(loadingToastId);
+      console.log('response', response);
 
       if (response.type === 'database/connectToDatabase/fulfilled') {
         dispatch(addAlert('NoticeServerConnected'));
         dispatch(trimFrame('ServerConnect'));
-        toast.success("Connected successfully!");
+        toast.success('Connected successfully!');
         setConnectionState(true);
         closeModal();
       } else if (response.type === 'database/connectToDatabase/rejected') {
         dispatch(addAlert('ErrorServerConnectFail', response.error.message));
-        toast.error("Error Server Connect Fail", response.error.message);
+        toast.error('Error Server Connect Fail', response.error.message);
       }
     });
   };
 
   const handleConnection = () => {
-    if(connectionState) {
-      // Calling disconnect API 
+    if (connectionState) {
+      // Calling disconnect API
       dispatch(disconnectToDatabase()).then((response) => {
-        console.log("response", response);
+        console.log('response', response);
         setConnectionState(false);
-        toast.success("Disconnected successfully!");
+        toast.success('Disconnected successfully!');
       });
     } else {
       openModal();
     }
   };
 
-
   return (
     <div>
-      <Toaster/>
+      <Toaster />
       <button
         id="serverConnectionBtn"
         type="button"
-        className={connectionState ? "btn btn-lg btn-danger" : "btn btn-lg btn-success"}
+        className={
+          connectionState ? 'btn btn-danger' : 'btn btn-primary button'
+        }
         onClick={handleConnection}
       >
-        {connectionState ? "Disconnect Database" : "Connect Database"}
+        {connectionState ? 'Disconnect Database' : 'Connect Database'}
       </button>
       <Modal
         show={modalVisible}
@@ -118,23 +122,48 @@ const ServerConnectionModal = () => {
                   layout="vertical"
                   onFinish={connectToDatabase}
                 >
-                  <Form.Item name="host" label="Connect URL" rules={[{ required: true }]}>
+                  <Form.Item
+                    name="host"
+                    label="Connect URL"
+                    rules={[{ required: true }]}
+                  >
                     <Input placeholder="192.168.0.1" />
                   </Form.Item>
-                  <Form.Item name="port" label="Connect Port" rules={[{ required: true }]}>
-                    <InputNumber placeholder="5432" style={{ width: '100% !important' }} />
+                  <Form.Item
+                    name="port"
+                    label="Connect Port"
+                    rules={[{ required: true }]}
+                  >
+                    <InputNumber
+                      placeholder="5432"
+                      style={{ width: '100% !important' }}
+                    />
                   </Form.Item>
-                  <Form.Item name="database" label="Database Name" rules={[{ required: true }]}>
+                  <Form.Item
+                    name="database"
+                    label="Database Name"
+                    rules={[{ required: true }]}
+                  >
                     <Input placeholder="postgres" />
                   </Form.Item>
-                  <Form.Item name="user" label="User Name" rules={[{ required: true }]}>
+                  <Form.Item
+                    name="user"
+                    label="User Name"
+                    rules={[{ required: true }]}
+                  >
                     <Input placeholder="postgres" />
                   </Form.Item>
-                  <Form.Item name="password" label="Password" rules={[{ required: true }]}>
+                  <Form.Item
+                    name="password"
+                    label="Password"
+                    rules={[{ required: true }]}
+                  >
                     <Input.Password placeholder="postgres" />
                   </Form.Item>
                   <Form.Item>
-                    <Button type="primary" htmlType="submit">Connect</Button>
+                    <Button type="primary" htmlType="submit">
+                      Connect
+                    </Button>
                   </Form.Item>
                 </Form>
               </div>

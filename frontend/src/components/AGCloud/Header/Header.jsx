@@ -5,7 +5,7 @@ import ServerConnectionModal from '../ServerConnection/serverconnection';
 const Header = () => (
   <div className="header-title">
     <div className="header-text">
-      <h2 style={{ color: 'white' }}>AGE Viewer</h2>
+      <h4 style={{ color: 'white' }}>Age Viewer</h4>
     </div>
     <div className="account-information">
       <ServerConnectionModal />

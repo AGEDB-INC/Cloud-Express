@@ -8,6 +8,7 @@
 }
 
 
+
 .serverConnectionModal-content {
   background-color: #fefefe;
   margin: auto;
@@ -46,38 +47,38 @@
   color: #000;
   text-decoration: none;
   cursor: pointer;
-} 
-
-.projects-div-style{
-display: flex;
-width: auto;
-height: 200px;
-background-color: white;
-font-style: agcfont-bold;
 }
 
-.button-div-style{
-display: flex;
-width: auto;
-height: 100px;
-background-color: white;
-font-style: agcfont-bold;
+.projects-div-style {
+  display: flex;
+  width: auto;
+  height: 200px;
+  background-color: white;
+  font-style: agcfont-bold;
 }
 
-.serverConnection-paragraph{
-margin-left: 10px;
+.button-div-style {
+  display: flex;
+  width: auto;
+  height: 100px;
+  background-color: white;
+  font-style: agcfont-bold;
+}
+
+.serverConnection-paragraph {
+  margin-left: 10px;
   margin-top: 40px;
   font-family: agcfont-regular;
   color: blue;
   font-size: 14px;
 }
 
-.div-style{
-width: 600px;
-display: flex;
-width: auto;
-height: 100px;
-background-color: #F0F3F8;
+.div-style {
+  width: 600px;
+  display: flex;
+  width: auto;
+  height: 100px;
+  background-color: #F0F3F8;
 }
 
 .FrameWrapper {
