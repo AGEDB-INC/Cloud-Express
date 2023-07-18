@@ -11,6 +11,7 @@ import './Modal.css';
 import store from '../../../app/store';
 
 function MainModal({ 
+  onSelectProject,
   setCommand,
   command,
   update,
@@ -35,7 +36,7 @@ function MainModal({
       .catch((error) => {
         console.error('Error:', error);
       });
-  }, [update]);
+  }, []);
 
   const openModal = () => {
     setModalVisible(true);
@@ -84,7 +85,7 @@ function MainModal({
   
   const handleCreateProject = () => {
     if (selectedProject) {
-      // onSelectProject(selectedProject);
+      onSelectProject(selectedProject);
     }
     closeModal();
   };
@@ -200,7 +201,43 @@ function MainModal({
       input.click();
     }
   };
-  
+  const handleSampleCSV = (value, event) => {
+    handleProjectSelection(value, event);
+    fetch('/api/v1/db/Samplefiles')
+      .then((response) => response.json())
+      .then(async (fileInfos) => {
+        const nodeQueries = fileInfos
+          .filter((file) => file.type === 'node')
+          .map((file) => {
+            const labelName = file.name.split('.')[0]; // Assuming label name is the filename without extension
+            const query = `
+              SELECT create_vlabel('${selectedGraph}', '${labelName}')
+              WHERE _label_id('${selectedGraph}', '${labelName}') = 0;
+              SELECT load_labels_from_file('${selectedGraph}', '${labelName}', '${file.path}');
+            `;
+            return sendQueryToDatabase(query); // Replace with your SQL execution function
+          });
+        await Promise.all(nodeQueries);
+        const edgeQueries = fileInfos
+          .filter((file) => file.type === 'edge')
+          .map((file) => {
+            console.log(file);
+            const labelName = file.name.substring(0, file.name.indexOf('['));
+            const query = `
+              SELECT create_elabel('${selectedGraph}', '${labelName}')
+              WHERE _label_id('${selectedGraph}', '${labelName}') = 0;
+              SELECT load_edges_from_file('${selectedGraph}', '${labelName}', '${file.path}');
+            `;
+            return sendQueryToDatabase(query);
+          });
+        return Promise.all(edgeQueries);
+      })
+      .then(() => {
+        console.log('All queries executed');
+      })
+      .catch((error) => console.error('Error:', error));
+  };
+
   const handleGraphChange = (event) => {
     setSelectedGraph(event.target.value);
   };
@@ -256,7 +293,7 @@ function MainModal({
             <label>
               <div
                 style={{
-                  border: selectedProject === 'Graph for Movie Data' ? '3px solid blue' : '1px solid #e3e6f0',
+                  border: selectedProject === 'Graph for Car Specification' ? '3px solid blue' : '1px solid #e3e6f0',
                   padding: '30px',
                   display: 'flex',
                   borderRadius: '5px',
@@ -266,16 +303,16 @@ function MainModal({
                   e.target.style.border = '3px solid blue';
                 }}
                 onMouseLeave={(e) => {
-                  if(selectedProject !== 'Graph for Movie Data') e.target.style.border = '1px solid #e3e6f0';
+                  if(selectedProject !== 'Graph for Car Specification') e.target.style.border = '1px solid #e3e6f0';
                 }}
               >
-                Graph for Movie Data
+                Graph for Car Specification
                 <input
                     type="radio"
                     name="projectType"
-                    value="Graph for Movie Data"
+                    value="Graph for Car Specification"
                     style={{ transform: 'scale(1.5)' }}
-                    onChange={(event) => handleProjectSelection(event.target.value, event)}
+                    onChange={(event) => handleSampleCSV(event.target.value, event)}
                 />
               </div>
             </label>
@@ -348,6 +385,7 @@ function MainModal({
 };
 
 MainModal.propTypes = {
+  onSelectProject: PropTypes.func,
   setCommand: PropTypes.func.isRequired,
   command: PropTypes.string.isRequired,
   addFrame: PropTypes.func.isRequired,

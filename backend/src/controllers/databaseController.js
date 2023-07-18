@@ -82,9 +82,6 @@ class DatabaseController {
                             }
                             else {
                                 let type = file.includes('[') && file.includes('&') && file.includes(']') ? 'edge' : 'node';
-                                console.log('File type:', type);
-                                console.log('File name:', file);
-                                console.log('File filePath:', filePath);
                                 resolve({
                                     name: file,
                                     path: filePath,
