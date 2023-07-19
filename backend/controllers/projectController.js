@@ -11,6 +11,7 @@ exports.createProject = async (req, res) => {
     const errors = validationResult(req);
     if (!errors.isEmpty()) {
       return res.status(400).json({
+        message: "Please Enter a Valid Project Name",
         errors: errors.array(),
       });
     }
@@ -20,11 +21,13 @@ exports.createProject = async (req, res) => {
 
     if (!userId) {
       // If userId is not present in cookies then return error
+      console.log("User not logged in!");
       return res.status(401).send({ message: "User not logged in!" });
     } else {
       // Check if the user exists
       const user = await userController.verifyUserById(userId);
       if (!user) {
+        console.log("User not found!");
         return res.status(404).send({ message: "User not found!" });
       }
       
@@ -84,7 +87,6 @@ exports.deleteProject = async (req, res) => {
 exports.getProjectByUserId = async (req, res) => {
     try {
         let userId = req.cookies["userId"];
-    
         // Validate User
         if (!userId) {
         return res.status(401).send({ message: "User not logged in!" });

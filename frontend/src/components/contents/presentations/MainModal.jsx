@@ -1,17 +1,21 @@
 /* eslint-disable jsx-a11y/label-has-associated-control */
 /* eslint-disable */
-import React, { useEffect, useState } from 'react';
-import PropTypes from 'prop-types';
-import { connect, useDispatch, useSelector } from 'react-redux';
-import uuid from 'react-uuid';
-import { getMetaData } from '../../../features/database/MetadataSlice';
-import 'bootstrap/dist/css/bootstrap.min.css'; // Import Bootstrap CSS
-import { Modal, Button } from 'react-bootstrap';
-import './Modal.css';
-import store from '../../../app/store';
+import React, { useEffect, useState } from "react";
+import PropTypes from "prop-types";
+import { connect, useDispatch, useSelector } from "react-redux";
+import uuid from "react-uuid";
+import { getMetaData } from "../../../features/database/MetadataSlice";
+import "bootstrap/dist/css/bootstrap.min.css"; // Import Bootstrap CSS
+import { Modal, Button } from "react-bootstrap";
+import "./Modal.css";
+import store from "../../../app/store";
+import api from "../../../services/api";
+import dayjs from "dayjs";
+import { toast } from "react-toastify";
+import "react-toastify/dist/ReactToastify.css";
 
-function MainModal({ 
-  onSelectProject,
+function MainModal({
+  onProjectCreated,
   setCommand,
   command,
   update,
@@ -25,18 +29,54 @@ function MainModal({
   const [modalVisible, setModalVisible] = useState(false);
   const [selectedElement, setSelectedElement] = useState(null);
   const [activePromises, setPromises] = useState({});
-  const [selectedGraph, setSelectedGraph] = useState('');
+  const [selectedGraph, setSelectedGraph] = useState("");
   const [graphNames, setGraphNames] = useState([]);
-  
+  const [selectedProject, setSelectedProject] = useState("");
+
   useEffect(() => {
     dispatch(getMetaData())
       .then((metadata) => {
         setGraphNames(Object.keys(metadata.payload));
       })
       .catch((error) => {
-        console.error('Error:', error);
+        console.error("Error:", error);
       });
   }, []);
+
+  // Get Project Data From Database when modal is closed
+  useEffect(() => {
+    if (!modalVisible) {
+      getProjectData();
+    }
+  }, [modalVisible]);
+
+  // Function to Get User Project Data From Database
+  const getProjectData = async () => {
+    try {
+      const response = await api.get("/project/id", {
+        withCredentials: true,
+      });
+      const res = await response.data;
+
+      const start = dayjs(res.startDate);
+      const end = dayjs(res.endDate);
+      const today = dayjs(Date.now());
+      var days = 0;
+      if (!today.isAfter(end)) {
+        days = end.diff(today, "days") + 1;
+      }
+
+      const data = {
+        projectName: res.projectName,
+        startDate: start.format("YYYY-MM-DD"),
+        endDate: end.format("YYYY-MM-DD"),
+        daysLeft: days,
+      };
+      onProjectCreated(data);
+    } catch (error) {
+      console.error("Error fetching project data:", error);
+    }
+  };
 
   const openModal = () => {
     setModalVisible(true);
@@ -44,81 +84,100 @@ function MainModal({
 
   const closeModal = () => {
     if (selectedElement) {
-      selectedElement.style.border = '1px solid #e3e6f0';
+      selectedElement.style.border = "1px solid #e3e6f0";
     }
-    setSelectedElement(null); // Clear the selected element when modal closes
-    setSelectedProject(''); // Clear the selected project when modal closes
+    setSelectedElement(null);
+    setSelectedProject("");
     setModalVisible(false);
   };
 
-  const [selectedProject, setSelectedProject] = useState('');
-
-  const handleHover = (event) => {
-    const updatedEvent = { ...event };
-    updatedEvent.target.style.borderColor = 'blue'; // Set the background color on hover
-  };
-
-  const handleLeave = (event) => {
-    const updatedEvent = { ...event };
-    updatedEvent.target.style.borderColor = 'lightgray';
-  };
-
-  const handleButtonHover = (event) => {
-    const updatedEvent = { ...event };
-    updatedEvent.target.style.backgroundColor = '#B2BEB5'; // Set the background color on hover
-  };
-
-  const handleButtonLeave = (event) => {
-    const updatedEvent = { ...event };
-    updatedEvent.target.style.backgroundColor = 'white'; // Reset the background color on leave
-  };
-
-  
-  const handleProjectSelection = (value, event) => {
-    setSelectedProject(value);
-    if (selectedElement) {
-      selectedElement.style.border = '1px solid #e3e6f0';
-    }
-    event.target.parentNode.style.border = '3px solid blue';
-    setSelectedElement(event.target.parentNode);
-  };
-  
-  const handleCreateProject = () => {
+  // Function to Create New User Project in Database
+  const handleCreateProject = async () => {
     if (selectedProject) {
-      onSelectProject(selectedProject);
+      toast.loading("Creating project...");
+      const projectName = selectedProject;
+      console.log(projectName);
+      try {
+        const response = await api.post(
+          "/project/create",
+          { projectName },
+          {
+            withCredentials: true,
+          }
+        );
+
+        const data = response.data;
+        console.log(data);
+        toast.dismiss();
+        toast.success("Successfully created project!");
+      } catch (error) {
+        toast.dismiss();
+        console.log(error);
+        toast.error("An error occurred:", error.message);
+      }
     }
     closeModal();
   };
 
+  const handleHover = (event) => {
+    const updatedEvent = { ...event };
+    updatedEvent.target.style.borderColor = "blue"; // Set the background color on hover
+  };
+
+  const handleLeave = (event) => {
+    const updatedEvent = { ...event };
+    updatedEvent.target.style.borderColor = "lightgray";
+  };
+
+  const handleButtonHover = (event) => {
+    const updatedEvent = { ...event };
+    updatedEvent.target.style.backgroundColor = "#B2BEB5"; // Set the background color on hover
+  };
+
+  const handleButtonLeave = (event) => {
+    const updatedEvent = { ...event };
+    updatedEvent.target.style.backgroundColor = "white"; // Reset the background color on leave
+  };
+
+  const handleProjectSelection = (value, event) => {
+    setSelectedProject(value);
+    if (selectedElement) {
+      selectedElement.style.border = "1px solid #e3e6f0";
+    }
+    event.target.parentNode.style.border = "3px solid blue";
+    setSelectedElement(event.target.parentNode);
+  };
+
   async function sendQueryToDatabase(query) {
     const refKey = uuid();
-    if (database.status !== 'connected') {
-      return Promise.reject(new Error('Database is not connected.'));
+    if (database.status !== "connected") {
+      return Promise.reject(new Error("Database is not connected."));
     }
     setCommand(query);
     const currentCommand = store.getState().editor.command;
-    addFrame(currentCommand, 'CypherResultFrame', refKey);
+    addFrame(currentCommand, "CypherResultFrame", refKey);
     const req = dispatch(() => executeCypherQuery([refKey, currentCommand]));
     // Return the Promise chain
-    return req.then((response) => {
-      if (response.type === 'cypher/executeCypherQuery/rejected') {
-        if (response.error.name !== 'AbortError') {
-          dispatch(() => addAlert('ErrorCypherQuery'));
-          const latestCommand = store.getState().editor.command;
-          if (latestCommand === '') {
-            setCommand(command);
+    return req
+      .then((response) => {
+        if (response.type === "cypher/executeCypherQuery/rejected") {
+          if (response.error.name !== "AbortError") {
+            dispatch(() => addAlert("ErrorCypherQuery"));
+            const latestCommand = store.getState().editor.command;
+            if (latestCommand === "") {
+              setCommand(command);
+            }
           }
+          return;
         }
-        return;
-      }
-      if (update) dispatch(getMetaData());
-    })
+        if (update) dispatch(getMetaData());
+      })
       .finally(() => {
-        const updatedPromises = { ...activePromises }; 
-        updatedPromises[refKey] = req; 
-        setPromises(updatedPromises); 
+        const updatedPromises = { ...activePromises };
+        updatedPromises[refKey] = req;
+        setPromises(updatedPromises);
         dispatch(() => addCommandHistory(command));
-        setCommand('');
+        setCommand("");
       });
   }
 
@@ -129,8 +188,12 @@ function MainModal({
 
     for (let i = 0; i < files.length; i += 1) {
       const file = files[i];
-      if (file.name.includes('[') && file.name.includes('&') && file.name.includes(']')) {
-        const labelName = file.name.substring(0, file.name.indexOf('['));
+      if (
+        file.name.includes("[") &&
+        file.name.includes("&") &&
+        file.name.includes("]")
+      ) {
+        const labelName = file.name.substring(0, file.name.indexOf("["));
         edgeFiles.push({ file, labelName });
       } else {
         nodeFiles.push(file);
@@ -138,11 +201,11 @@ function MainModal({
     }
 
     const uploadNodeFiles = nodeFiles.map((file) => {
-      const labelName = file.name.replace('.csv', '');
+      const labelName = file.name.replace(".csv", "");
       const formData = new FormData();
-      formData.append('file', file);
-      return fetch('/api/v1/db/upload', {
-        method: 'POST',
+      formData.append("file", file);
+      return fetch("/api/v1/db/upload", {
+        method: "POST",
         body: formData,
       })
         .then((response) => {
@@ -165,9 +228,9 @@ function MainModal({
       await Promise.all(uploadNodeFiles);
       const uploadEdgeFiles = edgeFiles.map(({ file, labelName }) => {
         const formData = new FormData();
-        formData.append('file', file);
-        return fetch('/api/v1/db/upload', {
-          method: 'POST',
+        formData.append("file", file);
+        return fetch("/api/v1/db/upload", {
+          method: "POST",
           body: formData,
         })
           .then((response) => {
@@ -187,29 +250,29 @@ function MainModal({
       });
       await Promise.all(uploadEdgeFiles);
     } catch (error) {
-      console.error('Error uploading files:', error);
+      console.error("Error uploading files:", error);
     }
   };
   const openCSVFileDialog = (value, event) => {
     handleProjectSelection(value, event);
-    if(selectedGraph !== '') {
-      const input = document.createElement('input');
-      input.type = 'file';
-      input.accept = '.csv';
+    if (selectedGraph !== "") {
+      const input = document.createElement("input");
+      input.type = "file";
+      input.accept = ".csv";
       input.multiple = true;
-      input.addEventListener('change', handleCSVFiles);
+      input.addEventListener("change", handleCSVFiles);
       input.click();
     }
   };
   const handleSampleCSV = (value, event) => {
     handleProjectSelection(value, event);
-    fetch('/api/v1/db/Samplefiles')
+    fetch("/api/v1/db/Samplefiles")
       .then((response) => response.json())
       .then(async (fileInfos) => {
         const nodeQueries = fileInfos
-          .filter((file) => file.type === 'node')
+          .filter((file) => file.type === "node")
           .map((file) => {
-            const labelName = file.name.split('.')[0]; // Assuming label name is the filename without extension
+            const labelName = file.name.split(".")[0]; // Assuming label name is the filename without extension
             const query = `
               SELECT create_vlabel('${selectedGraph}', '${labelName}')
               WHERE _label_id('${selectedGraph}', '${labelName}') = 0;
@@ -219,10 +282,10 @@ function MainModal({
           });
         await Promise.all(nodeQueries);
         const edgeQueries = fileInfos
-          .filter((file) => file.type === 'edge')
+          .filter((file) => file.type === "edge")
           .map((file) => {
             console.log(file);
-            const labelName = file.name.substring(0, file.name.indexOf('['));
+            const labelName = file.name.substring(0, file.name.indexOf("["));
             const query = `
               SELECT create_elabel('${selectedGraph}', '${labelName}')
               WHERE _label_id('${selectedGraph}', '${labelName}') = 0;
@@ -233,9 +296,9 @@ function MainModal({
         return Promise.all(edgeQueries);
       })
       .then(() => {
-        console.log('All queries executed');
+        console.log("All queries executed");
       })
-      .catch((error) => console.error('Error:', error));
+      .catch((error) => console.error("Error:", error));
   };
 
   const handleGraphChange = (event) => {
@@ -260,17 +323,23 @@ function MainModal({
           <Modal.Title>New Project</Modal.Title>
         </Modal.Header>
         <Modal.Body>
-        <div style={{ display: 'flex', flexDirection: 'column', alignItems: 'center' }}>
+          <div
+            style={{
+              display: "flex",
+              flexDirection: "column",
+              alignItems: "center",
+            }}
+          >
             <select
               value={selectedGraph}
               onChange={handleGraphChange}
               style={{
-                marginBottom: '20px',
-                padding: '10px',
-                borderRadius: '5px',
-                border: '1px solid #ccc',
-                width: '300px',
-                fontSize: '16px',
+                marginBottom: "20px",
+                padding: "10px",
+                borderRadius: "5px",
+                border: "1px solid #ccc",
+                width: "300px",
+                fontSize: "16px",
               }}
             >
               <option value="">Select a graph</option>
@@ -280,81 +349,94 @@ function MainModal({
                 </option>
               ))}
             </select>
-            <p style={{ fontStyle: 'italic', color: '#666' }}>Selected graph: {selectedGraph}</p>
+            <p style={{ fontStyle: "italic", color: "#666" }}>
+              Selected graph: {selectedGraph}
+            </p>
           </div>
 
           <p>
-            {' '}
+            {" "}
             <strong>Built-in database projects</strong>
           </p>
 
-          <div style={{ display: 'flex', justifyContent: 'left'}}>
-
+          <div style={{ display: "flex", justifyContent: "left" }}>
             <label>
               <div
                 style={{
-                  border: selectedProject === 'Graph for Car Specification' ? '3px solid blue' : '1px solid #e3e6f0',
-                  padding: '30px',
-                  display: 'flex',
-                  borderRadius: '5px',
-                  gap: '5rem',
+                  border:
+                    selectedProject === "Graph for Car Specification"
+                      ? "3px solid blue"
+                      : "1px solid #e3e6f0",
+                  padding: "30px",
+                  display: "flex",
+                  borderRadius: "5px",
+                  gap: "5rem",
                 }}
                 onMouseEnter={(e) => {
-                  e.target.style.border = '3px solid blue';
+                  e.target.style.border = "3px solid blue";
                 }}
                 onMouseLeave={(e) => {
-                  if(selectedProject !== 'Graph for Car Specification') e.target.style.border = '1px solid #e3e6f0';
+                  if (selectedProject !== "Graph for Car Specification")
+                    e.target.style.border = "1px solid #e3e6f0";
                 }}
               >
                 Graph for Car Specification
                 <input
-                    type="radio"
-                    name="projectType"
-                    value="Graph for Car Specification"
-                    style={{ transform: 'scale(1.5)' }}
-                    onChange={(event) => handleSampleCSV(event.target.value, event)}
+                  type="radio"
+                  name="projectType"
+                  value="Graph for Car Specification"
+                  style={{ transform: "scale(1.5)" }}
+                  onChange={(event) =>
+                    handleSampleCSV(event.target.value, event)
+                  }
                 />
               </div>
             </label>
-
           </div>
           <p className="mt-3">
-            {' '}
+            {" "}
             <strong>Import your own data for a new database project</strong>
           </p>
-          <div style={{ display: 'flex', justifyContent: 'left'}} >
-            <label >
+          <div style={{ display: "flex", justifyContent: "left" }}>
+            <label>
               <div
                 style={{
-                  border: selectedProject === 'Import User Data (.CSV)' ? '3px solid blue' : '1px solid #e3e6f0',
-                  padding: '28px',
-                  display: 'flex',
-                  borderRadius: '5px',
-                  gap: '5rem',
+                  border:
+                    selectedProject === "Import User Data (.CSV)"
+                      ? "3px solid blue"
+                      : "1px solid #e3e6f0",
+                  padding: "28px",
+                  display: "flex",
+                  borderRadius: "5px",
+                  gap: "5rem",
                 }}
                 onMouseEnter={(e) => {
-                  e.target.style.border = '3px solid blue';
+                  e.target.style.border = "3px solid blue";
                 }}
                 onMouseLeave={(e) => {
-                  if(selectedProject !== 'Import User Data (.CSV)') e.target.style.border = '1px solid #e3e6f0';
+                  if (selectedProject !== "Import User Data (.CSV)")
+                    e.target.style.border = "1px solid #e3e6f0";
                 }}
               >
                 Import User Data (.CSV)
                 <input
                   type="radio"
                   name="projectType"
-                  style={{ transform: 'scale(1.5)' }}
-                  value='Import User Data (.CSV)'
-                  onChange={(event) => openCSVFileDialog(event.target.value, event)}
-                  />
+                  style={{ transform: "scale(1.5)" }}
+                  value="Import User Data (.CSV)"
+                  onChange={(event) =>
+                    openCSVFileDialog(event.target.value, event)
+                  }
+                />
               </div>
             </label>
           </div>
 
-          {selectedGraph === '' && selectedProject !== '' && (
-            <p style={{ color: 'red', marginTop: '10px' }}>Please select a graph before choosing a project.</p>
+          {selectedGraph === "" && selectedProject !== "" && (
+            <p style={{ color: "red", marginTop: "10px" }}>
+              Please select a graph before choosing a project.
+            </p>
           )}
-
         </Modal.Body>
         <Modal.Footer>
           <Button
@@ -362,7 +444,7 @@ function MainModal({
             size="lg"
             onClick={closeModal}
             style={{
-              width: '30%',
+              width: "30%",
             }}
           >
             Cancel
@@ -371,10 +453,10 @@ function MainModal({
             size="lg"
             variant="primary"
             style={{
-              width: '30%',
+              width: "30%",
             }}
             onClick={handleCreateProject}
-            disabled={selectedProject === ''}
+            disabled={selectedProject === "" || selectedGraph === "" }
           >
             + Create New Project
           </Button>
@@ -382,10 +464,10 @@ function MainModal({
       </Modal>
     </div>
   );
-};
+}
 
 MainModal.propTypes = {
-  onSelectProject: PropTypes.func,
+  onProjectCreated: PropTypes.func,
   setCommand: PropTypes.func.isRequired,
   command: PropTypes.string.isRequired,
   addFrame: PropTypes.func.isRequired,
