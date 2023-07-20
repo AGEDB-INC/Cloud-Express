@@ -24,7 +24,7 @@ router.post(
 // Delete Project
 router.delete("/delete", projectController.deleteProject);
 // Get Project By User ID 
-router.get("/get", projectController.getProjectByUserId);
+router.get("/id", projectController.getProjectByUserId);
 
 
 
