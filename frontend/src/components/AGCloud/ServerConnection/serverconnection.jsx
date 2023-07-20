@@ -87,7 +87,7 @@ const ServerConnectionModal = () => {
 
   return (
     <div>
-      <Toaster />
+      {/* <Toaster /> */}
       <button
         id="serverConnectionBtn"
         type="button"

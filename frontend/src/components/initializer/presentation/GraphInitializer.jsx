@@ -108,6 +108,7 @@ const InitGraphModal = ({ show, setShow }) => {
         }
       })
       .catch((err) => {
+        // eslint-disable-next-line
         console.log('error', err);
         setLoading(false);
         setError(err);

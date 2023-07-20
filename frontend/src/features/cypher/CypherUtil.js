@@ -337,6 +337,7 @@ export const generateCytoscapeElement = (data, maxDataOfGraph, isNew) => {
           classes: isNew ? 'new node' : 'edge',
         },
       );
+      // eslint-disable-next-line
       console.log(JSON.stringify(labelName), edgeLegend[labelName], edges);
     } else {
       if (!Object.prototype.hasOwnProperty.call(nodeLegend, labelName)) {
@@ -396,6 +397,7 @@ export const generateCytoscapeElement = (data, maxDataOfGraph, isNew) => {
       });
     });
   }
+  // eslint-disable-next-line
   console.log('edge sizes', edgeLabelSizes);
   return {
     legend: {

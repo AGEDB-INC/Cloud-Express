@@ -201,6 +201,7 @@ const Frame = ({
             type="link"
             className={`${styles.FrameButton}`}
             onClick={() => {
+              // eslint-disable-next-line
               if (window.confirm('Are you sure you want to close this window?')) {
                 dispatch(removeFrame(refKey));
                 dispatch(removeActiveRequests(refKey));

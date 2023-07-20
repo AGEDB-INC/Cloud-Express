@@ -48,6 +48,7 @@ const App = () => {
       <Routes>
         <Route exact path="/login" element={<Login />} />
         <Route exact path="/signup" element={<SignUp />} />
+
         {authenticate ? (
           <>
             <Route exact path="/" element={<MainPage />} />

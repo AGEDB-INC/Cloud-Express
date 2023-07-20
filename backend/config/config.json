@@ -1,22 +1,22 @@
 {
   "development": {
     "username": "root",
-    "password": "your_password_here",
-    "database": "your_database_name_here",
+    "password": "rootpassword",
+    "database": "cloud-express",
     "host": "localhost",
     "dialect": "mysql"
   },
   "test": {
     "username": "root",
-    "password": "your_password_here",
-    "database": "your_database_name_here",
+    "password": "rootpassword",
+    "database": "cloud-express",
     "host": "localhost",
     "dialect": "mysql"
   },
   "production": {
     "username": "root",
-    "password": "your_password_here",
-    "database": "your_database_name_here",
+    "password": "rootpassword",
+    "database": "cloud-express",
     "host": "localhost",
     "dialect": "mysql"
   }
