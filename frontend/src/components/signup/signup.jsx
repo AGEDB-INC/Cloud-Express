@@ -47,6 +47,7 @@ const SignUpPage = () => {
     }
     const submitData = { ...formData };
     delete submitData.confirmPassword;
+    // eslint-disable-next-line
     console.log(submitData);
     try {
       //  With Credentials allow the browser to store the cookie
@@ -57,6 +58,7 @@ const SignUpPage = () => {
         toast.success("Successfully Signed Up!");
         navigate("/login");
       } else {
+        // eslint-disable-next-line
         console.error("SignUp failed");
         toast.error("SignUp failed!");
       }
@@ -72,6 +74,7 @@ const SignUpPage = () => {
       }
 
       else {
+        // eslint-disable-next-line
         console.error('An error occurred:', error.response);
         toast.error('SignUp failed! Please try again');
       }

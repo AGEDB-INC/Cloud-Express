@@ -120,6 +120,7 @@ function OpenCSVFileDialog({
       });
       await Promise.all(uploadEdgeFiles);
     } catch (error) {
+      // eslint-disable-next-line
       console.error('Error uploading files:', error);
     }
   };
@@ -152,6 +153,7 @@ function OpenCSVFileDialog({
         const edgeQueries = fileInfos
           .filter((file) => file.type === 'edge')
           .map((file) => {
+            // eslint-disable-next-line
             console.log(file);
             const labelName = file.name.substring(0, file.name.indexOf('['));
             const query = `
@@ -164,8 +166,10 @@ function OpenCSVFileDialog({
         return Promise.all(edgeQueries);
       })
       .then(() => {
+        // eslint-disable-next-line
         console.log('All queries executed');
       })
+      // eslint-disable-next-line
       .catch((error) => console.error('Error:', error));
   };
   const handleDropdownChange = (event) => {

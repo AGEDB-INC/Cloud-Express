@@ -122,6 +122,7 @@ const CypherResultFrame = ({
   const downloadPng = () => {
     const eleJson = chartAreaRef.current.getCy().elements().jsons();
     if (eleJson.length === 0) {
+      // eslint-disable-next-line
       alert('No data to download!');
       return;
     }
@@ -138,6 +139,7 @@ const CypherResultFrame = ({
   const downloadJson = () => {
     const eleJson = chartAreaRef.current.getCy().elements().jsons();
     if (eleJson.length === 0) {
+      // eslint-disable-next-line
       alert('No data to download!');
       return;
     }
@@ -153,6 +155,7 @@ const CypherResultFrame = ({
   const downloadCsv = () => {
     const eleJson = chartAreaRef.current.getCy().elements().jsons();
     if (eleJson.length === 0) {
+      // eslint-disable-next-line
       alert('No data to download!');
       return;
     }
@@ -169,6 +172,7 @@ const CypherResultFrame = ({
       const json2csvParser = new Parser();
       saveAs(new Blob([`\uFEFF${json2csvParser.parse(dataJson)}`], { type: 'text/csv;charset=utf-8' }), `${reqString.replace(/ /g, '_')}.csv`);
     } catch (err) {
+      // eslint-disable-next-line
       alert('Unknown Error.');
     }
   };

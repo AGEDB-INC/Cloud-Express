@@ -137,6 +137,7 @@ const CypherResultCytoscapeCharts = ({
       true,
     );
     if (generatedData.elements.nodes.length === 0) {
+      // eslint-disable-next-line
       alert('No data to extend.');
       return;
     }

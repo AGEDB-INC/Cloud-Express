@@ -48,6 +48,7 @@ const ModalDialog = ({
           dispatch(removeGraphHistory());
           dispatch(removeElementHistory());
           dispatch(closeModal());
+          // eslint-disable-next-line
           alert('The node has been deleted from your database. Please re-run the query.');
           getMetaData({ currentGraph });
         }

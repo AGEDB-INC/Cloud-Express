@@ -33,6 +33,7 @@ const mapStateToProps = (state, ownProps) => {
       );
     } catch (e) {
       // TODO need tracing error
+      // eslint-disable-next-line
       console.error(e);
     }
     return {
