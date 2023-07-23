@@ -1,0 +1,827 @@
+id,mfr_name,car_division,carline
+1,General Motors,Buick,ENCLAVE FWD
+2,BMW,BMW,M5 Sedan
+3,Nissan,INFINITI,Q50 AWD RED SPORT
+4,FCA US LLC,Dodge,Durango AWD
+5,BMW,BMW,840i Coupe
+6,Jaguar Land Rover L,Land Rover,Discovery
+7,Kia,KIA,Sorento Hybrid FWD
+8,Porsche,Porsche,Panamera 4S ST
+9,BMW,BMW,X3 M
+10,Hyundai,GENESIS,G70 RWD
+11,General Motors,Buick,ENVISION FWD
+12,Porsche,Porsche,911 Carrera S Cabriolet
+13,Toyota,TOYOTA,HIGHLANDER HYBRID AWD
+14,Toyota,TOYOTA,HIGHLANDER
+15,Mercedes-Benz,Mercedes-Benz,CLA 250 4MATIC
+16,Volvo,"Volvo Cars of North America, LLC",S60 B5
+17,Jaguar Land Rover L,Land Rover,Range Rover P400 MHEV
+18,Ford Motor Company,Ford,EXPLORER FFV AWD
+19,General Motors,Chevrolet,SILVERADO 4WD CAB CHASSIS
+20,Mercedes-Benz,Mercedes-Benz,GLE 580 4MATIC
+21,FCA US LLC,RAM,1500 Classic 4X4
+22,Volkswagen Group of,Audi,S7
+23,Ford Motor Company,Ford,MAVERICK AWD
+24,Ford Motor Company,Lincoln,NAUTILUS AWD
+25,BMW,BMW,430i xDrive Coupe
+26,Ford Motor Company,Ford,EXPLORER PLATINUM HEV AWD
+27,Porsche,Porsche,911 Carrera 4 Cabriolet
+28,Ford Motor Company,Ford,F150 PICKUP 2WD FFV
+29,Mercedes-Benz,Mercedes-Benz,GLC 300
+30,Honda,Honda,ODYSSEY FWD
+31,BMW,BMW,228i Gran Coupe
+32,Toyota,TOYOTA,AVALON XLE
+33,Hyundai,HYUNDAI MOTOR COMPANY,Tucson Hybrid
+34,BMW,BMW,M240i xDrive Coupe
+35,Mercedes-Benz,Mercedes-Benz,G 550
+36,General Motors,Chevrolet,COLORADO ZR2 4WD
+37,Maserati,MASERATI,LEVANTE TROFEO
+38,Ford Motor Company,Ford,MUSTANG
+39,Ford Motor Company,Ford,Transit Connect Wagon LWB FWD
+40,General Motors,Chevrolet,TAHOE 4WD
+41,Porsche,Porsche,911 Turbo
+42,Kia,KIA,Niro Touring
+43,Toyota,LEXUS,LS 500
+44,BMW,BMW,X6 M
+45,Toyota,LEXUS,UX 250h AWD
+46,Mercedes-Benz,Mercedes-Benz,AMG C 43 4MATIC (coupe)
+47,Mercedes-Benz,Mercedes-Benz,"Metris (Cargo Van, LWB)"
+48,Volkswagen Group of,Audi,TT Coupe quattro
+49,Hyundai,GENESIS,G80 RWD
+50,General Motors,Cadillac,XT6 FWD
+51,Kia,KIA,Sorento AWD
+52,Volkswagen Group of,Audi,A4 quattro
+53,MAZDA,MAZDA,MAZDA3 5-Door 2WD
+54,BMW,BMW,M5 CS Sedan
+55,Volkswagen Group of,Volkswagen,Atlas Cross Sport 4Motion
+56,Volkswagen Group of,Audi,A6 Allroad quattro
+57,Nissan,NISSAN,SENTRA SR
+58,Ford Motor Company,Ford,F150 RAPTOR 4WD
+59,Volkswagen Group of,Audi,S5 Cabriolet
+60,FCA US LLC,Jeep,Gladiator 4X4
+61,BMW,Mini,COOPER CONVERTIBLE
+62,General Motors,Chevrolet,SILVERADO 2WD CAB CHASSIS
+63,Ford Motor Company,Ford,EXPLORER AWD
+64,Honda,Acura,MDX AWD
+65,Mitsubishi Motors Co,Mitsubishi Motors Corporation,ECLIPSE CROSS 2WD
+66,Volkswagen Group of,Bugatti,Chiron
+67,Porsche,Porsche,Panamera 4 ST
+68,Mercedes-Benz,Mercedes-Benz,Metris (Passenger Van)
+69,Nissan,NISSAN,KICKS
+70,Volkswagen Group of,Volkswagen,Golf-R
+71,Maserati,MASERATI,GHIBLI TROFEO
+72,Toyota,TOYOTA,COROLLA
+73,Nissan,NISSAN,ROGUE AWD SL/PLATINUM
+74,Hyundai,HYUNDAI MOTOR COMPANY,Santa Fe AWD
+75,Jaguar Land Rover L,Jaguar,F-TYPE P450 AWD R-Dynamic Conv
+76,General Motors,GMC,YUKON 4WD
+77,Nissan,NISSAN,TITAN 4WD PRO-4X
+78,Volkswagen Group of,Audi,SQ5
+79,BMW,BMW,M340i Sedan
+80,Toyota,TOYOTA,COROLLA HATCHBACK XSE
+81,Kia,KIA,Soul Eco dynamics
+82,Nissan,NISSAN,FRONTIER 4WD
+83,Toyota,LEXUS,RC 300 AWD
+84,Kia,KIA,Seltos AWD
+85,Ford Motor Company,Lincoln,NAUTILUS FWD
+86,Porsche,Porsche,911 Carrera Cabriolet
+87,Porsche,Porsche,718 Cayman T
+88,Toyota,LEXUS,NX 250 AWD
+89,Ford Motor Company,Ford,MAVERICK FWD
+90,Mercedes-Benz,Mercedes-Benz,C 300 4MATIC
+91,Volkswagen Group of,Audi,A7 quattro
+92,Mercedes-Benz,Mercedes-Benz,E 450 (convertible)
+93,BMW,BMW,740i Sedan
+94,Ford Motor Company,Ford,FORD GT
+95,McLaren Automotive ,McLaren,720S Spider
+96,Toyota,LEXUS,NX 350 AWD
+97,Jaguar Land Rover L,Land Rover,New Range Rover P360 LWB MHEV
+98,General Motors,Chevrolet,SILVERADO 2WD
+99,Jaguar Land Rover L,Land Rover,Range Rover Evoque
+100,Honda,Honda,HR-V FWD
+101,Nissan,NISSAN,PATHFINDER 2WD
+102,Toyota,LEXUS,RX 350 L
+103,Jaguar Land Rover L,Land Rover,Range Rover SVA
+104,Mercedes-Benz,Mercedes-Benz,AMG GLE 53 4MATIC+
+105,General Motors,GMC,ACADIA FWD
+106,General Motors,Chevrolet,SPARK ACTIV
+107,Jaguar Land Rover L,Land Rover,New Range Rover LWB
+108,Nissan,NISSAN,SENTRA
+109,Toyota,TOYOTA,SIENNA
+110,Kia,KIA,Niro FE
+111,Jaguar Land Rover L,Land Rover,Range Rover Velar P340 MHEV
+112,FCA US LLC,Dodge,Challenger Widebody
+113,Mercedes-Benz,Mercedes-Benz,C 300
+114,Volkswagen Group of,Audi,R8 Coupe RWD
+115,Toyota,LEXUS,IS 500
+116,Volkswagen Group of,Audi,A6 quattro
+117,aston martin,Aston Martin Lagonda Ltd,Vantage V8
+118,Volkswagen Group of,Audi,TT Roadster quattro
+119,General Motors,Chevrolet,SILVERADO 4WD MUD TERRAIN TIRES
+120,Jaguar Land Rover L,Jaguar,E-PACE
+121,Toyota,TOYOTA,COROLLA CROSS
+122,BMW,BMW,M8 Competition Coupe
+123,Ford Motor Company,Ford,ESCAPE AWD HEV
+124,FCA US LLC,Dodge,Durango RWD
+125,General Motors,Chevrolet,CORVETTE
+126,Toyota,TOYOTA,CAMRY AWD LE/SE
+127,FCA US LLC,Jeep,Cherokee 4X4
+128,FCA US LLC,Chrysler,300 AWD
+129,Toyota,LEXUS,ES 250 AWD
+130,Volkswagen Group of,Audi,A5 Sportback S line quattro
+131,Honda,Honda,HR-V AWD
+132,Honda,Acura,MDX FWD
+133,Toyota,TOYOTA,TACOMA 2WD
+134,Rolls-Royce,Rolls-Royce Motor Cars Limited,Cullinan
+135,Volkswagen Group of,Volkswagen,Taos 4Motion
+136,BMW,BMW,430i Convertible
+137,Toyota,LEXUS,LS 500h AWD
+138,Mitsubishi Motors Co,Mitsubishi Motors Corporation,ECLIPSE CROSS ES 4WD
+139,Volkswagen Group of,Audi,Q3 S line quattro
+140,Volkswagen Group of,Volkswagen,GTI
+141,General Motors,GMC,SIERRA 4WD MUD TERRAIN TIRES
+142,Honda,Acura,NSX
+143,Kia,KIA,Stinger RWD
+144,Mercedes-Benz,Mercedes-Benz,E 450 (coupe)
+145,BMW,BMW,X2 M35i
+146,Volkswagen Group of,Audi,RS 5 Coupe
+147,Porsche,Porsche,Cayenne Turbo GT Coupe
+148,Honda,Acura,ILX
+149,Toyota,TOYOTA,PRIUS Eco
+150,BMW,BMW,X2 xDrive28i
+151,Nissan,NISSAN,VERSA
+152,Volkswagen Group of,Audi,S6
+153,General Motors,Cadillac,CT5 AWD
+154,Nissan,INFINITI,Q50 RED SPORT
+155,FCA US LLC,ALFA ROMEO,Giulia AWD
+156,Volkswagen Group of,Audi,Q7 quattro
+157,Porsche,Porsche,Panamera GTS ST
+158,Nissan,INFINITI,Q50 AWD
+159,Porsche,Porsche,718 Boxster
+160,Nissan,NISSAN,PATHFINDER 4WD PLATINUM
+161,Toyota,LEXUS,IS 350
+162,Hyundai,HYUNDAI MOTOR COMPANY,Veloster N
+163,Hyundai,HYUNDAI MOTOR COMPANY,Kona AWD
+164,Maserati,MASERATI,QUATTROPORTE GT
+165,Ford Motor Company,Lincoln,AVIATOR RWD
+166,Ford Motor Company,Ford,ESCAPE FWD HEV
+167,Mercedes-Benz,Mercedes-Benz,AMG SL 55 4MATIC+
+168,FCA US LLC,Chrysler,Pacifica AWD
+169,Jaguar Land Rover L,Land Rover,Range Rover Velar
+170,Mitsubishi Motors Co,Mitsubishi Motors Corporation,MIRAGE G4
+171,General Motors,Cadillac,XT5 LIMO FWD
+172,General Motors,Chevrolet,BLAZER FWD
+173,Porsche,Porsche,911 Carrera 4S Cabriolet
+174,Hyundai,GENESIS,GV80 AWD
+175,Mercedes-Benz,Mercedes-Benz,E 350 4MATIC
+176,Maserati,MASERATI,GHIBLI GT
+177,Ford Motor Company,Ford,BRONCO BADLANDS 4WD
+178,Volkswagen Group of,Audi,Q8 quattro
+179,General Motors,Cadillac,CT4 AWD
+180,General Motors,Cadillac,CT4
+181,Mercedes-Benz,Mercedes-Benz,S 580 4MATIC Maybach
+182,Toyota,LEXUS,LC 500h
+183,BMW,TOYOTA,Supra 2.0
+184,Volkswagen Group of,Bugatti,Chiron Pur Sport
+185,Toyota,LEXUS,RC 300
+186,Porsche,Porsche,911 Carrera
+187,Maserati,MASERATI,LEVANTE MODENA
+188,Honda,Honda,CIVIC 4Dr
+189,Hyundai,HYUNDAI MOTOR COMPANY,Santa Fe FWD
+190,Volkswagen Group of,Audi,RS Q8
+191,Hyundai,HYUNDAI MOTOR COMPANY,Tucson Hybrid Blue
+192,Toyota,TOYOTA,CAMRY LE/SE
+193,Jaguar Land Rover L,Land Rover,Range Rover LWB
+194,Nissan,INFINITI,Q60 AWD RED SPORT
+195,Volvo,"Volvo Cars of North America, LLC",XC60 B5 AWD
+196,Mercedes-Benz,Mercedes-Benz,AMG E 53 4MATIC+ (Convertible)
+197,BMW,BMW,840i Gran Coupe
+198,BMW,BMW,M4 Competition Coupe
+199,Ferrari,"Ferrari North America, Inc.",Roma
+200,Rolls-Royce,Rolls-Royce Motor Cars Limited,Phantom Extended
+201,Ford Motor Company,Ford,EXPLORER PLATINUM HEV RWD
+202,Nissan,NISSAN,TITAN 4WD
+203,Nissan,NISSAN,ARMADA 4WD
+204,BMW,Mini,COOPER COUNTRYMAN ALL4
+205,Mercedes-Benz,Mercedes-Benz,AMG GLS 63 4MATIC+
+206,Ford Motor Company,Ford,TRANSIT T150 WAGON 4WD FFV
+207,Toyota,LEXUS,RX 350 L AWD
+208,BMW,Mini,COOPER S COUNTRYMAN
+209,Mercedes-Benz,Mercedes-Benz,E 450 4MATIC All-Terrain (wagon)
+210,Mercedes-Benz,Mercedes-Benz,Metris (Cargo Van)
+211,FCA US LLC,Dodge,Challenger SRT Widebody
+212,Volkswagen Group of,Bentley,Bentayga
+213,Toyota,TOYOTA,VENZA AWD
+214,Volvo,"Volvo Cars of North America, LLC",XC90 T6 AWD
+215,aston martin,Aston Martin Lagonda Ltd,DB11 V12
+216,BMW,BMW,ALPINA B8 Gran Coupe
+217,Volvo,"Volvo Cars of North America, LLC",V90CC B6 AWD
+218,Volkswagen Group of,Audi,A3 quattro
+219,Nissan,NISSAN,ROGUE SPORT AWD
+220,Mercedes-Benz,Mercedes-Benz,GLE 350 4MATIC
+221,Rolls-Royce,Rolls-Royce Motor Cars Limited,Cullinan Black Badge
+222,Ford Motor Company,Ford,F150 PICKUP 4WD
+223,Porsche,Porsche,718 Cayman GTS 4.0
+224,Toyota,TOYOTA,AVALON
+225,Honda,Honda,RIDGELINE AWD
+226,Mercedes-Benz,Mercedes-Benz,AMG E 53 4MATIC+
+227,Nissan,INFINITI,Q60 AWD
+228,Porsche,Porsche,Macan
+229,BMW,Mini,COOPER S CLUBMAN
+230,Toyota,TOYOTA,SEQUOIA 4WD
+231,BMW,Mini,COOPER COUNTRYMAN
+232,General Motors,Buick,ENCORE AWD
+233,BMW,BMW,X2 sDrive28i
+234,Toyota,TOYOTA,HIGHLANDER AWD
+235,BMW,BMW,Z4 M40i
+236,Nissan,NISSAN,ROGUE FWD SL/PLATINUM
+237,Toyota,TOYOTA,RAV4 HYBRID AWD
+238,Toyota,TOYOTA,TUNDRA 4WD
+239,Volkswagen Group of,Audi,SQ7
+240,Toyota,LEXUS,RX 450h L AWD
+241,BMW,BMW,M440i xDrive Convertible
+242,Ford Motor Company,Ford,F150 PICKUP 2WD HEV
+243,General Motors,Cadillac,XT5 HEARSE FWD
+244,Mercedes-Benz,Mercedes-Benz,Metris (US Postal)
+245,BMW,BMW,M850i xDrive Gran Coupe
+246,FCA US LLC,FIAT,500X AWD
+247,Hyundai,HYUNDAI MOTOR COMPANY,Venue
+248,FCA US LLC,Jeep,Grand Cherokee L 4X4
+249,Mercedes-Benz,Mercedes-Benz,AMG GLE 63 S 4MATIC+
+250,Porsche,Porsche,718 Boxster GTS 4.0
+251,Mercedes-Benz,Mercedes-Benz,CLS 450 4MATIC
+252,Toyota,LEXUS,ES 350
+253,Ford Motor Company,Ford,BRONCO BLACK DIAMOND 4WD
+254,Rolls-Royce,Rolls-Royce Motor Cars Limited,Phantom
+255,Toyota,TOYOTA,CAMRY TRD
+256,Toyota,TOYOTA,PRIUS AWD
+257,Mercedes-Benz,Mercedes-Benz,GLB 250
+258,FCA US LLC,Jeep,Compass 4X2
+259,General Motors,Chevrolet,SILVERADO 4WD ZR2
+260,Porsche,Porsche,Macan S
+261,Ford Motor Company,Ford,F150 PICKUP 4WD HEV
+262,General Motors,Cadillac,ESCALADE 2WD
+263,Toyota,TOYOTA,CAMRY XSE
+264,Volkswagen Group of,Audi,R8 Spyder RWD
+265,Hyundai,HYUNDAI MOTOR COMPANY,Palisade AWD
+266,MAZDA,MAZDA,MAZDA3 5-Door 4WD
+267,Hyundai,HYUNDAI MOTOR COMPANY,Ioniq
+268,Honda,Honda,INSIGHT TOURING
+269,Mercedes-Benz,Mercedes-Benz,AMG CLA 45 4MATIC
+270,Volvo,"Volvo Cars of North America, LLC",XC40 T5 AWD
+271,Mercedes-Benz,Mercedes-Benz,E 350
+272,MAZDA,MAZDA,MAZDA3 4-Door 4WD
+273,BMW,Mini,JOHN COOPER WORKS CLUBMAN ALL4
+274,Ford Motor Company,Ford,F150 PICKUP TREMOR 4WD
+275,BMW,BMW,ALPINA XB7
+276,Subaru,Subaru,WRX
+277,Toyota,TOYOTA,HIGHLANDER HYBRID
+278,Maserati,MASERATI,QUATTROPORTE MODENA AWD
+279,Honda,Acura,TLX Type-S
+280,Maserati,MASERATI,GHIBLI MODENA RWD
+281,General Motors,GMC,YUKON XL 2WD
+282,General Motors,Chevrolet,COLORADO 4WD
+283,General Motors,Buick,ENVISION AWD
+284,Kia,KIA,Telluride AWD
+285,BMW,BMW,M4CompetitionMxDriveConvertible
+286,Jaguar Land Rover L,Land Rover,Range Rover
+287,Nissan,INFINITI,QX80 4WD
+288,Honda,Honda,CR-V AWD
+289,Mercedes-Benz,Mercedes-Benz,AMG GLE 53 4MATIC+ (coupe)
+290,Mercedes-Benz,Mercedes-Benz,A 220
+291,Volkswagen Group of,Bentley,Continental GT V8 Convertible
+292,Jaguar Land Rover L,Land Rover,Defender 90 MHEV
+293,Volkswagen Group of,Lamborghini,Huracan Coupe RWD
+294,Ford Motor Company,Ford,EXPLORER RWD
+295,Honda,Honda,PILOT AWD
+296,Honda,Honda,PILOT FWD
+297,Porsche,Porsche,Panamera GTS
+298,Mercedes-Benz,Mercedes-Benz,AMG C 43 4MATIC (convertible)
+299,Rolls-Royce,Rolls-Royce Motor Cars Limited,Ghost
+300,Mercedes-Benz,Mercedes-Benz,AMG A 35 4MATIC
+301,Jaguar Land Rover L,Land Rover,Discovery Sport
+302,FCA US LLC,Jeep,Cherokee Trailhawk 4X4
+303,Nissan,INFINITI,QX60 FWD
+304,Porsche,Porsche,Cayenne Turbo Coup?
+305,Mitsubishi Motors Co,Mitsubishi Motors Corporation,ECLIPSE CROSS 4WD
+306,Jaguar Land Rover L,Land Rover,Discovery MHEV
+307,Jaguar Land Rover L,Land Rover,Defender 110
+308,Kia,KIA,Sportage FWD
+309,Toyota,LEXUS,ES 300h
+310,MAZDA,MAZDA,MX-5
+311,General Motors,Cadillac,XT5 AWD
+312,Porsche,Porsche,Panamera 4 Executive
+313,Volvo,"Volvo Cars of North America, LLC",S90 B6 AWD
+314,MAZDA,MAZDA,CX-30 4WD
+315,Toyota,TOYOTA,CAMRY XLE/XSE
+316,General Motors,GMC,CANYON 4WD
+317,Mercedes-Benz,Mercedes-Benz,GLE 450 4MATIC
+318,Toyota,LEXUS,RX 350
+319,Mercedes-Benz,Mercedes-Benz,GLS 450 4MATIC
+320,BMW,BMW,X4 M
+321,BMW,BMW,740i xDrive Sedan
+322,Toyota,TOYOTA,COROLLA XLE
+323,Mercedes-Benz,Mercedes-Benz,GLS 580 4MATIC
+324,Jaguar Land Rover L,Jaguar,XF P300 AWD
+325,FCA US LLC,Jeep,Wrangler 2dr 4X4
+326,Ford Motor Company,Ford,BRONCO SPORT 4WD
+327,Toyota,LEXUS,NX 350h AWD
+328,Honda,Honda,PASSPORT FWD
+329,BMW,BMW,M550i xDrive Sedan
+330,BMW,BMW,M440i xDrive Gran Coupe
+331,Ford Motor Company,Ford,F150 PICKUP 4WD FFV
+332,Toyota,TOYOTA,COROLLA HATCHBACK
+333,FCA US LLC,Jeep,Wrangler Rubic 4dr EcoDiesel 4x4
+334,General Motors,GMC,YUKON 2WD
+335,BMW,BMW,X5 M
+336,FCA US LLC,Jeep,Wrangler 4dr EcoDiesel 4x4
+337,Ford Motor Company,Lincoln,NAVIGATOR 2WD
+338,Ford Motor Company,Ford,RANGER TREMOR 4WD
+339,BMW,BMW,X1 sDrive28i
+340,Porsche,Porsche,911 Carrera GTS
+341,FCA US LLC,ALFA ROMEO,Stelvio
+342,Hyundai,HYUNDAI MOTOR COMPANY,Ioniq Blue
+343,Mercedes-Benz,Mercedes-Benz,AMG G 63
+344,Ferrari,"Ferrari North America, Inc.",812 GTS
+345,Toyota,LEXUS,IS 350 AWD
+346,General Motors,Chevrolet,SILVERADO 4WD
+347,Honda,Acura,RDX AWD A-SPEC
+348,Porsche,Porsche,Cayenne S
+349,FCA US LLC,Chrysler,Voyager
+350,Subaru,Subaru,LEGACY
+351,Hyundai,HYUNDAI MOTOR COMPANY,Santa Cruz AWD
+352,Honda,Acura,MDX AWD Type-S
+353,Nissan,NISSAN,ALTIMA
+354,Ford Motor Company,Ford,TRANSIT CONNECT VAN FFV
+355,General Motors,Chevrolet,MALIBU
+356,Jaguar Land Rover L,Jaguar,F-TYPE P450 RWD Convertible
+357,General Motors,Chevrolet,TRAVERSE AWD
+358,Volkswagen Group of,Audi,RS 7
+359,Nissan,NISSAN,ROGUE SPORT
+360,Volkswagen Group of,Bugatti,Chiron Super Sport
+361,General Motors,Cadillac,XT4 AWD
+362,Porsche,Porsche,911 Carrera 4S
+363,BMW,BMW,Z4 sDrive30i
+364,Nissan,NISSAN,PATHFINDER 4WD
+365,FCA US LLC,Jeep,Cherokee FWD
+366,FCA US LLC,Chrysler,Pacifica
+367,Ford Motor Company,Ford,ECOSPORT AWD
+368,BMW,BMW,M850i xDrive Coupe
+369,Hyundai,HYUNDAI MOTOR COMPANY,Santa Cruz FWD
+370,BMW,BMW,X3 M40i
+371,FCA US LLC,Jeep,Grand Cherokee 4X4
+372,MAZDA,MAZDA,CX-9 4WD
+373,aston martin,Aston Martin Lagonda Ltd,DB11 V8
+374,Porsche,Porsche,911 Targa 4
+375,Volkswagen Group of,Audi,SQ5 Sportback
+376,Porsche,Porsche,911 Turbo S Cabriolet
+377,Volkswagen Group of,Audi,TTS Coupe quattro
+378,Mercedes-Benz,Mercedes-Benz,GLE 350
+379,Mercedes-Benz,Mercedes-Benz,AMG GLA 45 4MATIC
+380,Jaguar Land Rover L,Jaguar,F-PACE
+381,Hyundai,HYUNDAI MOTOR COMPANY,Sonata Hybrid
+382,Subaru,Subaru,ASCENT LIMITED/TOURING/ONYX AWD
+383,Volkswagen Group of,Audi,RS 6 Avant
+384,Volkswagen Group of,Lamborghini,Aventador Coupe
+385,Toyota,TOYOTA,CAMRY HYBRID SE/XLE/XSE
+386,BMW,BMW,840i xDrive Coupe
+387,General Motors,Cadillac,CT4 V AWD
+388,Mercedes-Benz,Mercedes-Benz,AMG GLC 43 4MATIC
+389,Nissan,NISSAN,ALTIMA AWD
+390,Porsche,Porsche,718 Boxster S
+391,Volvo,"Volvo Cars of North America, LLC",XC60 B6 AWD
+392,Ford Motor Company,Ford,TRANSIT T150 WAGON 2WD FFV
+393,BMW,BMW,330i Sedan
+394,Mercedes-Benz,Mercedes-Benz,E 450 4MATIC (coupe)
+395,Ford Motor Company,Ford,EXPEDITION 4WD
+396,BMW,Mini,JCW COUNTRYMAN ALL4
+397,Ford Motor Company,Ford,ESCAPE FWD
+398,Toyota,TOYOTA,4RUNNER 2WD
+399,Volkswagen Group of,Audi,S8
+400,Honda,Acura,RDX FWD
+401,Porsche,Porsche,911 GT3
+402,Nissan,NISSAN,TITAN 2WD
+403,Volkswagen Group of,Lamborghini,Urus
+404,Kia,KIA,Niro
+405,Mercedes-Benz,Mercedes-Benz,Maybach S 680 4Matic
+406,Honda,Acura,TLX Type-S Perf Tire
+407,Mercedes-Benz,Mercedes-Benz,S 580 4MATIC
+408,Subaru,Subaru,IMPREZA 4-Door
+409,Toyota,LEXUS,RC F
+410,BMW,BMW,840i Convertible
+411,Porsche,Porsche,Panamera Turbo S / Exec / ST
+412,Volkswagen Group of,Audi,A5 Coupe quattro
+413,Volkswagen Group of,Audi,TT RS Coupe
+414,FCA US LLC,Jeep,Renegade 4x2
+415,BMW,BMW,M4 Competition M xDrive Coupe
+416,General Motors,Chevrolet,SUBURBAN 4WD
+417,Toyota,TOYOTA,CAMRY
+418,Mercedes-Benz,Mercedes-Benz,AMG GLB 35 4MATIC
+419,BMW,BMW,M850i xDrive Convertible
+420,Ferrari,"Ferrari North America, Inc.",F8 Spider
+421,BMW,BMW,X7 M50i
+422,Volkswagen Group of,Audi,Q5 S line quattro
+423,BMW,BMW,530i xDrive Sedan
+424,BMW,BMW,M440i Coupe
+425,Volvo,"Volvo Cars of North America, LLC",XC90 T5
+426,General Motors,Chevrolet,TRAILBLAZER FWD
+427,FCA US LLC,Chrysler,300
+428,BMW,BMW,750i xDrive Sedan
+429,Volkswagen Group of,Audi,A5 Sportback quattro
+430,General Motors,Buick,ENCORE FWD
+431,FCA US LLC,RAM,1500 4X4
+432,Jaguar Land Rover L,Jaguar,F-TYPE P450 AWD R-Dynamic Coupe
+433,Nissan,NISSAN,ALTIMA SV/SL
+434,Porsche,Porsche,Macan GTS
+435,Toyota,LEXUS,LC 500
+436,Ferrari,"Ferrari North America, Inc.",Portofino M
+437,Ford Motor Company,Ford,EXPLORER HEV AWD
+438,Porsche,Porsche,911 GT3 Touring
+439,Toyota,TOYOTA,COROLLA CROSS AWD
+440,Mercedes-Benz,Mercedes-Benz,AMG GLC 43 4MATIC (coupe)
+441,Porsche,Porsche,911 Carrera 4 GTS
+442,Volkswagen Group of,Bentley,Flying Spur
+443,FCA US LLC,Dodge,Charger Widebody
+444,Porsche,Porsche,Cayenne
+445,Hyundai,HYUNDAI MOTOR COMPANY,Tucson FWD
+446,Ford Motor Company,Ford,TRANSIT CONNECT WAGON LWB FFV
+447,Ford Motor Company,Lincoln,NAVIGATOR 4WD
+448,Maserati,MASERATI,QUATTROPORTE TROFEO
+449,Nissan,INFINITI,QX50 AWD
+450,Nissan,NISSAN,MURANO AWD
+451,Nissan,INFINITI,QX50
+452,BMW,BMW,M440i xDrive Coupe
+453,Honda,Honda,ACCORD SPORT/TOURING
+454,Jaguar Land Rover L,Land Rover,Range Rover Sport
+455,Toyota,TOYOTA,TACOMA 4WD
+456,Ford Motor Company,Lincoln,CORSAIR FWD
+457,Jaguar Land Rover L,Jaguar,XF P250
+458,General Motors,Chevrolet,TRAILBLAZER AWD
+459,Volkswagen Group of,Audi,Q5 quattro
+460,Mercedes-Benz,Mercedes-Benz,AMG SL 63 4MATIC+
+461,Nissan,MITSUBISHI MOTORS,Outlander 4WD
+462,General Motors,Chevrolet,BLAZER AWD
+463,Toyota,TOYOTA,AVALON HYBRID XLE
+464,McLaren Automotive ,McLaren,GT
+465,Hyundai,HYUNDAI MOTOR COMPANY,Santa Fe Hybrid Blue
+466,Volkswagen Group of,Audi,S4
+467,Ford Motor Company,Ford,MAVERICK HEV FWD
+468,BMW,BMW,X6 xDrive40i
+469,FCA US LLC,Dodge,Charger SRT Widebody
+470,General Motors,Buick,ENCORE GX FWD
+471,BMW,BMW,M5 Competition Sedan
+472,Porsche,Porsche,718 Cayman
+473,Toyota,TOYOTA,CAMRY HYBRID LE
+474,Hyundai,HYUNDAI MOTOR COMPANY,Accent
+475,Nissan,INFINITI,Q60 RED SPORT
+476,General Motors,Cadillac,CT5 V AWD
+477,Mercedes-Benz,Mercedes-Benz,C 300 4MATIC (convertible)
+478,General Motors,Cadillac,XT5 FWD
+479,Mercedes-Benz,Mercedes-Benz,GLC 300 4MATIC
+480,Nissan,MITSUBISHI MOTORS,Outlander 2WD
+481,Ford Motor Company,Ford,EXPLORER TIMBERLINE AWD
+482,Toyota,LEXUS,ES 350 F SPORT
+483,Toyota,LEXUS,UX 250h
+484,Mercedes-Benz,Mercedes-Benz,GLB 250 4MATIC
+485,Jaguar Land Rover L,Land Rover,Range Rover Sport P360 MHEV
+486,Mitsubishi Motors Co,Mitsubishi Motors Corporation,Outlander Sport 2WD
+487,Toyota,TOYOTA,HIGHLANDER HYBRID AWD LTD/PLAT
+488,Honda,Honda,PILOT AWD TrailSport
+489,Honda,Honda,INSIGHT
+490,Jaguar Land Rover L,Jaguar,F-TYPE R AWD Convertible
+491,General Motors,Chevrolet,TRAX AWD
+492,Mercedes-Benz,Mercedes-Benz,Metris (US Postal Long)
+493,Volkswagen Group of,Bentley,Continental GT Speed
+494,Toyota,TOYOTA,4RUNNER 4WD
+495,FCA US LLC,Jeep,Grand Wagoneer 4x2
+496,General Motors,Cadillac,CT5
+497,BMW,Mini,COOPER S HARDTOP 2 DOOR
+498,BMW,BMW,X3 sDrive30i
+499,Kia,KIA,Forte FE
+500,General Motors,GMC,TERRAIN FWD
+501,BMW,BMW,840i xDrive Convertible
+502,Jaguar Land Rover L,Jaguar,F-TYPE R AWD Coupe
+503,Nissan,INFINITI,Q50
+504,Ford Motor Company,Ford,EXPEDITION TIMBERLINE 4X4
+505,Subaru,Subaru,CROSSTREK AWD
+506,FCA US LLC,Jeep,Compass 4X4
+507,General Motors,Chevrolet,CAMARO
+508,Ford Motor Company,Ford,MUSTANG CONVERTIBLE
+509,Ford Motor Company,Ford,EXPLORER HEV RWD
+510,Jaguar Land Rover L,Land Rover,Defender 110 MHEV
+511,Ford Motor Company,Ford,RANGER 4WD
+512,BMW,BMW,530i Sedan
+513,Toyota,TOYOTA,RAV4
+514,Nissan,NISSAN,FRONTIER 2WD
+515,Subaru,Subaru,FORESTER WILDERNESS AWD
+516,Porsche,Porsche,911 Carrera 4
+517,General Motors,Cadillac,XT6 AWD
+518,Toyota,LEXUS,RC 350
+519,Hyundai,GENESIS,G90 AWD
+520,Jaguar Land Rover L,Jaguar,F-PACE P340 MHEV
+521,Toyota,TOYOTA,C-HR
+522,BMW,BMW,X5 M50i
+523,Maserati,MASERATI,MC20
+524,BMW,BMW,M440i Convertible
+525,McLaren Automotive ,McLaren,765LT Spider
+526,Nissan,NISSAN,MURANO FWD
+527,Subaru,Subaru,BRZ
+528,General Motors,Cadillac,ESCALADE 4WD
+529,Ford Motor Company,Lincoln,CORSAIR AWD
+530,Volvo,"Volvo Cars of North America, LLC",V60CC T5 AWD
+531,Volkswagen Group of,Audi,A4 S line quattro
+532,BMW,BMW,430i Coupe
+533,Porsche,Porsche,911 Carrera 4 GTS Cabriolet
+534,BMW,BMW,X4 M Competition
+535,General Motors,Cadillac,CT4 V
+536,Toyota,LEXUS,NX 250
+537,BMW,TOYOTA,Supra 3.0
+538,Porsche,Porsche,Panamera 4
+539,Nissan,NISSAN,ROGUE FWD
+540,Volkswagen Group of,Volkswagen,Atlas Cross Sport
+541,Volkswagen Group of,Audi,SQ8
+542,FCA US LLC,RAM,1500 4X2
+543,Jaguar Land Rover L,Land Rover,Range Rover P360 MHEV
+544,FCA US LLC,Jeep,Wrangler 4dr 4X4
+545,FCA US LLC,ALFA ROMEO,Giulia
+546,Volkswagen Group of,Audi,RS 5 Sportback
+547,Volvo,"Volvo Cars of North America, LLC",XC40 T4
+548,Toyota,TOYOTA,TUNDRA 4WD PRO
+549,Nissan,INFINITI,Q60
+550,Volkswagen Group of,Volkswagen,Jetta
+551,General Motors,GMC,SIERRA 4WD CAB CHASSIS
+552,Toyota,LEXUS,LC 500 CONVERTIBLE
+553,BMW,BMW,X6 M50i
+554,Porsche,Porsche,Cayenne S Coup?
+555,Volvo,"Volvo Cars of North America, LLC",XC90 T5 AWD
+556,BMW,BMW,X1 xDrive28i
+557,Ford Motor Company,Ford,ESCAPE AWD
+558,Porsche,Porsche,718 Cayman S
+559,BMW,BMW,X5 M Competition
+560,Toyota,TOYOTA,RAV4 AWD LE
+561,Volkswagen Group of,Volkswagen,GLI
+562,General Motors,GMC,SIERRA 4WD
+563,Ford Motor Company,Ford,MUSTANG MACH 1
+564,FCA US LLC,Dodge,Charger
+565,Mitsubishi Motors Co,Mitsubishi Motors Corporation,ECLIPSE CROSS ES 2WD
+566,Volkswagen Group of,Audi,A5 Cabriolet quattro
+567,Ford Motor Company,Ford,SHELBY GT500 MUSTANG
+568,Hyundai,HYUNDAI MOTOR COMPANY,Elantra N
+569,Toyota,TOYOTA,TACOMA 4WD D-CAB MT TRD-ORP/PRO
+570,Hyundai,GENESIS,G90 RWD
+571,Jaguar Land Rover L,Jaguar,F-PACE SVR
+572,General Motors,GMC,YUKON XL 4WD
+573,Nissan,NISSAN,MAXIMA
+574,Subaru,Subaru,IMPREZA 5-Door
+575,FCA US LLC,Dodge,Challenger
+576,Volkswagen Group of,Audi,A8 L quattro
+577,Honda,Honda,CR-V FWD
+578,Honda,Acura,TLX AWD A-SPEC
+579,Volkswagen Group of,Bentley,Continental GT
+580,FCA US LLC,Dodge,Charger AWD
+581,FCA US LLC,Jeep,Renegade 4x4
+582,Volkswagen Group of,Volkswagen,Arteon
+583,Volkswagen Group of,Lamborghini,Huracan Coupe
+584,Ford Motor Company,Ford,BRONCO RAPTOR 4WD
+585,Jaguar Land Rover L,Land Rover,New Range Rover P360 MHEV
+586,Maserati,MASERATI,LEVANTE GT
+587,Porsche,Porsche,911 Turbo Cabriolet
+588,McLaren Automotive ,McLaren,720S Coupe
+589,FCA US LLC,Jeep,Wagoneer 4x4
+590,FCA US LLC,RAM,Promaster City
+591,Volvo,"Volvo Cars of North America, LLC",S60 B5 AWD
+592,Toyota,TOYOTA,COROLLA APEX
+593,BMW,BMW,540i xDrive Sedan
+594,Mercedes-Benz,Mercedes-Benz,CLA 250
+595,General Motors,GMC,ACADIA AWD
+596,Mercedes-Benz,Mercedes-Benz,C 300 (Coupe)
+597,Volvo,"Volvo Cars of North America, LLC",XC60 B5
+598,Jaguar Land Rover L,Land Rover,Defender 90
+599,Kia,KIA,Sorento Hybrid AWD
+600,BMW,Mini,COOPER S CONVERTIBLE
+601,General Motors,Chevrolet,TRAX FWD
+602,Toyota,LEXUS,RX 450h AWD
+603,Volkswagen Group of,Volkswagen,Arteon 4Motion
+604,FCA US LLC,Jeep,Gladiator EcoDiesel 4X4
+605,FCA US LLC,Jeep,Grand Cherokee L 4X2
+606,Volkswagen Group of,Lamborghini,Aventador Roadster
+607,BMW,BMW,X3 xDrive30i
+608,Nissan,NISSAN,ARMADA 2WD
+609,aston martin,Aston Martin Lagonda Ltd,DBX V8
+610,General Motors,Chevrolet,TRAVERSE FWD
+611,General Motors,Cadillac,XT5 LIMO AWD
+612,Kia,KIA,Soul
+613,Subaru,Subaru,OUTBACK WILDERNESS AWD
+614,Nissan,NISSAN,ROGUE AWD
+615,Porsche,Porsche,911 Targa 4S
+616,Rolls-Royce,Rolls-Royce Motor Cars Limited,Ghost Extended
+617,Nissan,INFINITI,QX80 2WD
+618,Toyota,LEXUS,LS 500 AWD
+619,Mercedes-Benz,Mercedes-Benz,S 500 4MATIC
+620,Maserati,MASERATI,GHIBLI MODENA AWD
+621,BMW,BMW,M8 Competition Gran Coupe
+622,Volkswagen Group of,Audi,R8 Coupe
+623,BMW,BMW,M8 Competition Convertible
+624,BMW,BMW,M235i xDrive Gran Coupe
+625,Ford Motor Company,Ford,TRANSIT CONNECT USPS
+626,Porsche,Porsche,718 Cayman GT4
+627,Toyota,TOYOTA,COROLLA HATCHBACK MANUAL
+628,BMW,BMW,M3 Competition M xDrive Sedan
+629,Porsche,Porsche,Panamera
+630,Nissan,NISSAN,ALTIMA SR
+631,Volkswagen Group of,Audi,RS3
+632,Rolls-Royce,Rolls-Royce Motor Cars Limited,Ghost Black Badge
+633,BMW,BMW,228i xDrive Gran Coupe
+634,General Motors,Cadillac,XT5 HEARSE AWD
+635,Volkswagen Group of,Volkswagen,Tiguan 4Motion
+636,Porsche,Porsche,911 Targa 4 GTS
+637,Ford Motor Company,Lincoln,AVIATOR AWD
+638,MAZDA,MAZDA,MAZDA3 4-Door 2WD
+639,Mercedes-Benz,Mercedes-Benz,C 300 (convertible)
+640,Porsche,Porsche,718 Boxster T
+641,Toyota,TOYOTA,TUNDRA 2WD
+642,BMW,BMW,X4 M40i
+643,BMW,BMW,X5 xDrive40i
+644,BMW,Mini,COOPER S HARDTOP 4 DOOR
+645,FCA US LLC,ALFA ROMEO,Stelvio AWD
+646,Maserati,MASERATI,LEVANTE MODENA V8
+647,General Motors,Chevrolet,EQUINOX FWD
+648,Ford Motor Company,Ford,BRONCO SASQUATCH 4WD
+649,FCA US LLC,Jeep,Grand Wagoneer 4x4
+650,Mercedes-Benz,Mercedes-Benz,GLA 250 4MATIC
+651,FCA US LLC,RAM,1500 HFE 4X2
+652,Toyota,TOYOTA,CAMRY AWD XLE/XSE
+653,Jaguar Land Rover L,Land Rover,New Range Rover
+654,BMW,BMW,M3 Sedan
+655,BMW,BMW,M3 Competition Sedan
+656,Ford Motor Company,Ford,RANGER 2WD
+657,BMW,Mini,JOHN COOPER WORKS HARDTOP 2 DOOR
+658,Hyundai,GENESIS,GV80 RWD
+659,Hyundai,GENESIS,G70 AWD
+660,Kia,KIA,Carnival
+661,Mercedes-Benz,Mercedes-Benz,GLS 600 4MATIC Maybach
+662,Volkswagen Group of,Volkswagen,Atlas 4Motion
+663,FCA US LLC,RAM,1500 TRX 4x4
+664,FCA US LLC,Jeep,Gladiator Rubic EcoDiesel 4x4
+665,BMW,BMW,840i xDrive Gran Coupe
+666,FCA US LLC,Jeep,Wagoneer 4x2
+667,Volkswagen Group of,Audi,S3
+668,Nissan,INFINITI,QX55 AWD
+669,BMW,BMW,M760i xDrive Sedan
+670,Mercedes-Benz,Mercedes-Benz,C 300 4MATIC (Coupe)
+671,Ford Motor Company,Ford,Transit Connect Van FWD
+672,Hyundai,HYUNDAI MOTOR COMPANY,Kona FWD
+673,General Motors,Buick,ENCLAVE AWD
+674,General Motors,GMC,SIERRA 2WD CAB CHASSIS
+675,Mercedes-Benz,Mercedes-Benz,E 450 4MATIC
+676,FCA US LLC,Dodge,Challenger SRT
+677,FCA US LLC,RAM,1500 Classic 4X2
+678,Ford Motor Company,Ford,EXPEDITION 2WD
+679,Ferrari,"Ferrari North America, Inc.",812 Competizione
+680,FCA US LLC,Jeep,Renegade Trailhawk 4x4
+681,Volkswagen Group of,Volkswagen,Passat
+682,Volkswagen Group of,Bentley,Continental GT Speed Convertible
+683,Porsche,Porsche,Cayenne GTS Coupe
+684,Porsche,Porsche,Cayenne / Cayenne Coup?
+685,BMW,BMW,X5 sDrive40i
+686,General Motors,GMC,TERRAIN AWD
+687,Kia,KIA,K5 AWD
+688,Hyundai,HYUNDAI MOTOR COMPANY,Elantra Hybrid
+689,Honda,Acura,TLX FWD A-SPEC
+690,FCA US LLC,Jeep,Grand Cherokee 4X2
+691,Porsche,Porsche,Panamera 4S Executive
+692,Mitsubishi Motors Co,Mitsubishi Motors Corporation,Outlander Sport 4WD
+693,Toyota,TOYOTA,AVALON HYBRID
+694,General Motors,Chevrolet,SPARK
+695,Kia,KIA,K5
+696,BMW,BMW,X7 xDrive40i
+697,Jaguar Land Rover L,Jaguar,E-PACE MHEV
+698,FCA US LLC,Jeep,Grand Cherokee WK 4X2
+699,Hyundai,GENESIS,G80 AWD
+700,Kia,KIA,Forte
+701,Honda,Honda,PASSPORT AWD
+702,Volkswagen Group of,Volkswagen,Jetta SE/SEL
+703,Ford Motor Company,Ford,F150 PICKUP 2WD
+704,BMW,Mini,COOPER S CLUBMAN ALL4
+705,Nissan,NISSAN,ALTIMA AWD SR/PLATINUM
+706,General Motors,Cadillac,XT4 FWD
+707,Porsche,Porsche,Panamera 4S
+708,BMW,BMW,M340i xDrive Sedan
+709,Subaru,Subaru,IMPREZA SPORT 5-Door
+710,Toyota,LEXUS,RC 350 AWD
+711,BMW,BMW,330i xDrive Sedan
+712,General Motors,Chevrolet,TAHOE 2WD
+713,Ford Motor Company,Ford,MUSTANG HO COUPE
+714,Volkswagen Group of,Lamborghini,Huracan Spyder
+715,Toyota,TOYOTA,PRIUS
+716,Jaguar Land Rover L,Land Rover,Range Rover Velar P400 MHEV
+717,Volkswagen Group of,Bentley,Bentayga Speed
+718,General Motors,Chevrolet,SUBURBAN 2WD
+719,Volkswagen Group of,Audi,A3
+720,Jaguar Land Rover L,Jaguar,XF P250 AWD
+721,General Motors,Chevrolet,EQUINOX AWD
+722,Kia,KIA,Sorento FWD
+723,Mercedes-Benz,Mercedes-Benz,GLA 250
+724,Toyota,LEXUS,IS 300 AWD
+725,Ford Motor Company,Ford,F150 RAPTOR 37 4WD
+726,Porsche,Porsche,911 Turbo S
+727,Hyundai,HYUNDAI MOTOR COMPANY,Sonata Hybrid Blue
+728,Ford Motor Company,Ford,MUSTANG HO CONVERTIBLE
+729,Jaguar Land Rover L,Land Rover,Range Rover LWB SVA
+730,Hyundai,HYUNDAI MOTOR COMPANY,Palisade FWD
+731,Mercedes-Benz,Mercedes-Benz,AMG GLA 35 4MATIC
+732,Porsche,Porsche,911 Carrera GTS Cabriolet
+733,Volkswagen Group of,Lamborghini,Huracan Spyder RWD
+734,Hyundai,HYUNDAI MOTOR COMPANY,Santa Fe Hybrid
+735,Hyundai,HYUNDAI MOTOR COMPANY,Sonata
+736,Nissan,INFINITI,QX60 AWD
+737,Ferrari,"Ferrari North America, Inc.",F8 Tributo
+738,BMW,BMW,X6 M Competition
+739,Ford Motor Company,Ford,EDGE AWD
+740,Porsche,Porsche,718 Spyder
+741,Volkswagen Group of,Audi,Q5 Sportback S line quattro
+742,Porsche,Porsche,Cayenne Turbo
+743,Porsche,Porsche,911 Carrera S
+744,Toyota,TOYOTA,GR86
+745,Jaguar Land Rover L,Land Rover,New Range Rover P400 MHEV
+746,Honda,Acura,RDX FWD A-SPEC
+747,BMW,BMW,540i Sedan
+748,Maserati,MASERATI,QUATTROPORTE MODENA RWD
+749,General Motors,Chevrolet,COLORADO 2WD
+750,BMW,BMW,430i xDrive Convertible
+751,BMW,Mini,JOHN COOPER WORKS CONVERTIBLE
+752,BMW,Mini,COOPER HARDTOP 2 DOOR
+753,Jaguar Land Rover L,Jaguar,F-PACE P400 MHEV
+754,Hyundai,HYUNDAI MOTOR COMPANY,Tucson AWD
+755,Toyota,LEXUS,LX 600
+756,Honda,Acura,TLX AWD
+757,General Motors,GMC,SIERRA 2WD
+758,Jaguar Land Rover L,Land Rover,New Range Rover P400 LWB MHEV
+759,Toyota,TOYOTA,RAV4 AWD TRD OFFROAD
+760,Toyota,TOYOTA,COROLLA XSE
+761,Mercedes-Benz,Mercedes-Benz,AMG CLA 35 4MATIC
+762,Subaru,Subaru,IMPREZA SPORT 4-Door
+763,Honda,Honda,CIVIC 5Dr
+764,Volkswagen Group of,Volkswagen,Tiguan R-Line 4Motion
+765,Volkswagen Group of,Audi,Q3 quattro
+766,Hyundai,HYUNDAI MOTOR COMPANY,Kona N
+767,Mercedes-Benz,Mercedes-Benz,GLC 300 4MATIC (Coupe)
+768,Honda,Honda,ACCORD
+769,Kia,KIA,Seltos FWD
+770,Volkswagen Group of,Lamborghini,Aventador Countach
+771,Mercedes-Benz,Mercedes-Benz,E 450 4MATIC (convertible)
+772,Ford Motor Company,Ford,BRONCO 4WD
+773,Toyota,TOYOTA,RAV4 AWD
+774,BMW,BMW,ALPINA B7 xDrive
+775,Kia,KIA,Telluride FWD
+776,aston martin,Aston Martin Lagonda Ltd,DBS
+777,FCA US LLC,Dodge,Challenger AWD
+778,Volkswagen Group of,Audi,S5 Coupe
+779,Toyota,LEXUS,UX 200
+780,Toyota,LEXUS,IS 300
+781,Jaguar Land Rover L,Land Rover,Range Rover Evoque MHEV
+782,Subaru,Subaru,OUTBACK AWD
+783,BMW,BMW,X3 M Competition
+784,Hyundai,HYUNDAI MOTOR COMPANY,Elantra
+785,BMW,BMW,230i Coupe
+786,BMW,BMW,X4 xDrive30i
+787,Honda,Acura,TLX FWD
+788,Jaguar Land Rover L,Jaguar,F-TYPE P450 RWD Coupe
+789,BMW,Mini,COOPER S COUNTRYMAN ALL4
+790,BMW,BMW,430i Gran Coupe
+791,Volkswagen Group of,Volkswagen,Taos
+792,General Motors,Buick,ENCORE GX AWD
+793,Toyota,LEXUS,RX 350 AWD
+794,Mercedes-Benz,Mercedes-Benz,AMG GT 43 4MATIC+
+795,FCA US LLC,Dodge,Durango SRT AWD
+796,Volkswagen Group of,Audi,S5 Sportback
+797,Volkswagen Group of,Volkswagen,Atlas
+798,Volkswagen Group of,Audi,A4 allroad quattro
+799,Honda,Acura,RDX AWD
+800,Toyota,LEXUS,GX 460
+801,MAZDA,MAZDA,CX-5 4WD
+802,Toyota,TOYOTA,COROLLA HYBRID
+803,Volkswagen Group of,Volkswagen,Tiguan
+804,Mitsubishi Motors Co,Mitsubishi Motors Corporation,MIRAGE
+805,Mercedes-Benz,Mercedes-Benz,AMG GT 53 4MATIC+
+806,Mercedes-Benz,Mercedes-Benz,A 220 4MATIC
+807,Subaru,Subaru,FORESTER AWD
+808,General Motors,GMC,CANYON 2WD
+809,Kia,KIA,Rio
+810,Mercedes-Benz,Mercedes-Benz,AMG GLE 63 S 4MATIC+ (coupe)
+811,Toyota,TOYOTA,SEQUOIA 2WD
+812,Kia,KIA,Sportage AWD
+813,Jaguar Land Rover L,Land Rover,Range Rover Sport SVR
+814,FCA US LLC,Jeep,Grand Cherokee WK 4X4
+815,Subaru,Subaru,ASCENT AWD
+816,BMW,Mini,COOPER HARDTOP 4 DOOR
+817,Mercedes-Benz,Mercedes-Benz,AMG E 53 4MATIC+ (Coupe)
+818,Porsche,Porsche,Cayenne GTS
+819,Volkswagen Group of,Audi,R8 Spyder
+820,Jaguar Land Rover L,Land Rover,Range Rover Sport P400 MHEV
+821,General Motors,Cadillac,CT5 V
+822,Hyundai,HYUNDAI MOTOR COMPANY,Elantra Hybrid Blue
+823,BMW,BMW,M4 Coupe
+824,Kia,KIA,Stinger AWD
+825,Hyundai,GENESIS,GV70 AWD
+826,Toyota,TOYOTA,SIENNA AWD
