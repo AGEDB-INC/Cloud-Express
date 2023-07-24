@@ -81,6 +81,20 @@ exports.verifyUserById = async (id) => {
   }
 };
 
+
+// Logging Out a User -- Clearing Token Cookie
+exports.logoutUser = async (req, res) => {
+  try {
+    // Clearing Token from Cookies So no more calls to the DB can be made
+    res.clearCookie('token');
+    res.clearCookie('userId');
+    res.status(200).send({ message: 'User logged out successfully.' });
+  } catch (err) {
+    console.log(err);
+  }
+};
+
+
 /////  -------- Sequelize Code - Commented For Future Use (If Needed) -------- /////
 
 //     //// Registering a User

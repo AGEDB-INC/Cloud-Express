@@ -16,8 +16,12 @@
 
 .account-information {
     color: white;
-    margin-top: 15px;
-    margin-right: 60px;
+    margin-top: 10px;
+    margin-right: 50px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    overflow: visible;
 }
 
 .connection-button {
@@ -33,3 +37,21 @@
 .connection-button:hover {
     background-color: #45a049;
 }
+ 
+  .account-information > *:not(:last-child) {
+    margin-right: 20px;
+  }
+
+  .dropdown {
+    position: relative;
+    display: inline-block;
+    background-color: transparent !important;
+    color: #fff !important;
+    outline: none !important;
+    border: none !important;
+  }
+
+  .dropdown:focus {
+    outline: none !important;
+    box-shadow: none !important;
+  }
