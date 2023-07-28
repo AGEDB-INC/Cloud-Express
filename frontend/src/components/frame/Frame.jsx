@@ -22,11 +22,8 @@ import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import {
   faAngleDown,
   faAngleUp,
-  faCompressAlt,
-  faExpandAlt,
-  faSync,
-  faTimes,
   faClone,
+  faTimes,
 } from '@fortawesome/free-solid-svg-icons';
 import { Button, Popover } from 'antd';
 import PropTypes from 'prop-types';
@@ -45,29 +42,15 @@ const Frame = ({
   refKey,
   onSearch,
   onSearchCancel,
-  onRefresh,
   onThick,
-  thicnessMenu,
+  // eslint-disable-next-line react/prop-types
+  thicnessMenu: thicknessMenu,
   bodyNoPadding,
   isTable,
 }) => {
   const dispatch = useDispatch();
-  const [isFullScreen, setFullScreen] = useState(false);
+  const [isFullScreen] = useState(false);
   const [isExpand, setExpand] = useState(true);
-
-  // const downloadMenu = () => (
-  //   <Menu onClick={(e) => onDownload(e)}>
-  //     <Menu.Item key="png">
-  //       Save as PNG
-  //     </Menu.Item>
-  //     <Menu.Item key="json">
-  //       Save as JSON
-  //     </Menu.Item>
-  //     <Menu.Item key="csv">
-  //       Save as CSV
-  //     </Menu.Item>
-  //   </Menu>
-  // );
 
   return (
     <div className={`${styles.Frame} ${isFullScreen ? styles.FullScreen : ''}`}>
@@ -90,7 +73,7 @@ const Frame = ({
         </div>
         <div className={styles.ButtonArea}>
           {!isTable && onThick ? (
-            <Popover placement="bottomLeft" content={thicnessMenu} trigger="click">
+            <Popover placement="bottomLeft" content={thicknessMenu} trigger="click">
               <Button
                 size="large"
                 type="link"
@@ -124,70 +107,10 @@ const Frame = ({
               <IconFilter />
             </Button>
           ) : null}
-          {/* {false ? ( // en:Functionality is hidden due to */}
-          {/* functional problems // ko:기능이 동작하지 않아 감춤 */}
-          {/*  <Dropdown */}
-          {/*    trigger={['click']} */}
-          {/*    overlay={downloadMenu} */}
-          {/*  > */}
-          {/*    <Button */}
-          {/*      size="large" */}
-          {/*      type="link" */}
-          {/*      className={styles.FrameButton} */}
-          {/*    > */}
-          {/*      <FontAwesomeIcon */}
-          {/*        icon={faDownload} */}
-          {/*        size="lg" */}
-          {/*      /> */}
-          {/*      <FontAwesomeIcon icon={faAngleDown} /> */}
-          {/*    </Button> */}
-          {/*  </Dropdown> */}
-          {/* ) */}
-          {/*  : null} */}
           <Button
             size="large"
             type="link"
-            className={`${styles.FrameButton} ${
-              isFullScreen ? styles.activate : ''
-            }`}
-            onClick={() => setFullScreen(!isFullScreen)}
-            title="Expand"
-          >
-            <FontAwesomeIcon
-              icon={isFullScreen ? faCompressAlt : faExpandAlt}
-              size="lg"
-            />
-          </Button>
-          {
-            !isTable && onRefresh ? (
-              <Button
-                size="large"
-                type="link"
-                className={`${styles.FrameButton}`}
-                onClick={() => onRefresh()}
-                title="Refresh"
-              >
-                <FontAwesomeIcon
-                  icon={faSync}
-                  size="lg"
-                />
-              </Button>
-            ) : null
-          }
-          {/* <Button
-            size="large"
-            type="link"
-            className={`${styles.FrameButton} ${isPinned ? styles.activate : ''}`}
-            onClick={() => pinFrame(refKey)}
-          >
-          <FontAwesomeIcon icon={faPaperclip}
-              size="lg"
-            />
-          </Button> */}
-          <Button
-            size="large"
-            type="link"
-            className={`${styles.FrameButton}`}
+            className={styles.FrameButton}
             onClick={() => setExpand(!isExpand)}
             title={isExpand ? 'Hide' : 'Show'}
           >
@@ -199,9 +122,8 @@ const Frame = ({
           <Button
             size="large"
             type="link"
-            className={`${styles.FrameButton}`}
+            className={styles.FrameButton}
             onClick={() => {
-              // eslint-disable-next-line
               if (window.confirm('Are you sure you want to close this window?')) {
                 dispatch(removeFrame(refKey));
                 dispatch(removeActiveRequests(refKey));
@@ -230,8 +152,8 @@ Frame.defaultProps = {
   onSearch: null,
   onThick: null,
   onSearchCancel: null,
-  thicnessMenu: null,
-  onRefresh: null,
+  // eslint-disable-next-line react/default-props-match-prop-types
+  thicknessMenu: null,
   bodyNoPadding: false,
 };
 
@@ -241,8 +163,10 @@ Frame.propTypes = {
   refKey: PropTypes.string.isRequired,
   onSearch: PropTypes.func,
   onThick: PropTypes.func,
-  thicnessMenu: PropTypes.func,
+  // eslint-disable-next-line react/require-default-props, react/no-unused-prop-types
+  thicknessMenu: PropTypes.func,
   onSearchCancel: PropTypes.func,
+  // eslint-disable-next-line react/no-unused-prop-types, react/require-default-props
   onRefresh: PropTypes.func,
   bodyNoPadding: PropTypes.bool,
   isTable: PropTypes.bool.isRequired,

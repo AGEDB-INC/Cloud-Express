@@ -20,15 +20,9 @@
 /* eslint-disable react/prop-types */
 /* eslint-disable no-unused-vars */
 import React, { useState, useEffect } from 'react';
-import {
-  Modal, Select, Input, Button,
-} from 'antd';
 import style from './popover.module.scss';
 
-const EdgeThicknessSettingModal = ({
-  onSubmit,
-  properties,
-}) => {
+const EdgeThicknessSettingModal = ({ onSubmit, properties }) => {
   const [standardEdge, setStdEdge] = useState('');
   const [standardProperty, setStdProperty] = useState('');
   const [MinValue, setMinValue] = useState('');
@@ -41,28 +35,21 @@ const EdgeThicknessSettingModal = ({
   const selectionEdge = () => {
     const edgeList = new Set(properties.map((p) => p.edge));
     return Array.from(edgeList).map((edge) => (
-      <>
-        <option className={style.option} value={edge}>
-          {edge}
-        </option>
-      </>
+      <option className={style.option} value={edge} key={edge}>
+        {edge}
+      </option>
     ));
   };
 
-  const selectionPropertie = () => {
-    const propertyList = new Set(
-      properties.map((p) => (p.edge === standardEdge ? p.property : undefined)),
-    );
+  const selectionProperty = () => {
+    // eslint-disable-next-line max-len
+    const propertyList = new Set(properties.map((p) => (p.edge === standardEdge ? p.property : undefined)));
     return Array.from(propertyList).map((property) => (
-      property
-        ? (
-          <>
-            <option className={style.option} value={property}>
-              {property}
-            </option>
-          </>
-        )
-        : <></>
+      property ? (
+        <option className={style.option} value={property} key={property}>
+          {property}
+        </option>
+      ) : null
     ));
   };
 
@@ -88,24 +75,24 @@ const EdgeThicknessSettingModal = ({
     <div style={{ width: '370px' }}>
       <p className={style.title}>Apply Edge Weight</p>
       <select
-        className={`${standardEdge === '' ? style.default : style.select}`}
+        className={standardEdge === '' ? style.default : style.select}
         defaultValue={null}
         value={standardEdge}
         onChange={(e) => setStdEdge(e.target.value)}
         style={{ width: '95%' }}
       >
-        <option className={`${style.option}`} value="">Select Edge</option>
+        <option className={style.option} value="">Select Edge</option>
         {selectionEdge()}
       </select>
       <select
-        className={`${standardProperty === '' ? style.default : style.select}`}
+        className={standardProperty === '' ? style.default : style.select}
         defaultValue={null}
         value={standardProperty}
         onChange={(e) => setStdProperty(e.target.value)}
         style={{ width: '95%' }}
       >
-        <option className={`${style.option}`} value="">Select Property</option>
-        {selectionPropertie()}
+        <option className={style.option} value="">Select Property</option>
+        {selectionProperty()}
       </select>
       <input
         className={style.input}
