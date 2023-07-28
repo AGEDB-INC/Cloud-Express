@@ -15,6 +15,7 @@ import { toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 
 function MainModal({
+  allGraphs,
   onProjectCreated,
   setCommand,
   command,
@@ -32,15 +33,18 @@ function MainModal({
   const [selectedGraph, setSelectedGraph] = useState("");
   const [graphNames, setGraphNames] = useState([]);
   const [selectedProject, setSelectedProject] = useState("");
+  const [selectedCSVFiles, setselectedCSVFiles] = useState([]);
 
   useEffect(() => {
-    dispatch(getMetaData())
-      .then((metadata) => {
-        setGraphNames(Object.keys(metadata.payload));
-      })
-      .catch((error) => {
-        console.error("Error:", error);
-      });
+    setGraphNames(allGraphs);
+    console.log(graphNames)
+    // dispatch(getMetaData())
+    //   .then((metadata) => {
+    //     setGraphNames(Object.keys(metadata.payload));
+    //   })
+    //   .catch((error) => {
+    //     console.error("Error:", error);
+    //   });
   }, []);
 
   // Get Project Data From Database when modal is closed
@@ -94,6 +98,13 @@ function MainModal({
   // Function to Create New User Project in Database
   const handleCreateProject = async () => {
     if (selectedProject) {
+      if (selectedProject === "Import User Data (.CSV)") {
+        handleCSVFiles();
+      }
+      else {
+        handleSampleCSV(selectedProject);
+      }
+      console.log(selectedProject);
       toast.loading("Creating project...");
       const projectName = selectedProject;
       console.log(projectName);
@@ -181,19 +192,16 @@ function MainModal({
       });
   }
 
-  const handleCSVFiles = async (event) => {
-    const { files } = event.target;
+  const handleCSVFiles = async () => {
     const nodeFiles = [];
     const edgeFiles = [];
 
-    for (let i = 0; i < files.length; i += 1) {
-      const file = files[i];
+    for (let i = 0; i < selectedCSVFiles.length; i += 1) {
+      const file = selectedCSVFiles[i];
       if (
-        file.name.includes("[") &&
-        file.name.includes("&") &&
-        file.name.includes("]")
+        file.name.includes("eg_") 
       ) {
-        const labelName = file.name.substring(0, file.name.indexOf("["));
+        const labelName = file.name.replace(".csv", "");
         edgeFiles.push({ file, labelName });
       } else {
         nodeFiles.push(file);
@@ -253,44 +261,49 @@ function MainModal({
       console.error("Error uploading files:", error);
     }
   };
+  const handleFileSelection = (event) => {
+    setselectedCSVFiles([...event.target.files]); // Store the selected files in the state
+  };
   const openCSVFileDialog = (value, event) => {
-    handleProjectSelection(value, event);
+    handleProjectSelection(event.target.value, event)
     if (selectedGraph !== "") {
       const input = document.createElement("input");
       input.type = "file";
       input.accept = ".csv";
       input.multiple = true;
-      input.addEventListener("change", handleCSVFiles);
+      input.addEventListener("change", handleFileSelection);
       input.click();
     }
   };
-  const handleSampleCSV = (value, event) => {
-    handleProjectSelection(value, event);
+  const handleSampleCSV = (sampleFileName) => {
     fetch("/api/v1/db/Samplefiles")
       .then((response) => response.json())
-      .then(async (fileInfos) => {
+      .then(async (data) => {
+        const fileInfos = data[sampleFileName];
         const nodeQueries = fileInfos
           .filter((file) => file.type === "node")
           .map((file) => {
-            const labelName = file.name.split(".")[0]; // Assuming label name is the filename without extension
+            const labelName = file.name.split(".")[0]; 
             const query = `
               SELECT create_vlabel('${selectedGraph}', '${labelName}')
               WHERE _label_id('${selectedGraph}', '${labelName}') = 0;
               SELECT load_labels_from_file('${selectedGraph}', '${labelName}', '${file.path}');
             `;
-            return sendQueryToDatabase(query); // Replace with your SQL execution function
+            console.log("Node query", query)
+            return sendQueryToDatabase(query);
           });
         await Promise.all(nodeQueries);
         const edgeQueries = fileInfos
           .filter((file) => file.type === "edge")
           .map((file) => {
             console.log(file);
-            const labelName = file.name.substring(0, file.name.indexOf("["));
+            const labelName = file.name.split(".")[0];
             const query = `
               SELECT create_elabel('${selectedGraph}', '${labelName}')
               WHERE _label_id('${selectedGraph}', '${labelName}') = 0;
               SELECT load_edges_from_file('${selectedGraph}', '${labelName}', '${file.path}');
             `;
+            console.log("edge query", query)
             return sendQueryToDatabase(query);
           });
         return Promise.all(edgeQueries);
@@ -342,12 +355,13 @@ function MainModal({
                 fontSize: "16px",
               }}
             >
-              <option value="">Select a graph</option>
-              {graphNames.map((graphName) => (
-                <option key={graphName} value={graphName}>
-                  {graphName}
-                </option>
-              ))}
+              {graphNames != undefined && (
+                graphNames.map((graphName) => (
+                  <option key={graphName} value={graphName}>
+                    {graphName}
+                  </option>
+                ))
+              )}
             </select>
             <p style={{ fontStyle: "italic", color: "#666" }}>
               Selected graph: {selectedGraph}
@@ -359,7 +373,7 @@ function MainModal({
             <strong>Built-in database projects</strong>
           </p>
 
-          <div style={{ display: "flex", justifyContent: "left" }}>
+          {/* <div style={{ display: "flex", justifyContent: "left" }}>
             <label>
               <div
                 style={{
@@ -387,7 +401,116 @@ function MainModal({
                   value="Graph for Car Specification"
                   style={{ transform: "scale(1.5)" }}
                   onChange={(event) =>
-                    handleSampleCSV(event.target.value, event)
+                    handleProjectSelection(event.target.value, event)
+                  }
+                />
+                <input
+                  type="radio"
+                  name="projectType"
+                  value="Graph for Car Specification"
+                  style={{ transform: "scale(1.5)" }}
+                  onChange={(event) =>
+                    handleProjectSelection(event.target.value, event)
+                  }
+                />
+                
+              </div>
+            </label>
+          </div> */}
+          <div style={{ display: "flex", flexWrap: "wrap", justifyContent: "left" }}>
+            <label>
+              <div
+                style={{
+                  border:
+                    selectedProject === "Graph for Car Specification"
+                      ? "3px solid blue"
+                      : "1px solid #e3e6f0",
+                  padding: "30px",
+                  display: "flex",
+                  borderRadius: "5px",
+                  gap: "5rem",
+                }}
+                onMouseEnter={(e) => {
+                  e.target.style.border = "3px solid blue";
+                }}
+                onMouseLeave={(e) => {
+                  if (selectedProject !== "Graph for Car Specification")
+                    e.target.style.border = "1px solid #e3e6f0";
+                }}
+              >
+                Graph for Car Specification
+                <input
+                  type="radio"
+                  name="projectType"
+                  value="Graph for Car Specification"
+                  style={{ transform: "scale(1.5)" }}
+                  onChange={(event) =>
+                    handleProjectSelection(event.target.value, event)
+                  }
+                />
+              </div>
+            </label>
+            <label>
+              <div
+                style={{
+                  border:
+                    selectedProject === "Graph for P2P Evaluation"
+                      ? "3px solid blue"
+                      : "1px solid #e3e6f0",
+                  padding: "30px",
+                  
+                  display: "flex",
+                  borderRadius: "5px",
+                  gap: "5rem",
+                }}
+                onMouseEnter={(e) => {
+                  e.target.style.border = "3px solid blue";
+                }}
+                onMouseLeave={(e) => {
+                  if (selectedProject !== "Graph for P2P Evaluation")
+                    e.target.style.border = "1px solid #e3e6f0";
+                }}
+              >
+                Graph for P2P Evaluation
+                <input
+                  type="radio"
+                  name="projectType"
+                  value="Graph for P2P Evaluation"
+                  style={{ transform: "scale(1.5)" }}
+                  onChange={(event) =>
+                    handleProjectSelection(event.target.value, event)
+                  }
+                />
+              </div>
+            </label>
+            <label>
+              <div
+                style={{
+                  border:
+                    selectedProject === "Graph for Cyber Security"
+                      ? "3px solid blue"
+                      : "1px solid #e3e6f0",
+                  padding: "30px",
+                  display: "flex",
+                  borderRadius: "5px",
+                  gap: "5rem",
+                }}
+                onMouseEnter={(e) => {
+                  e.target.style.border = "3px solid blue";
+                }}
+                onMouseLeave={(e) => {
+                  if (selectedProject !== "Graph for Cyber Security")
+                    e.target.style.border = "1px solid #e3e6f0";
+                }}
+              >
+                Graph for Cyber Security
+                <input
+                  type="radio"
+                  name="projectType"
+                  value="Graph for Cyber Security"
+                  style={{ transform: "scale(1.5)" }}
+                  onChange={(event) =>
+                    handleProjectSelection(event.target.value, event)
                   }
                 />
               </div>
@@ -456,7 +579,8 @@ function MainModal({
               width: "30%",
             }}
             onClick={handleCreateProject}
-            disabled={selectedProject === "" || selectedGraph === "" }
+            // temporary if conditions will remove once other datasets are ready to put in.
+            disabled={selectedProject === "" || selectedGraph === ""}
           >
             + Create New Project
           </Button>

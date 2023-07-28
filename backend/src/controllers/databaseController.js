@@ -62,48 +62,92 @@ class DatabaseController {
     }
 
     async getFilesInfo(req, res) {
-        try {   
-            const directoryPath = path.join(__dirname, '../../uploads/SampleCSVs');
-            console.log(directoryPath);
-            fs.readdir(directoryPath, (err, files) => {
+        try {
+          const directories = ['Graph for Car Specification', 'Graph for Cyber Security', 'Graph for P2P Evaluation'];
+          const fileInfoPromises = [];
+      
+          directories.forEach((dir) => {
+            const directoryPath = path.join(__dirname, `../../uploads/SampleCSVs/${dir}`);
+            const promise = new Promise((resolve, reject) => {
+              fs.readdir(directoryPath, (err, files) => {
                 if (err) {
-                    console.error('Error reading directory:', err);
-                    res.status(500).json({ error: 'Error reading directory' });
-                    return;
+                  console.error(`Error reading directory ${dir}:`, err);
+                  resolve([]); // Resolve with an empty array for this directory
+                } else {
+                  const fileInfo = files.map((file) => {
+                    const filePath = path.join(directoryPath, file);
+                    const type =
+                      file.includes('eg_')
+                        ? 'edge'
+                        : 'node';
+                    return { name: file, path: filePath, type };
+                  });
+                  resolve(fileInfo);
                 }
-        
-                let fileInfoPromises = files.map(file => {
-                    return new Promise((resolve, reject) => {
-                        let filePath = path.join(directoryPath, file);
-                        
-                        fs.readFile(filePath, 'utf8', (err, data) => {
-                            if (err) {
-                                reject('Error reading file:', err);
-                            }
-                            else {
-                                let type = file.includes('[') && file.includes('&') && file.includes(']') ? 'edge' : 'node';
-                                resolve({
-                                    name: file,
-                                    path: filePath,
-                                    type: type
-                                });
-                            }
-                        });
-                    });
-                });
-        
-                Promise.all(fileInfoPromises)
-                    .then(fileInfo => res.json(fileInfo))
-                    .catch(error => {
-                        console.error(error);
-                        res.status(500).json({ error: 'Error reading files' });
-                    });
+              });
             });
+            fileInfoPromises.push(promise);
+          });
+      
+          const fileInfos = await Promise.all(fileInfoPromises);
+      
+          // Organize fileInfos based on directories
+          const response = directories.reduce((acc, dir, index) => {
+            acc[dir] = fileInfos[index];
+            return acc;
+          }, {});
+      
+          res.json(response);
         } catch (error) {
-            console.error('Error reading directory:', error);
-            res.status(500).json({ error: 'Error reading directory' });
+          console.error('Error reading directories:', error);
+          res.status(500).json({ error: 'Error reading directories' });
         }
-    }
+      }
+      
+      
+    // async getFilesInfo(req, res) {
+    //     try {   
+    //         const directoryPath = path.join(__dirname, '../../uploads/SampleCSVs');
+    //         console.log(directoryPath);
+    //         fs.readdir(directoryPath, (err, files) => {
+    //             if (err) {
+    //                 console.error('Error reading directory:', err);
+    //                 res.status(500).json({ error: 'Error reading directory' });
+    //                 return;
+    //             }
+        
+    //             let fileInfoPromises = files.map(file => {
+    //                 return new Promise((resolve, reject) => {
+    //                     let filePath = path.join(directoryPath, file);
+                        
+    //                     fs.readFile(filePath, 'utf8', (err, data) => {
+    //                         if (err) {
+    //                             reject('Error reading file:', err);
+    //                         }
+    //                         else {
+    //                             let type = file.includes('[') && file.includes('&') && file.includes(']') ? 'edge' : 'node';
+    //                             resolve({
+    //                                 name: file,
+    //                                 path: filePath,
+    //                                 type: type
+    //                             });
+    //                         }
+    //                     });
+    //                 });
+    //             });
+        
+    //             Promise.all(fileInfoPromises)
+    //                 .then(fileInfo => res.json(fileInfo))
+    //                 .catch(error => {
+    //                     console.error(error);
+    //                     res.status(500).json({ error: 'Error reading files' });
+    //                 });
+    //         });
+    //     } catch (error) {
+    //         console.error('Error reading directory:', error);
+    //         res.status(500).json({ error: 'Error reading directory' });
+    //     }
+    // }
     
     async connectDatabase(req, res, next) {
         let databaseService = sessionService.get(req.sessionID);
