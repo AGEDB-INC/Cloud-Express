@@ -37,14 +37,6 @@ function MainModal({
 
   useEffect(() => {
     setGraphNames(allGraphs);
-    console.log(graphNames)
-    // dispatch(getMetaData())
-    //   .then((metadata) => {
-    //     setGraphNames(Object.keys(metadata.payload));
-    //   })
-    //   .catch((error) => {
-    //     console.error("Error:", error);
-    //   });
   }, []);
 
   // Get Project Data From Database when modal is closed
@@ -104,10 +96,8 @@ function MainModal({
       else {
         handleSampleCSV(selectedProject);
       }
-      console.log(selectedProject);
       toast.loading("Creating project...");
       const projectName = selectedProject;
-      console.log(projectName);
       try {
         const response = await api.post(
           "/project/create",
@@ -118,7 +108,6 @@ function MainModal({
         );
 
         const data = response.data;
-        console.log(data);
         toast.dismiss();
         toast.success("Successfully created project!");
       } catch (error) {
@@ -289,27 +278,23 @@ function MainModal({
               WHERE _label_id('${selectedGraph}', '${labelName}') = 0;
               SELECT load_labels_from_file('${selectedGraph}', '${labelName}', '${file.path}');
             `;
-            console.log("Node query", query)
             return sendQueryToDatabase(query);
           });
         await Promise.all(nodeQueries);
         const edgeQueries = fileInfos
           .filter((file) => file.type === "edge")
           .map((file) => {
-            console.log(file);
             const labelName = file.name.split(".")[0];
             const query = `
               SELECT create_elabel('${selectedGraph}', '${labelName}')
               WHERE _label_id('${selectedGraph}', '${labelName}') = 0;
               SELECT load_edges_from_file('${selectedGraph}', '${labelName}', '${file.path}');
             `;
-            console.log("edge query", query)
             return sendQueryToDatabase(query);
           });
         return Promise.all(edgeQueries);
       })
       .then(() => {
-        console.log("All queries executed");
       })
       .catch((error) => console.error("Error:", error));
   };
