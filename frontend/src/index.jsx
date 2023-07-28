@@ -22,6 +22,8 @@ import ReactDOM from 'react-dom';
 import 'bootstrap/dist/css/bootstrap.min.css';
 import { Provider } from 'react-redux';
 import { BrowserRouter } from 'react-router-dom';
+// eslint-disable-next-line import/no-extraneous-dependencies
+import { GoogleOAuthProvider } from '@react-oauth/google';
 import store from './app/store';
 
 import App from './App';
@@ -30,7 +32,9 @@ import './index.css';
 ReactDOM.render(
   <Provider store={store}>
     <BrowserRouter>
-      <App />
+      <GoogleOAuthProvider clientId="786408429553-kh6msde0vcg3mmpbofj17u0nfbiqfe2a.apps.googleusercontent.com">
+        <App />
+      </GoogleOAuthProvider>
     </BrowserRouter>
   </Provider>,
 

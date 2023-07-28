@@ -53,7 +53,7 @@ app.use(
     secret: process.env.SECRET_KEY,
     algorithms: ['HS256'],
     getToken: (req) => req.cookies.token,
-  }).unless({ path: ['/user/login', '/user/signup'] })
+  }).unless({ path: ['/user/login', '/user/signup', '/user/googleSignin'] })
 );
 
 // Global Error Handling for JWT

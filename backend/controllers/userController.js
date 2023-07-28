@@ -2,6 +2,8 @@ const User = require('../models/User');
 const db = require('../models/index');
 const jwt = require('jsonwebtoken');
 const bcrypt = require('bcrypt');
+const axios = require('axios');
+const jwt_decode = require('jwt-decode');
 require('dotenv').config();
 const { check, validationResult } = require('express-validator');
 
@@ -31,12 +33,61 @@ exports.registerUser = async (req, res) => {
       password: hashedPassword,
       companyName,
     };
-
-    const createdUser = await User.create(newUser);
+    await User.create(newUser);
     res.status(200).send({ message: 'User registered successfully!' });
   } catch (err) {
     console.log(err);
     res.status(500).send({ message: 'Some error occurred. Try Again!' });
+  }
+};
+exports.googleSignin = async (req, res) => {
+  console.log('code', req.body);
+  try {
+    const { code } = req.body;
+    console.log('code', code);
+    const CLIENT_ID =
+      '786408429553-kh6msde0vcg3mmpbofj17u0nfbiqfe2a.apps.googleusercontent.com';
+    const CLIENT_SECRET = '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';
+    const REDIRECT_URI = 'http://localhost:3000';
+    const response = await axios.post('https://oauth2.googleapis.com/token', {
+      code,
+      client_id: CLIENT_ID,
+      client_secret: CLIENT_SECRET,
+      redirect_uri: REDIRECT_URI,
+      grant_type: 'authorization_code',
+    });
+    console.log('response', response.data);
+    const { id_token } = response.data;
+    const decoded = jwt_decode(id_token);
+    const { email, given_name, family_name } = decoded;
+    const user = await User.findOne({ email });
+
+    if (user) {
+      const token = jwt.sign({ userEmail: email }, process.env.SECRET_KEY);
+      res.cookie('token', token, { sameSite: 'none', secure: true });
+      res.cookie('userId', user._id, { sameSite: 'none', secure: true });
+      return res.status(200).json({ message: 'Google Sign-In success' });
+    } else {
+      const newUser = new User({
+        email,
+        firstName: given_name,
+        lastName: family_name,
+        password: ' ',
+        companyName: ' ',
+      });
+
+      await newUser.save();
+
+      const token = jwt.sign({ userEmail: email }, process.env.SECRET_KEY);
+      res.cookie('token', token, { sameSite: 'none', secure: true });
+      res.cookie('userId', newUser._id, { sameSite: 'none', secure: true });
+
+      return res
+        .status(200)
+        .json({ message: 'Google Sign-In success (new user)' });
+    }
+  } catch (error) {
+    return res.status(500).json({ message: 'Internal Server Error' });
   }
 };
 
@@ -50,13 +101,10 @@ exports.loginUser = async (req, res) => {
     if (!user) {
       return res.status(400).json({ message: 'Error: Invalid Credentials!' });
     }
-    // Checking if password is correct
     const isPasswordValid = await bcrypt.compare(password, user.password);
     if (!isPasswordValid) {
       return res.status(400).json({ message: 'Error: Invalid Credentials!' });
     }
-
-    // Creating Auth Token and Storing it in Cookies
     const token = jwt.sign({ userEmail: email }, process.env.SECRET_KEY);
     // Stores JWT in cookies
     res.cookie('token', token, { sameSite: 'none', secure: true });
@@ -81,7 +129,6 @@ exports.verifyUserById = async (id) => {
   }
 };
 
-
 // Logging Out a User -- Clearing Token Cookie
 exports.logoutUser = async (req, res) => {
   try {
@@ -93,7 +140,6 @@ exports.logoutUser = async (req, res) => {
     console.log(err);
   }
 };
-
 
 /////  -------- Sequelize Code - Commented For Future Use (If Needed) -------- /////
 
