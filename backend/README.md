@@ -1,29 +1,23 @@
 # AGViewer Backend
+There are two separate backend servers for Cloud-Express project. One server is used to communicate with local postgres database. This server runs automatically via a script when you run `npm run start`.
+The second server is an online MongoDB server used for Login/SignUp and other User and Project related opearations and functionalities. 
 
-### UPDATES
-
-- Sequelize is used for defining our database schemas and creating new APIs. Sequelize is a  Node.js ORM for Postgres, MySQL, MariaDB, SQLite, and Microsoft SQL Server. It features solid transaction support, relations, eager and lazy loading, read replication and more.
-
-## STEPS TO RUN BACKEND MYSQL SERVER
-
-- Run `npm install` to install all the node_module dependencies.
-
-### SETTING UP MYSQL DATABASE WITH SEQUELIZE 
-
-    - In the `backend/config/config.js` file, add your database credentials to connect with: 
-
-    ```
-        "username": "your_userName",
-        "password": "your_password",
-        "database": "database_to_connect_to",
-        "host": "localhost",
-        "dialect": "mysql"
-    ```
-
-### .ENV File
+## STEPS TO RUN Backend MongoDB SERVER
+### 1. Create a .env File
     -Create a `.env` file in the `backend` directory and add the following fields in it: 
     ```
-        PORT = port_number (example: 3000) 
-        SECRET_KEY=your_secret_key_here     // Secret key for JsonWebToken(Jwt) 
+    PORT = 4000
+    SECRET_KEY = ApacheAgeViewer
+    MONGO_URI = mongodb+srv://safi50:cloudExpress@cloud-express.le2yrog.mongodb.net/cloud-express-users?retryWrites=true&w=majority
     ```
-    
+    - Secret Key is used to encrypt JWT Token
+    - MONGO_URI contains the string to connect to our online Database cluster. It will be replaced with an official production string once development is complete.
+
+### 2. Run the MongoDB server in a new terminal
+```
+    cd backend
+    npm install     // to install node_module dependencies if you haven't already
+    node index    // to run the backend mongodb server
+```
+
+
