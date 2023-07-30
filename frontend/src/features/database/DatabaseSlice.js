@@ -16,32 +16,33 @@
  * specific language governing permissions and limitations
  * under the License.
  */
-
 import { createAsyncThunk, createSlice } from '@reduxjs/toolkit';
 
 export const connectToDatabase = createAsyncThunk(
   'database/connectToDatabase',
   async (formData) => {
     try {
-      const response = await fetch('/api/v1/db/connect',
-        {
-          method: 'POST',
-          headers: {
-            Accept: 'application/json',
-            'Content-Type': 'application/json',
-          },
-          body: JSON.stringify(formData),
-        });
-      if (response.ok) { return await response.json(); }
+      const response = await fetch('/api/v1/db/connect', {
+        method: 'POST',
+        headers: {
+          Accept: 'application/json',
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify(formData),
+      });
+
+      if (response.ok) {
+        return await response.json();
+      }
+
       throw response;
     } catch (error) {
       const errorJson = await error.json();
-      const errorDetail = {
+      throw {
         name: 'Failed to Retrieve Connection Information',
         message: `[${errorJson.severity}]:(${errorJson.code}) ${errorJson.message} `,
         statusText: error.statusText,
       };
-      throw errorDetail;
     }
   },
 );
@@ -58,79 +59,98 @@ export const getConnectionStatus = createAsyncThunk(
   async () => {
     try {
       const response = await fetch('/api/v1/db');
-      if (response.ok) { return await response.json(); }
+
+      if (response.ok) {
+        return await response.json();
+      }
+
       throw response;
     } catch (error) {
       const errorJson = await error.json();
-      const errorDetail = {
+      throw {
         name: 'Failed to Retrieve Connection Information',
         message: `[${errorJson.severity}]:(${errorJson.code}) ${errorJson.message} `,
         statusText: error.statusText,
       };
-      throw errorDetail;
     }
   },
 );
 
-const DatabaseSlice = createSlice({
+const initialState = {
+  host: '',
+  port: '',
+  user: '',
+  password: '',
+  database: '',
+  graph: '',
+  status: 'init',
+  pending: false,
+};
+
+const databaseSlice = createSlice({
   name: 'database',
-  initialState: {
-    status: 'init',
-  },
+  initialState,
   reducers: {
-    changeGraph: (state, action) => ({
-      ...state,
-      graph: action.payload.graphName,
-    }),
+    changeGraph: (state, action) => {
+      state.graph = action.payload.graphName;
+    },
   },
-  extraReducers: {
-    [connectToDatabase.fulfilled]: (state, action) => ({
-      host: action.payload.host,
-      port: action.payload.port,
-      user: action.payload.user,
-      password: action.payload.password,
-      database: action.payload.database,
-      graph: action.payload.graph,
-      status: 'connected',
-    }),
-    [connectToDatabase.rejected]: () => ({
-      host: '',
-      port: '',
-      user: '',
-      password: '',
-      database: '',
-      graph: '',
-      status: 'disconnected',
-    }),
-    [disconnectToDatabase.fulfilled]: () => ({
-      host: '',
-      port: '',
-      user: '',
-      password: '',
-      database: '',
-      graph: '',
-      status: 'disconnected',
-    }),
-    [getConnectionStatus.fulfilled]: (state, action) => ({
-      host: action.payload.host,
-      port: action.payload.port,
-      user: action.payload.user,
-      password: action.payload.password,
-      database: action.payload.database,
-      graph: action.payload.graph,
-      status: 'connected',
-    }),
-    [getConnectionStatus.rejected]: () => ({
-      host: '',
-      port: '',
-      user: '',
-      password: '',
-      database: '',
-      graph: '',
-      status: 'disconnected',
-    }),
+  extraReducers: (builder) => {
+    builder
+      .addCase(connectToDatabase.pending, (state) => {
+        state.pending = true;
+      })
+      .addCase(connectToDatabase.fulfilled, (state, action) => {
+        state.host = action.payload.host;
+        state.port = action.payload.port;
+        state.user = action.payload.user;
+        state.password = action.payload.password;
+        state.database = action.payload.database;
+        state.graph = action.payload.graph;
+        state.status = 'connected';
+        state.pending = false;
+      })
+      .addCase(connectToDatabase.rejected, (state) => {
+        state.host = '';
+        state.port = '';
+        state.user = '';
+        state.password = '';
+        state.database = '';
+        state.graph = '';
+        state.status = 'disconnected';
+        state.pending = false;
+      })
+      .addCase(disconnectToDatabase.fulfilled, (state) => {
+        state.host = '';
+        state.port = '';
+        state.user = '';
+        state.password = '';
+        state.database = '';
+        state.graph = '';
+        state.status = 'disconnected';
+      })
+      .addCase(getConnectionStatus.fulfilled, (state, action) => {
+        state.host = action.payload.host;
+        state.port = action.payload.port;
+        state.user = action.payload.user;
+        state.password = action.payload.password;
+        state.database = action.payload.database;
+        state.graph = action.payload.graph;
+        state.status = 'connected';
+      })
+      .addCase(getConnectionStatus.rejected, (state) => {
+        state.host = '';
+        state.port = '';
+        state.user = '';
+        state.password = '';
+        state.database = '';
+        state.graph = '';
+        state.status = 'disconnected';
+      });
   },
 });
-export const { changeGraph } = DatabaseSlice.actions;
 
-export default DatabaseSlice.reducer;
+export const { changeGraph } = databaseSlice.actions;
+
+export default databaseSlice.reducer;
+
