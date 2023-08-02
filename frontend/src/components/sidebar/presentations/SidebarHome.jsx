@@ -290,7 +290,7 @@ const GraphItems = ({
 }) => (
   <button
     type="button"
-    className={`${graph === currentGraph ? 'graph-item-clicked' : 'graph-item'}`}
+    className={graph === currentGraph ? 'graph-item-clicked' : 'graph-item'}
     onClick={() => { changeCurrentGraph({ id: gid }); changeGraph({ graphName: graph }); }}
   >
     {graph}
