@@ -47,11 +47,10 @@ const Login = () => {
             className="background-radial-gradient overflow-hidden"
           >
             <div className="container text-center text-lg-start">
-              <div className="row gx-lg-5 align-items-center" style={{ overflow: 'visible' }}>
+              <div className="row gx-lg-5" style={{ overflow: 'visible' }}>
                 <div className="col-lg-6 mb-5 mb-lg-0" style={{ zIndex: 10 }}>
                   <h1
-                    className="my-5 display-5 fw-bold ls-tight"
-                    style={{ color: 'hsl(218, 81%, 75%)' }}
+                    className="ls-tight"
                   >
                     Experience Graph Database
                     <br />
@@ -81,8 +80,8 @@ const Login = () => {
         </div>
         <div className="form">
           <div className="card bg-glass " style={{ border: 'none' }}>
-            <div className="card-body px-4 py-5 px-md-5">
-              <h1>
+            <div className="card-body py-md-5 px-md-5">
+              <h1 className="text-center text-md-left">
                 {' '}
                 <strong className="text-secondary">
                   {' '}
@@ -96,18 +95,13 @@ const Login = () => {
                 Experience our built-in database projects
                 <br />
                 or
-              </small>
-              <br />
-              <small
-                className="text-center  text-secondary"
-                style={{ fontSize: '16px' }}
-              >
+                <br />
                 Create project using your own data
               </small>
               <form onSubmit={handleSubmit}>
                 <div className="row">
-                  <div className="col-md-6 mb-4" />
-                  <div className="col-md-6 mb-4" />
+                  <div className="mb-md-4" />
+                  <div className="mb-md-4" />
                 </div>
 
                 <div className="form-outline mb-4">

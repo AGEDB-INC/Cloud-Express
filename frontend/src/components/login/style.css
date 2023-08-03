@@ -64,7 +64,17 @@
   }
   .container .row{
     margin-bottom: 5%;
+    align-items: center;
   }
+
+  .ls-tight{
+    margin-top: 5%;
+    margin-bottom: 5%;
+    font-weight: bold;
+    color: hsl(218, 81%, 75%);
+  }
+
+  
   /* Additional responsive styles */
   @media (max-width: 768px) {
     .Row {
@@ -91,6 +101,13 @@
     }
     .form small{
         display: none;
+    }
+    
+    .ls-tight{
+      margin-top: 0;
+      margin-bottom: 0;
+      text-align: center;
+      font-size: 1.7rem;
     }
   }
   
