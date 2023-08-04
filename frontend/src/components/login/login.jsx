@@ -1,17 +1,46 @@
 /* eslint-disable no-unused-vars */
 /* eslint-disable import/no-unresolved */
 // eslint-disable-next-line import/no-extraneous-dependencies
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import { Link, useNavigate } from 'react-router-dom';
 import { toast } from 'react-toastify';
+// eslint-disable-next-line import/no-extraneous-dependencies
+import { GoogleLogin, googleLogout, useGoogleLogin } from '@react-oauth/google';
 import 'react-toastify/dist/ReactToastify.css';
+import axios from 'axios';
 import api from '../../services/api';
 import './style.css';
 
 const Login = () => {
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
+  const [userInfo, setUserInfo] = useState([]);
+  const [profileInfo, setProfileInfo] = useState([]);
   const navigate = useNavigate();
+
+  // eslint-disable-next-line consistent-return
+  const googleSignin = async (code) => {
+    const res = await api.post('/user/googleSignin', {
+      // eslint-disable-next-line object-shorthand
+      code: code,
+    });
+    return res;
+  };
+
+  const googleLogin = useGoogleLogin({
+    onSuccess: async ({ code }) => {
+      try {
+        const response = await googleSignin(code);
+        if (response.status === 200) {
+          toast.success('Successfully Logged In!');
+          window.location.assign('/AGCloud');
+        }
+      } catch (error) {
+        toast.error('An error occurred:', error.message);
+      }
+    },
+    flow: 'auth-code',
+  });
 
   const handleSubmit = async (e) => {
     e.preventDefault();
@@ -21,8 +50,6 @@ const Login = () => {
       return;
     }
     try {
-      // console.log(email, password);
-      // With Credentials allow the browser to store the cookie
       const response = await api.post('/user/login', { email, password }, { withCredentials: true });
       if (response.status === 200) {
         toast.success('Successfully Logged In!');
@@ -137,6 +164,33 @@ const Login = () => {
                 >
                   Sign In
                 </button>
+                <div className="mt-4">
+                  <div className="row">
+                    <div
+                      className="col-md-12"
+
+                    >
+                      <button
+                        className="btn btn-lg btn-google btn-block  btn-outline"
+                        type="button"
+                        style={{
+                          color: '#545454',
+                          backgroundColor: '#ffffff',
+                          boxShadow: '0 1px 2px 1px #ddd',
+                          borderColor: 'black',
+                          borderRadius: '50px',
+                          fontSize: '18px',
+                        }}
+                        onClick={googleLogin}
+                      >
+                        <img src="https://img.icons8.com/color/16/000000/google-logo.png" alt="icon" />
+                        {' '}
+                        Login With Google
+                      </button>
+
+                    </div>
+                  </div>
+                </div>
 
                 <div className="text-center mt-5">
                   <p>
