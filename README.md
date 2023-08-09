@@ -102,4 +102,4 @@ To Connect to postgreSQL server running from Docker Container
 
 # License
 
-Apache AGE Viewer is licensed under the Apache License, Version 2.0. See LICENSE for the full license text.
+Apache AGE Viewer is licensed under the Apache License, Version 2.0. See [LICENSE](https://github.com/AGEDB-INC/Cloud-Express/blob/main/LICENSE) for the full license text.
