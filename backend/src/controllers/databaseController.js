@@ -104,6 +104,27 @@ class DatabaseController {
         }
       }
       
+      async CleanUpUploadedFiles() {
+        const uploadsFolderPath = path.join(__dirname, '../../uploads');
+      
+        try {
+          const files = await fs.readdir(uploadsFolderPath);
+      
+          // Filter CSV files
+          const csvFiles = files.filter(file => path.extname(file).toLowerCase() === '.csv');
+      
+          // Delete each CSV file
+          for (const csvFile of csvFiles) {
+            const filePath = path.join(uploadsFolderPath, csvFile);
+            await fs.unlink(filePath);
+            console.log(`Deleted file: ${csvFile}`);
+          }
+      
+          console.log('Cleanup completed');
+        } catch (error) {
+          console.error('Error cleaning up files:', error);
+        }
+      }
       
     // async getFilesInfo(req, res) {
     //     try {   
