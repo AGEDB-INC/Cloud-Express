@@ -1,15 +1,32 @@
 /* eslint-disable */
 import React, { useState, useEffect } from "react";
 import { useNavigate } from "react-router-dom";
+import { useDispatch } from "react-redux";
 import MainModalContainer from "../../contents/containers/MainModal";
 import "./MyProjectTab.css";
+import { getMetaData } from "../../../features/database/MetadataSlice";
 import TutorialGuideTab from "../tutorialguidetab/tutorialguidetab";
 import { toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 import api from "../../../services/api";
 
 const MyProjectTab = () => {
+  const dispatch = useDispatch();
+  const [graphNames, setGraphNames] = useState([]);
   const navigate = useNavigate();
+  
+  useEffect(() => {
+    dispatch(getMetaData())
+      .then((metadata) => {
+        console.log("Metadata response:", metadata);
+        console.log("Metadata payload:", metadata.payload);
+        setGraphNames(Object.keys(metadata.payload));
+      })
+      .catch((error) => {
+        console.error("Error:", error);
+      });
+  }, []);
+
   const handleGoToAgeViewer = () => {
     // navigate("/");
     window.open("/");
@@ -92,9 +109,15 @@ const MyProjectTab = () => {
                       Delete
                     </button>
                   </div>
-                ) : (
-                  <MainModalContainer onProjectCreated={handleProjectData} />
+                ) : graphNames.length != 0 ? null : (
+                  <div>Loading...</div>
                 )}
+
+              </div>
+              {graphNames.length > 0 && !projectData && (
+                <MainModalContainer allGraphs={graphNames} onProjectCreated={handleProjectData} />
+              )}
+
             </td>
           </tr>
         </table>

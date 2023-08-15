@@ -154,7 +154,6 @@ function OpenCSVFileDialog({
           .filter((file) => file.type === 'edge')
           .map((file) => {
             // eslint-disable-next-line
-            console.log(file);
             const labelName = file.name.substring(0, file.name.indexOf('['));
             const query = `
               SELECT create_elabel('${currentGraph}', '${labelName}')
