@@ -7,8 +7,6 @@
 
 }
 
-
-
 .serverConnectionModal-content {
   background-color: #fefefe;
   margin: auto;
@@ -88,4 +86,13 @@
 
 .FullWidth {
   width: 100% !important;
+}
+.flex-row{
+  display: flex;
+}
+
+@media (max-width: 768px) {
+  .flex-row{
+    flex-direction: column;
+  }
 }

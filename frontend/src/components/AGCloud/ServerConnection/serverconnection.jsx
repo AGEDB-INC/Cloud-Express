@@ -1,5 +1,5 @@
 /* eslint-disable */
-import React, { useState } from 'react'; // Import your CSS file
+import React, { useState } from 'react';
 import 'bootstrap/dist/css/bootstrap.min.css'; // Import Bootstrap CSS
 import { Modal, Button } from 'react-bootstrap'; // Import Modal and Button components from React Bootstrap
 import { Col, Form, Input, InputNumber, Row } from 'antd';
@@ -104,19 +104,21 @@ const ServerConnectionModal = () => {
         backdrop="static"
         keyboard={false}
         centered
-        size="lg"
+        size="md"
+        style={{ backgroundColor: 'rgba(212, 217, 230, 0.2)' }}
       >
-        <Modal.Header closeButton>
-          <Modal.Title>Connect to Database</Modal.Title>
+        <Modal.Header closeButton
+        style={{  margin: 'auto' }}>
+          <Modal.Title>
+            Connect to Database</Modal.Title>
         </Modal.Header>
         <Modal.Body>
-          <Row>
-            <Col span={6}>
-              <h3>Connect to Database</h3>
+          <Row style={{ display: 'flex', flexDirection: 'column'}}>
+            <Col style={{ textAlign: 'center', color: 'orangered'}}>
               <p>Database access might require an authenticated connection.</p>
             </Col>
-            <Col span={18}>
-              <div style={{ maxWidth: '450px' }}>
+            <Col>
+              <div style={{ maxWidth: '450px', margin: 'auto' }}>
                 <Form
                   initialValues={FormInitialValue}
                   layout="vertical"
@@ -136,7 +138,7 @@ const ServerConnectionModal = () => {
                   >
                     <InputNumber
                       placeholder="5432"
-                      style={{ width: '100% !important' }}
+                      style={{ width: '100%' }}
                     />
                   </Form.Item>
                   <Form.Item
@@ -160,7 +162,8 @@ const ServerConnectionModal = () => {
                   >
                     <Input.Password placeholder="postgres" />
                   </Form.Item>
-                  <Form.Item>
+                  <Form.Item 
+                    style={{ display: 'flex', justifyContent: 'center', alignItems: 'center' }}>
                     <Button type="primary" htmlType="submit">
                       Connect
                     </Button>

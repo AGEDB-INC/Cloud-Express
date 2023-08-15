@@ -1,6 +1,6 @@
 .page {
     position: relative;
-    height: 350px;
+    height: 90vh;
     flex-direction: column;
 
   }
