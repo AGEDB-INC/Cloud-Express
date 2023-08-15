@@ -19,10 +19,12 @@ const Login = () => {
 
   // eslint-disable-next-line consistent-return
   const googleSignin = async (code) => {
-    const res = await api.post('/user/googleSignin', {
-      // eslint-disable-next-line object-shorthand
-      code: code,
-    });
+    const res = await api.post(
+      '/user/googleSignin',
+      { code },
+      // with credentials is necessary to enable cookies in the browser
+      { withCredentials: true },
+    );
     return res;
   };
 
@@ -49,7 +51,11 @@ const Login = () => {
       return;
     }
     try {
-      const response = await api.post('/user/login', { email, password }, { withCredentials: true });
+      const response = await api.post(
+        '/user/login',
+        { email, password },
+        { withCredentials: true },
+      );
       if (response.status === 200) {
         toast.success('Successfully Logged In!');
         window.location.assign('/AGCloud');
@@ -115,7 +121,10 @@ const Login = () => {
             </style>
 
             <div className="container px-4 py-5 px-md-5 text-center text-lg-start my-5">
-              <div className="row gx-lg-5 align-items-center mb-5" style={{ overflow: 'visible' }}>
+              <div
+                className="row gx-lg-5 align-items-center mb-5"
+                style={{ overflow: 'visible' }}
+              >
                 <div className="col-lg-6 mb-5 mb-lg-0" style={{ zIndex: 10 }}>
                   <h1
                     className="my-5 display-5 fw-bold ls-tight"
@@ -213,10 +222,7 @@ const Login = () => {
                 </button>
                 <div className="mt-4">
                   <div className="row">
-                    <div
-                      className="col-md-12"
-
-                    >
+                    <div className="col-md-12">
                       <button
                         className="btn btn-lg btn-google btn-block  btn-outline"
                         type="button"
@@ -230,11 +236,13 @@ const Login = () => {
                         }}
                         onClick={googleLogin}
                       >
-                        <img src="https://img.icons8.com/color/16/000000/google-logo.png" alt="icon" />
+                        <img
+                          src="https://img.icons8.com/color/16/000000/google-logo.png"
+                          alt="icon"
+                        />
                         {' '}
                         Login With Google
                       </button>
-
                     </div>
                   </div>
                 </div>
