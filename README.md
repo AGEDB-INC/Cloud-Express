@@ -6,8 +6,7 @@
 </p>
 
 # What is Apache-Age Viewer
-Apache-Age Viewer is a web based user interface that provides visualization of graph data stored in a postgreSQL database with AGE extension. 
-It is graph visualisation tool, for Apache AGE.
+Cloud-express is an innovative web application that aims to bridge the gap between users and Apache Age, a cutting-edge database management system. With Cloud-express, users can now access Apache Age online through a user-friendly web interface. Gone are the days of offline access – Cloud-express offers a seamless experience, allowing users to harness the power of Apache Age's advanced capabilities directly from their web browsers.
 
 This is a sub-project of [the Apache AGE project](https://age.apache.org/#).
 
@@ -21,16 +20,20 @@ Install latest **pm2** with :
 ``` npm i pm2 ```
 
 
-> [pm2](https://www.npmjs.com/package/pm2) is an NPM module to run the project in production mode, and hence is optional for getting started with setting up development environment for Age-Viewer 
+> [pm2](https://www.npmjs.com/package/pm2) is an NPM module to run the project in production mode, and hence is optional for getting started with setting up development environment for Cloud express. 
 
-# Running Age-Viewer
+# Running Cloud-express.
 
- - Install the required node modules using  :  
+ - To run frontend:
+   Install the required node modules using  :  
 	```npm run setup```
-- Run Age-Viewer using : 
+- Run cloud-express frontend using : 
 ```npm run start```
+- To run Backend
+  use ```node index.js``` in backend folder
 
->This will start the age-viewer on http://localhost:3000 if port 3000 is free.
+
+>This will start the Cloud-express frontend on http://localhost:3000 and backend on http://localhost:4000 if these ports are free.
 
 
 # How to build using command
@@ -51,8 +54,8 @@ Install latest **pm2** with :
 
 	```
 
-  # How to start using Age-Viewer
- - To start using Age-Viewer we need to have a running postgreSQL database server with Apache Age Extension 
+  # How to start using Cloud express
+ - To start using Cloud express we need to have a running postgreSQL database server with Apache Age Extension 
 	 ### Setting up the PostgreSQL server with AGE extension
 	-  Easiest way  for Windows, Mac-OS and Linux Environment using **Docker**
   
@@ -87,9 +90,14 @@ Install latest **pm2** with :
 		`` psql -U postgresUser -d postgresDB -p 5455 -h localhost``
 		and put in ``postgresPW`` when prompted for password.
 - After logging into postgreSQL shell follow the [Post-Installation](https://github.com/apache/age#post-installation) instruction to create a graph in the database.
-### Connect Apache Age-Viewer to PostgreSQL Database
+### Login into the web-app using your credentials.
+
+![image](https://github.com/AGEDB-INC/Cloud-Express/assets/95052507/50c5f2c9-8653-4fbf-8273-b420f5436e76)
+
+### Connect Apache cloud-express to PostgreSQL Database
 **Initial Connection Layout**
-![enter image description here](https://user-images.githubusercontent.com/69689387/211624181-9644f489-1a45-4eed-ac8e-7aaf156b97ea.png)
+![image](https://github.com/AGEDB-INC/Cloud-Express/assets/95052507/5be2e953-b3df-42c6-94a7-c633850ba6c7)
+
 To Connect to postgreSQL server running from Docker Container
 - Connect URL - localhost
 - Connect Port - 5455 
@@ -98,8 +106,10 @@ To Connect to postgreSQL server running from Docker Container
 - Password - postgresPW
 > The following field is same as used to make the docker container specified above as flags.
 
+### Now you can create project for yourself or choose from predefined Projects.
+![image](https://github.com/AGEDB-INC/Cloud-Express/assets/95052507/6b9866c5-2277-4e1a-a12e-70e367125ecc)
 
-
+### After that you can go to the AGcloud dashboard and play around with your project
 # License
 
-Apache AGE Viewer is licensed under the Apache License, Version 2.0. See LICENSE for the full license text.
+Cloud express is also licensed under the Apache License, Version 2.0 same as Apache AGE Viewer. See LICENSE for the full license text.
