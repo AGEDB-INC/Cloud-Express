@@ -1,0 +1,81 @@
+/* styles.css */
+  .Row{
+    width: 100%;
+    display: flex;
+    overflow: none;
+  }
+
+  .image{
+    height: 100vh;
+    padding: 0;
+  }
+  .image section{
+    height: 100%;
+    width: 100%;
+  }
+  .form{
+    height: 100vh;
+    padding: 0;
+  }
+  .form > div{
+    height: 100%;
+    width: 100%;
+    /* padding: 0;
+    margin:0; */
+  }
+
+  .container{
+    width: 100%;
+    padding: 5%;
+    margin-top: 5%;
+  }
+  .container .row{
+    margin-bottom: 5%;
+    align-items: center;
+  }
+
+  .ls-tight{
+    margin-top: 5%;
+    margin-bottom: 5%;
+    font-weight: bold;
+    color: hsl(218, 81%, 75%);
+  }
+
+  
+  /* Additional responsive styles */
+  @media (max-width: 768px) {
+    .Row {
+      flex-direction: column;
+    }
+  
+    /* #radius-shape-1,
+    #radius-shape-2 {
+    } */
+  
+    .background-radial-gradient {
+      background-size: 100% 100%;
+      /* Add any other styles you want for smaller screens */
+    }
+  
+    .image {
+      width: 100%;
+      height: 30vh;
+    }
+  
+    .form {
+      margin-top: 1.5rem;
+      width: 100%;
+      height: auto;
+    }
+    .form small{
+        display: none;
+    }
+    
+    .ls-tight{
+      margin-top: 0;
+      margin-bottom: 0;
+      text-align: center;
+      font-size: 1.7rem;
+    }
+  }
+  

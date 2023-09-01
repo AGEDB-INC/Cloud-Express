@@ -59,7 +59,7 @@ const MyProjectTab = () => {
   };
 
   return (
-    <div>
+    <div style={{ width: '100%'}}>
       <div
         className="div-style"
         style={{ display: "flex", alignItems: "flex-start" }}
@@ -76,6 +76,7 @@ const MyProjectTab = () => {
             <th className="column-title">Date created</th>
             <th className="column-title">Project name</th>
             <th className="column-title">Days left for use</th>
+            <th className="column-title">Action</th>
           </tr>
           <tr className="second-row">
             <td id="firstColumn" className="column-title">
@@ -87,10 +88,9 @@ const MyProjectTab = () => {
             <td id="thirdColumn" className="column-title">
               {projectData ? projectData.daysLeft : "-"}
             </td>
-            <td>
-              <div>
+            <td className="column-title">
                 {projectData ? (
-                  <div>
+                  <div className="table-buttons">
                     <button
                       id="ageViewerButton"
                       type="button"
@@ -102,8 +102,8 @@ const MyProjectTab = () => {
                     <button
                       id="deleteButton"
                       type="button"
-                      style={{ marginLeft: "20px" , color: "red", border: "1px solid red", backgroundColor: "transparent",}}
-                      className="btn btn-danger"
+                      style={{ color: "red", border: "1px solid red", backgroundColor: "transparent",}}
+                      className="btn btn-danger ml-md-5"
                       onClick={deleteProject}
                     >
                       Delete
@@ -112,10 +112,12 @@ const MyProjectTab = () => {
                 ) : graphNames.length != 0 ? null : (
                   <div>Loading...</div>
                 )}
+
               </div>
               {graphNames.length > 0 && !projectData && (
                 <MainModalContainer allGraphs={graphNames} onProjectCreated={handleProjectData} />
               )}
+
             </td>
           </tr>
         </table>

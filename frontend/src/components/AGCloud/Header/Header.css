@@ -5,6 +5,8 @@
     flex-direction: row;
     justify-content: space-between;
     align-items: center;
+    width: 96%;
+    margin: 2%;
 }
 
 .header-text {
@@ -22,6 +24,7 @@
     align-items: center;
     justify-content: space-between;
     overflow: visible;
+    width: 250px;
 }
 
 .connection-button {
@@ -54,4 +57,31 @@
   .dropdown:focus {
     outline: none !important;
     box-shadow: none !important;
+  }
+
+  @media (max-width: 768px) {
+    .header-title {
+      flex-direction: column;
+      height: auto;
+      width: 96%;
+    
+    }
+    .header-text{
+      width: 100%;
+      margin: 10px;
+    }
+    .header-text h4{
+      width: 100%;
+      text-align: center;
+    }
+    .account-information {
+      margin: 5px;
+      width: 100%;
+  }
+  .connection-button {
+    padding: 5px;
+    font-size: 12px;
+    border-radius: 12px;
+    margin-right: 5px;
+}
   }
