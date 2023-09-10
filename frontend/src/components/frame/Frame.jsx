@@ -110,6 +110,49 @@ const Frame = ({
           <Button
             size="large"
             type="link"
+<<<<<<< HEAD
+=======
+            className={`${styles.FrameButton} ${
+              isFullScreen ? styles.activate : ''
+            }`}
+            onClick={() => setFullScreen(!isFullScreen)}
+            title="Expand"
+          >
+            <FontAwesomeIcon
+              icon={isFullScreen ? faCompressAlt : faExpandAlt}
+              size="lg"
+            />
+          </Button>
+          {
+            !isTable && onRefresh ? (
+              <Button
+                size="large"
+                type="link"
+                className={styles.FrameButton}
+                onClick={() => onRefresh()}
+                title="Refresh"
+              >
+                <FontAwesomeIcon
+                  icon={faSync}
+                  size="lg"
+                />
+              </Button>
+            ) : null
+          }
+          {/* <Button
+            size="large"
+            type="link"
+            className={`${styles.FrameButton} ${isPinned ? styles.activate : ''}`}
+            onClick={() => pinFrame(refKey)}
+          >
+          <FontAwesomeIcon icon={faPaperclip}
+              size="lg"
+            />
+          </Button> */}
+          <Button
+            size="large"
+            type="link"
+>>>>>>> ed65228cbd4cd2c557180e500a8d9fd3f4341738
             className={styles.FrameButton}
             onClick={() => setExpand(!isExpand)}
             title={isExpand ? 'Hide' : 'Show'}

@@ -28,11 +28,17 @@ class DatabaseService {
         this._graphRepository = null;
     }
 
+    // Initialize the graph connection and retrieve metadata
     async getMetaData(graphName) {
         let gr = this._graphRepository;
+        
+        // Initialize graph names
         await gr.initGraphNames();
         const { graphs } = gr.getConnectionInfo();
+
+        // Analyze the graph
         await DatabaseService.analyzeGraph(gr);
+
         if (graphName) {
             if (graphs.includes(graphName.currentGraph)) {
                 return await this.getMetaDataSingle(graphName.currentGraph, graphs);
@@ -42,23 +48,16 @@ class DatabaseService {
         } else if (graphs.length > 0) {
             return await this.graphNameInitialize(graphs);
         } else {
-            throw new Error('graph does not exist');
-            // return await this.getMetaDataMultiple(graphs);
+            throw new Error('Graph does not exist');
         }
     }
 
-    // async getMetaDataMultiple(graphs){
-    //     const metadata = {};
-    //     await Promise.all(graphs.map(async(gname)=>{
-    //         metadata[gname] = await this.getMetaDataSingle(gname);
-    //     }))
-    //     return metadata;
-    // }
-
+    // Retrieve metadata for a single graph
     async getMetaDataSingle(curGraph, graphs) {
         let metadata = {};
         let data = {};
         const { database } = this.getConnectionInfo();
+        
         try {
             let { nodes, edges } = await this.readMetaData(curGraph);
             data.nodes = nodes;
@@ -67,22 +66,27 @@ class DatabaseService {
             data.graph = curGraph;
             data.database = database;
             data.role = await this.getRole();
+
+            // Organize metadata by graph name
             graphs.forEach((gname) => {
                 if (gname !== curGraph) metadata[gname] = {};
                 else metadata[gname] = data;
-            })
+            });
         } catch (error) {
             throw error;
         }
+
         return metadata;
     }
 
+    // Initialize metadata structure for multiple graphs
     async graphNameInitialize(graphs) {
         let metadata = {};
         graphs.forEach((gname) => {
             metadata[gname] = {};
-        })
+        });
         return metadata;
+    }
     }
 
     async getGraphLabels() {

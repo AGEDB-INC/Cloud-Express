@@ -92,7 +92,11 @@ const EdgeThicknessSettingModal = ({ onSubmit, properties }) => {
         style={{ width: '95%' }}
       >
         <option className={style.option} value="">Select Property</option>
+<<<<<<< HEAD
         {selectionProperty()}
+=======
+        {selectionPropertie()}
+>>>>>>> ed65228cbd4cd2c557180e500a8d9fd3f4341738
       </select>
       <input
         className={style.input}

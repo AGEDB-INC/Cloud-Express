@@ -41,8 +41,17 @@ router.post(
   },
   userController.loginUser
 );
+router.post(
+  '/googleSignin',
+  [
+    check('code')
+      .not()
+      .isEmpty()
+      .withMessage('Google Sign-In code is required.'),
+  ],
+  userController.googleSignin
+);
 
 router.get('/logout', userController.logoutUser);
-
 
 module.exports = router;
