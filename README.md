@@ -5,7 +5,7 @@
     <img src="https://img.shields.io/github/stars/apache/age-viewer"/>
 </p>
 
-# What is Apache-Age Viewer
+# What is AGE Cloud Express
 Cloud-express is an innovative web application that aims to bridge the gap between users and Apache Age, a cutting-edge database management system. With Cloud-express, users can now access Apache Age online through a user-friendly web interface. Gone are the days of offline access – Cloud-express offers a seamless experience, allowing users to harness the power of Apache Age's advanced capabilities directly from their web browsers.
 
 This is a sub-project of [the Apache AGE project](https://age.apache.org/#).
