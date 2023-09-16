@@ -505,7 +505,7 @@ function MainModal({
             {" "}
             <strong>Import your own data for a new database project</strong>
           </p>
-          <div style={{ display: "flex", justifyContent: "left" }}>
+          <div style={{ display: "flex", justifyContent: "space-between", alignItems: "center" }}>
             <label>
               <div
                 style={{
@@ -538,6 +538,16 @@ function MainModal({
                 />
               </div>
             </label>
+            <div >
+              <a
+                href="https://dev.to/kamleshmmb45/csv-file-format-guide-for-cloud-express-managing-nodes-and-edges-1n8"
+                target="_blank"
+                rel="noopener noreferrer"
+                style={{ textDecoration: "underline" }}
+              >
+                Guidelines for User CSV format
+              </a>
+            </div>
           </div>
 
           {selectedGraph === "" && selectedProject !== "" && (
@@ -545,7 +555,7 @@ function MainModal({
               Please select a graph before choosing a project.
             </p>
           )}
-        </Modal.Body>
+        </Modal.Body>   
         <Modal.Footer>
           <Button
             variant="secondary"
