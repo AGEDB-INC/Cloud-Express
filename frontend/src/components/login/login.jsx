@@ -1,45 +1,54 @@
 /* eslint-disable no-unused-vars */
 /* eslint-disable import/no-unresolved */
-// eslint-disable-next-line import/no-extraneous-dependencies
-import React, { useState, useEffect } from 'react';
+import React, { useState } from 'react';
 import { Link, useNavigate } from 'react-router-dom';
 import { toast } from 'react-toastify';
-// eslint-disable-next-line import/no-extraneous-dependencies
-import { GoogleLogin, googleLogout, useGoogleLogin } from '@react-oauth/google';
-import 'react-toastify/dist/ReactToastify.css';
-import axios from 'axios';
+import { useGoogleLogin } from '@react-oauth/google'; // Import the correct module
 import api from '../../services/api';
+
+import 'react-toastify/dist/ReactToastify.css';
 
 const Login = () => {
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
-  const [userInfo, setUserInfo] = useState([]);
-  const [profileInfo, setProfileInfo] = useState([]);
   const navigate = useNavigate();
 
-  // eslint-disable-next-line consistent-return
-  const googleSignin = async (code) => {
-    const res = await api.post('/user/googleSignin', {
-      // eslint-disable-next-line object-shorthand
-      code: code,
-    });
-    return res;
-  };
-
+  // Define the GoogleSignIn function
   const googleLogin = useGoogleLogin({
     onSuccess: async ({ code }) => {
       try {
-        const response = await googleSignin(code);
+        // Send the Google OAuth code to your server for verification
+        const response = await api.post('/user/googleSignin', { code });
+
         if (response.status === 200) {
-          toast.success('Successfully Logged In!');
-          window.location.assign('/AGCloud');
+          // Successful sign-in, redirect to the desired page
+          toast.success('Successfully Logged In with Google!');
+          navigate('/AGCloud'); // Redirect to your desired page
+        } else {
+          // Handle any other response status codes or errors
+          toast.error('Google Sign-In Failed. Please try again.');
         }
       } catch (error) {
-        toast.error('An error occurred:', error.message);
+        // Handle network or server errors
+        toast.error('An error occurred during Google Sign-In.');
       }
     },
-    flow: 'auth-code',
+    // Specify your Google OAuth client ID
+    // eslint-disable-next-line max-len
+    clientId: '786408429553-kh6msde0vcg3mmpbofj17u0nfbiqfe2a.apps.googleusercontent.com',
+    // Replace with your actual client ID
+    // Specify the redirect URI (must match your Google OAuth configuration)
+    redirectUri: 'YOUR_REDIRECT_URI', // Replace with your actual redirect URI
+    // Optional: Specify additional OAuth scopes if needed
+    // scopes: ['profile', 'email'],
+    // Optional: Specify the OAuth flow type (default is 'code')
+    flow: 'code',
   });
+
+  const handleGoogleSignIn = () => {
+    // Trigger the Google sign-in process
+    googleLogin();
+  };
 
   const handleSubmit = async (e) => {
     e.preventDefault();
@@ -48,11 +57,12 @@ const Login = () => {
       toast.error('All fields are required!');
       return;
     }
+
     try {
       const response = await api.post('/user/login', { email, password }, { withCredentials: true });
       if (response.status === 200) {
         toast.success('Successfully Logged In!');
-        window.location.assign('/AGCloud');
+        navigate('/AGCloud');
       }
     } catch (error) {
       if (error.response && error.response.status === 400) {
@@ -60,11 +70,10 @@ const Login = () => {
       } else if (error.response && error.response.status === 500) {
         toast.error('Server Error. Try Again!');
       } else {
-        toast.error('An error occurred:', error.message);
+        toast.error(`An error occurred: ${error.message}`);
       }
     }
   };
-
   return (
     <>
       <div className="row overflow-hidden">
@@ -216,10 +225,11 @@ const Login = () => {
                     <div
                       className="col-md-12"
 
+                    // eslint-disable-next-line react/jsx-no-comment-textnodes
                     >
                       <button
-                        className="btn btn-lg btn-google btn-block  btn-outline"
                         type="button"
+                        className="btn btn-lg btn-google btn-block btn-outline"
                         style={{
                           color: '#545454',
                           backgroundColor: '#ffffff',
@@ -228,11 +238,13 @@ const Login = () => {
                           borderRadius: '50px',
                           fontSize: '18px',
                         }}
-                        onClick={googleLogin}
+                        onClick={handleGoogleSignIn}
                       >
-                        <img src="https://img.icons8.com/color/16/000000/google-logo.png" alt="icon" />
-                        {' '}
-                        Login With Google
+                        <img
+                          src="https://img.icons8.com/color/16/000000/google-logo.png"
+                          alt="Google Icon"
+                        />
+                        Sign In with Google
                       </button>
 
                     </div>
