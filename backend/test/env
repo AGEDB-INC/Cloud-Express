@@ -1,0 +1,7 @@
+
+
+PORT = 4000
+SECRET_KEY = ApacheAgeViewer
+MONGO_URI = mongodb+srv://safi50:cloudExpress@cloud-express.le2yrog.mongodb.net/cloud-express-users?retryWrites=true&w=majority
+
+Now, Run the backend and frontend on separate terminals.
