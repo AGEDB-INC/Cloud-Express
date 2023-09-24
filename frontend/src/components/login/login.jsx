@@ -39,7 +39,7 @@ const Login = () => {
       }
     },
     flow: 'auth-code',
-  });
+  }); // hello
 
   const handleSubmit = async (e) => {
     e.preventDefault();
