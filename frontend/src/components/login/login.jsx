@@ -17,19 +17,19 @@ const Login = () => {
   const [profileInfo, setProfileInfo] = useState([]);
   const navigate = useNavigate();
 
-  // eslint-disable-next-line consistent-return
-  const googleSignin = async (code) => {
-    const res = await api.post('/user/googleSignin', {
+  const googleSigning = async (code) => {
+    const res = await api.post('/user/googleSignin',
       // eslint-disable-next-line object-shorthand
-      code: code,
-    });
+      { code },
+      { withCredentials: true });
     return res;
   };
 
   const googleLogin = useGoogleLogin({
     onSuccess: async ({ code }) => {
       try {
-        const response = await googleSignin(code);
+        const response = await googleSigning(code);
+        console.log('respone', response);
         if (response.status === 200) {
           toast.success('Successfully Logged In!');
           window.location.assign('/AGCloud');
@@ -39,7 +39,7 @@ const Login = () => {
       }
     },
     flow: 'auth-code',
-  });
+  }); // hello
 
   const handleSubmit = async (e) => {
     e.preventDefault();
