@@ -32,4 +32,6 @@ router.post("/meta", wrap(databaseController.getMetadata));
 router.get("/metaChart", wrap(databaseController.getMetaChart));
 router.post("/upload", wrap(databaseController.uploadFiles));
 router.get("/Samplefiles", databaseController.getFilesInfo);
+router.get("/cleanUpUploadedFiles", databaseController.CleanUpUploadedFiles);
+
 module.exports = router;

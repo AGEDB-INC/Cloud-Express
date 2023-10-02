@@ -90,9 +90,27 @@ function MainModal({
   // Function to Create New User Project in Database
   const handleCreateProject = async () => {
     if (selectedProject) {
-      if (selectedProject === "Import User Data (.CSV)") {
-        handleCSVFiles();
-      }
+      let csvFilesPromise;
+
+    if (selectedProject === "Import User Data (.CSV)") {
+      csvFilesPromise = handleCSVFiles();
+      csvFilesPromise.then(async () => {
+        // After handleCSVFiles() completes, make a request to cleanUpUploadedFiles
+        try {
+          const cleanUpResponse = await fetch("/api/v1/db/cleanUpUploadedFiles", {
+            method: "POST", // You can adjust the method as needed
+          });
+
+          if (cleanUpResponse.ok) {
+            console.log("CSV Files Imported and Uploaded Files Cleaned Up");
+          } else {
+            console.error("Error cleaning up uploaded files:", cleanUpResponse.statusText);
+          }
+        } catch (error) {
+          console.error("Error cleaning up uploaded files:", error);
+        }
+      });
+    }
       else {
         handleSampleCSV(selectedProject);
       }
