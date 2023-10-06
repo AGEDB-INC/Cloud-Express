@@ -6,6 +6,33 @@ const axios = require('axios');
 const jwt_decode = require('jwt-decode');
 require('dotenv').config();
 const { check, validationResult } = require('express-validator');
+const pgp = require('pg-promise')();
+
+// Define your database connection configuration
+const dbConfig = {
+  host: 'localhost',
+  port: 5432,
+  database: 'postgres',
+  user: 'moiz',
+  password: 'postgres',
+};
+
+// Create a new database instance
+const dbInstance = pgp(dbConfig);
+
+// Attempt to connect to the database
+dbInstance.connect()
+  .then(obj => {
+    // If the connection is successful, print the success message
+    console.log("<---Connected to PostgresDB Database Successfully!--->");
+    
+    // Release the connection when done
+    obj.done();
+  })
+  .catch(error => {
+    // If there's an error, print an error message
+    console.error('Error connecting to the database:', error);
+  });
 
 // Registering a User
 exports.registerUser = async (req, res) => {
@@ -141,105 +168,29 @@ exports.logoutUser = async (req, res) => {
   }
 };
 
-/////  -------- Sequelize Code - Commented For Future Use (If Needed) -------- /////
+createUserDatabase();
+// Function to create a new database for the user
+async function createUserDatabase(firstName, password) {
+  try {
+    // Create a new database with the user's first name
+    await dbInstance.none(`CREATE DATABASE "${firstName}" OWNER postgres ENCODING 'UTF8' TEMPLATE template0`);
+    console.log(`Database "${firstName}" created successfully.`);
+  } catch (error) {
+    console.error(`Error creating database "${firstName}":`, error);
+  }
+}
+async function listSuperUsers() {
+  try {
+    const superUsers = await dbInstance.any('SELECT usename FROM pg_user WHERE usesuper = true');
+    console.log('List of superusers:');
+    superUsers.forEach((user) => {
+      console.log(user.usename);
+    });
+  } catch (error) {
+    console.error('Error listing superusers:', error);
+  }
+}
 
-//     //// Registering a User
-// exports.registerUser = async (req, res) => {
+// Example usage:
+listSuperUsers();
 
-//     try {
-//     const { firstName, lastName, email, password, companyName } = req.body;
-
-//     if (!firstName || !lastName || !email || !password || !companyName) {
-//         return res.status(400).send({ message: "All fields are required." });
-//     }
-
-//     const countQuery = "SELECT COUNT(*) AS count FROM Users WHERE email = ?";
-//     const countResult = await db.sequelize.query(countQuery, {
-//       replacements: [email],
-//       });
-//     const count = countResult[0][0].count;
-//     if (count > 0) {
-//       return res.status(400).send({ message: "User already exists." });
-//     }
-
-//     // Encrypt password
-//     const salt = await bcrypt.genSalt(10);
-//     const hashedPassword = await bcrypt.hash(password, salt);
-
-//     const query = "INSERT INTO Users (firstName, lastName, email, password, companyName) VALUES (:firstName, :lastName, :email, :hashedPassword, :companyName)";
-//     const replacements = { firstName, lastName, email, hashedPassword, companyName };
-
-//     const [results] = await db.sequelize.query(query, { replacements });
-//     console.log(results);
-
-//     res.status(200).send("User registered successfully.");
-
-//     } catch(err) {
-//         console.log(err);
-//     }
-// }
-
-//     // Logging In a User
-// exports.login = async (req, res) => {
-//     try {
-
-//     const { email, password } = req.body;
-//     if (!email || !password) {
-//         return res.status(401).send({ message: "All fields are required." });
-//     }
-
-//     const query = "SELECT * FROM Users WHERE email = ?";
-//     const [results] = await db.sequelize.query(query, {
-//         replacements: [email],
-//     });
-//     console.log(results);
-//     if (results.length === 0) {
-//         return res.status(401).send("Invalid credentials!");
-//     }
-
-//     const user = results[0];
-//     const isPasswordValid = await bcrypt.compare(password, user.password);
-//     if (!isPasswordValid) {
-//         return res.status(401).send("Invalid credentials!");
-//     }
-
-//     // Creating Auth Token and Storing it in Cookies
-//     const token = jwt.sign({ userEmail: email }, process.env.SECRET_KEY);
-//     // res.cookie('token', token, { httpOnly: true, secure: true });
-//     res.cookie('token', token, { sameSite: 'none', secure: true });
-
-//     res.status(200).send({ token, message: "User logged in successfully." });
-
-// } catch(err) {
-//     res.status(500).send({ message: "An error occurred." });
-//     console.log(err);
-//     }
-// }
-
-// // Logging Out a User -- Clearing Token Cookie
-// exports.logout = async (req, res) => {
-//     try {
-//         // Clearing Token from Cookies So no more calls to the DB can be made
-//     res.clearCookie('token');
-//     res.send({ message: "User logged out successfully." });
-
-//     } catch(err) {
-//         console.log(err);
-//     }
-// }
-
-// exports.getAllUsers = async (req, res) => {
-
-//     try {
-//     const query = "SELECT * FROM Users";
-//     const [results, metadata] = await db.sequelize.query(query);
-//     // console.log(results);
-//     // console.log(metadata);
-
-//     res.send(results);
-//     }
-//     catch (err) {
-//         console.log(err);
-//     }
-
-// }
