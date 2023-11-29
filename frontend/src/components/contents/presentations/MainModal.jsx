@@ -30,7 +30,7 @@ function MainModal({
   const [modalVisible, setModalVisible] = useState(false);
   const [selectedElement, setSelectedElement] = useState(null);
   const [activePromises, setPromises] = useState({});
-  const [selectedGraph, setSelectedGraph] = useState("");
+  const [selectedGraph, setSelectedGraph] = useState("demo_graph");
   const [graphNames, setGraphNames] = useState([]);
   const [selectedProject, setSelectedProject] = useState("");
   const [selectedCSVFiles, setselectedCSVFiles] = useState([]);
@@ -49,7 +49,8 @@ function MainModal({
   // Function to Get User Project Data From Database
   const getProjectData = async () => {
     try {
-      const response = await api.get("/project/id", {
+      const email = localStorage.getItem('email');
+      const response = await api.get(`/project/id?email=${email}`, {
         withCredentials: true,
       });
       const res = await response.data;
@@ -99,8 +100,9 @@ function MainModal({
       toast.loading("Creating project...");
       const projectName = selectedProject;
       try {
+        const email = localStorage.getItem('email');
         const response = await api.post(
-          "/project/create",
+          `/project/create?email=${email}`,
           { projectName },
           {
             withCredentials: true,
@@ -188,7 +190,7 @@ function MainModal({
     for (let i = 0; i < selectedCSVFiles.length; i += 1) {
       const file = selectedCSVFiles[i];
       if (
-        file.name.includes("eg_") 
+        file.name.includes("eg_")
       ) {
         const labelName = file.name.replace(".csv", "");
         edgeFiles.push({ file, labelName });
@@ -272,7 +274,7 @@ function MainModal({
         const nodeQueries = fileInfos
           .filter((file) => file.type === "node")
           .map((file) => {
-            const labelName = file.name.split(".")[0]; 
+            const labelName = file.name.split(".")[0];
             const query = `
               SELECT create_vlabel('${selectedGraph}', '${labelName}')
               WHERE _label_id('${selectedGraph}', '${labelName}') = 0;
@@ -398,7 +400,7 @@ function MainModal({
                     handleProjectSelection(event.target.value, event)
                   }
                 />
-                
+
               </div>
             </label>
           </div> */}
@@ -443,7 +445,7 @@ function MainModal({
                       ? "3px solid blue"
                       : "1px solid #e3e6f0",
                   padding: "30px",
-                  
+
                   display: "flex",
                   borderRadius: "5px",
                   gap: "5rem",
@@ -555,7 +557,7 @@ function MainModal({
               Please select a graph before choosing a project.
             </p>
           )}
-        </Modal.Body>   
+        </Modal.Body>
         <Modal.Footer>
           <Button
             variant="secondary"

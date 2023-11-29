@@ -19,7 +19,7 @@ const MyProjectTab = () => {
     dispatch(getMetaData())
       .then((metadata) => {
         console.log("Metadata response:", metadata);
-        console.log("Metadata payload:", metadata.payload);
+        // console.log("Metadata pacyload:", metadata.payload);
         setGraphNames(Object.keys(metadata.payload));
       })
       .catch((error) => {

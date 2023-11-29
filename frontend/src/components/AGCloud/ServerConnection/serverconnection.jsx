@@ -53,7 +53,7 @@ const ServerConnectionModal = () => {
     // const userDetails = JSON.parse(Cookies.get('userId'));
     // console.log('userDetails: ', userDetails);
     const email = localStorage.getItem('email');
-    console.log('email: ', email);
+    // console.log('email: ', email);
     const username = email.split('@')[0];
     // console.log('userDetails', JSON.parse(userDetails.slice(2)));
     if (username) {
@@ -86,7 +86,7 @@ const ServerConnectionModal = () => {
   }, [dispatch]);
 
   const connectToDatabase = (data) => {
-    console.log('connect to db data', data);
+    // console.log('connect to db data', data);
     const loadingToastId = toast.loading('Connecting to database...');
 
     dispatch(connectToDatabaseApi(data)).then((response) => {
