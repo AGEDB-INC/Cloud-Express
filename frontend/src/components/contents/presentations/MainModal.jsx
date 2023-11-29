@@ -363,7 +363,7 @@ function MainModal({
               <div
                 style={{
                   border:
-                    selectedProject === "Graph for Car Specification"
+                    selectedProject === "Graph_for_Car_Specification"
                       ? "3px solid blue"
                       : "1px solid #e3e6f0",
                   padding: "30px",
@@ -375,15 +375,15 @@ function MainModal({
                   e.target.style.border = "3px solid blue";
                 }}
                 onMouseLeave={(e) => {
-                  if (selectedProject !== "Graph for Car Specification")
+                  if (selectedProject !== "Graph_for_Car_Specification")
                     e.target.style.border = "1px solid #e3e6f0";
                 }}
               >
-                Graph for Car Specification
+                Graph_for_Car_Specification
                 <input
                   type="radio"
                   name="projectType"
-                  value="Graph for Car Specification"
+                  value="Graph_for_Car_Specification"
                   style={{ transform: "scale(1.5)" }}
                   onChange={(event) =>
                     handleProjectSelection(event.target.value, event)
@@ -392,7 +392,7 @@ function MainModal({
                 <input
                   type="radio"
                   name="projectType"
-                  value="Graph for Car Specification"
+                  value="Graph_for_Car_Specification"
                   style={{ transform: "scale(1.5)" }}
                   onChange={(event) =>
                     handleProjectSelection(event.target.value, event)
@@ -407,7 +407,7 @@ function MainModal({
               <div
                 style={{
                   border:
-                    selectedProject === "Graph for Car Specification"
+                    selectedProject === "Graph_for_Car_Specification"
                       ? "3px solid blue"
                       : "1px solid #e3e6f0",
                   padding: "30px",
@@ -419,15 +419,15 @@ function MainModal({
                   e.target.style.border = "3px solid blue";
                 }}
                 onMouseLeave={(e) => {
-                  if (selectedProject !== "Graph for Car Specification")
+                  if (selectedProject !== "Graph_for_Car_Specification")
                     e.target.style.border = "1px solid #e3e6f0";
                 }}
               >
-                Graph for Car Specification
+                Graph_for_Car_Specification
                 <input
                   type="radio"
                   name="projectType"
-                  value="Graph for Car Specification"
+                  value="Graph_for_Car_Specification"
                   style={{ transform: "scale(1.5)" }}
                   onChange={(event) =>
                     handleProjectSelection(event.target.value, event)
@@ -439,7 +439,7 @@ function MainModal({
               <div
                 style={{
                   border:
-                    selectedProject === "Graph for P2P Evaluation"
+                    selectedProject === "Graph_for_P2P_Evaluation"
                       ? "3px solid blue"
                       : "1px solid #e3e6f0",
                   padding: "30px",
@@ -452,15 +452,15 @@ function MainModal({
                   e.target.style.border = "3px solid blue";
                 }}
                 onMouseLeave={(e) => {
-                  if (selectedProject !== "Graph for P2P Evaluation")
+                  if (selectedProject !== "Graph_for_P2P_Evaluation")
                     e.target.style.border = "1px solid #e3e6f0";
                 }}
               >
-                Graph for P2P Evaluation
+                Graph_for_P2P_Evaluation
                 <input
                   type="radio"
                   name="projectType"
-                  value="Graph for P2P Evaluation"
+                  value="Graph_for_P2P_Evaluation"
                   style={{ transform: "scale(1.5)" }}
                   onChange={(event) =>
                     handleProjectSelection(event.target.value, event)
@@ -472,7 +472,7 @@ function MainModal({
               <div
                 style={{
                   border:
-                    selectedProject === "Graph for Cyber Security"
+                    selectedProject === "Graph_for_Cyber_Security"
                       ? "3px solid blue"
                       : "1px solid #e3e6f0",
                   padding: "30px",
@@ -484,15 +484,15 @@ function MainModal({
                   e.target.style.border = "3px solid blue";
                 }}
                 onMouseLeave={(e) => {
-                  if (selectedProject !== "Graph for Cyber Security")
+                  if (selectedProject !== "Graph_for_Cyber_Security")
                     e.target.style.border = "1px solid #e3e6f0";
                 }}
               >
-                Graph for Cyber Security
+                Graph_for_Cyber_Security
                 <input
                   type="radio"
                   name="projectType"
-                  value="Graph for Cyber Security"
+                  value="Graph_for_Cyber_Security"
                   style={{ transform: "scale(1.5)" }}
                   onChange={(event) =>
                     handleProjectSelection(event.target.value, event)

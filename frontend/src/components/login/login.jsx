@@ -1,13 +1,10 @@
-/* eslint-disable no-unused-vars */
-/* eslint-disable import/no-unresolved */
-// eslint-disable-next-line import/no-extraneous-dependencies
+/* eslint-disable */
 import React, { useState, useEffect } from 'react';
 import { Link, useNavigate } from 'react-router-dom';
 import { toast } from 'react-toastify';
-// eslint-disable-next-line import/no-extraneous-dependencies
 import { GoogleLogin, googleLogout, useGoogleLogin } from '@react-oauth/google';
 import 'react-toastify/dist/ReactToastify.css';
-import axios from 'axios';
+import Cookies from 'js-cookie';
 import api from '../../services/api';
 
 const Login = () => {
@@ -29,6 +26,7 @@ const Login = () => {
     onSuccess: async ({ code }) => {
       try {
         const response = await googleSigning(code);
+        // eslint-disable-next-line no-console
         console.log('respone', response);
         if (response.status === 200) {
           toast.success('Successfully Logged In!');
@@ -51,9 +49,25 @@ const Login = () => {
     try {
       const response = await api.post('/user/login', { email, password }, { withCredentials: true });
       if (response.status === 200) {
+        localStorage.setItem('token', response.data.token);
+        localStorage.setItem('email', response.data.email);
+        Cookies.set('token', response.data.token);
+        const userJSON = JSON.stringify(response.data.user);
+        Cookies.set('user', userJSON);
+        const user = JSON.parse(userJSON);
+        // eslint-disable-next-line no-underscore-dangle
+        const userId = user._id;
+        Cookies.set('userId', userId);
+        localStorage.setItem('user', userJSON);
         toast.success('Successfully Logged In!');
         window.location.assign('/AGCloud');
       }
+      // const response = await api.post('/user/login', { email, password },
+      //  { withCredentials: true });
+      // if (response.status === 200) {
+      //   toast.success('Successfully Logged In!');
+      //   window.location.assign('/AGCloud');
+      // }
     } catch (error) {
       if (error.response && error.response.status === 400) {
         toast.error('Invalid Credentials. Try Again!');
@@ -124,7 +138,7 @@ const Login = () => {
                     Experience Graph Database
                     <br />
                     <span style={{ color: 'hsl(218, 81%, 95%)' }}>
-                      With AGE Viewer
+                      With Agedb Cloud
                     </span>
                   </h1>
                   <p
@@ -154,7 +168,7 @@ const Login = () => {
                 {' '}
                 <strong className="text-secondary">
                   {' '}
-                  Welcome to AGE Viewer
+                  Welcome to Agedb Cloud
                 </strong>
               </h1>
               <small

@@ -26,7 +26,7 @@ const Header = () => {
   return (
     <div className="header-title">
       <div className="header-text">
-        <h4 style={{ color: 'white' }}>Age Viewer</h4>
+        <h4 style={{ color: 'white' }}>Agedb Cloud</h4>
       </div>
       <div className="account-information">
         <ServerConnectionModal />

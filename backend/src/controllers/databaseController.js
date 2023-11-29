@@ -63,7 +63,7 @@ class DatabaseController {
 
     async getFilesInfo(req, res) {
         try {
-          const directories = ['Graph for Car Specification', 'Graph for Cyber Security', 'Graph for P2P Evaluation'];
+          const directories = ['Graph_for_Car_Specification', 'Graph_for_Cyber_Security', 'Graph_for_P2P_Evaluation'];
           const fileInfoPromises = [];
       
           directories.forEach((dir) => {
@@ -148,7 +148,7 @@ class DatabaseController {
     //         res.status(500).json({ error: 'Error reading directory' });
     //     }
     // }
-    
+
     async connectDatabase(req, res, next) {
         let databaseService = sessionService.get(req.sessionID);
         if (!databaseService.isConnected()) {
@@ -220,3 +220,5 @@ class DatabaseController {
 }
 
 module.exports = DatabaseController;
+
+
