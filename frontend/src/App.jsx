@@ -37,7 +37,8 @@ const App = () => {
   const navigate = useNavigate();
   const [authenticate, setAuthenticate] = useState(false);
   const authentication = () => {
-    if (Cookies.get('token')) return setAuthenticate(true);
+    // if (Cookies.get('token')) return setAuthenticate(true);
+    if (localStorage.getItem('token')) return setAuthenticate(true);
     navigate('/login');
   };
   useEffect(() => {

@@ -19,6 +19,33 @@
 
 import { createAsyncThunk, createSlice } from '@reduxjs/toolkit';
 
+// export const getUserDB = createAsyncThunk(
+//   'database/connectToDatabase',
+//   async (formData) => {
+//     try {
+//       const response = await fetch('/api/v1/db/connect',
+//         {
+//           method: 'POST',
+//           headers: {
+//             Accept: 'application/json',
+//             'Content-Type': 'application/json',
+//           },
+//           body: JSON.stringify(formData),
+//         });
+//       if (response.ok) { return await response.json(); }
+//       throw response;
+//     } catch (error) {
+//       const errorJson = await error.json();
+//       const errorDetail = {
+//         name: 'Failed to Retrieve Connection Information',
+//         message: `[${errorJson.severity}]:(${errorJson.code}) ${errorJson.message} `,
+//         statusText: error.statusText,
+//       };
+//       throw errorDetail;
+//     }
+//   },
+// );
+
 export const connectToDatabase = createAsyncThunk(
   'database/connectToDatabase',
   async (formData) => {

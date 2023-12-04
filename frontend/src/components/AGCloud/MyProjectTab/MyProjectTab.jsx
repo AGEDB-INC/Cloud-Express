@@ -19,7 +19,7 @@ const MyProjectTab = () => {
     dispatch(getMetaData())
       .then((metadata) => {
         console.log("Metadata response:", metadata);
-        console.log("Metadata payload:", metadata.payload);
+        // console.log("Metadata pacyload:", metadata.payload);
         setGraphNames(Object.keys(metadata.payload));
       })
       .catch((error) => {
@@ -66,10 +66,10 @@ const MyProjectTab = () => {
       >
         <h2 className="first-heading">My Project</h2>
         <p className="paragraph">
-          Add a project to view its graph visualization in AGEViewer.
+          Add a project to view its graph visualization in Agedb Cloud.
         </p>
       </div>
-      <h2 className="mid-heading">AGCloud Database Project</h2>
+      <h2 className="mid-heading">Agedb Cloud Database Project</h2>
       <div className="project-table">
         <table id="projectDetailsTable" className="project-details">
           <tr>

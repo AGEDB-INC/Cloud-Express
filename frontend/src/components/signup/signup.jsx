@@ -1,3 +1,4 @@
+/* eslint-disable no-console */
 import React, { useState } from 'react';
 import { Link, useNavigate } from 'react-router-dom';
 import { toast } from 'react-toastify';
@@ -177,7 +178,7 @@ const SignUpPage = () => {
                 Experience Graph Database
                 <br />
                 <span style={{ color: 'hsl(218, 81%, 95%)' }}>
-                  With AGE Viewer
+                  Agedb Cloud
                 </span>
               </h1>
               <p
