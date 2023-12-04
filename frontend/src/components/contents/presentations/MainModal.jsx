@@ -30,7 +30,7 @@ function MainModal({
   const [modalVisible, setModalVisible] = useState(false);
   const [selectedElement, setSelectedElement] = useState(null);
   const [activePromises, setPromises] = useState({});
-  const [selectedGraph, setSelectedGraph] = useState("");
+  const [selectedGraph, setSelectedGraph] = useState("demo_graph");
   const [graphNames, setGraphNames] = useState([]);
   const [selectedProject, setSelectedProject] = useState("");
   const [selectedCSVFiles, setselectedCSVFiles] = useState([]);
@@ -49,7 +49,8 @@ function MainModal({
   // Function to Get User Project Data From Database
   const getProjectData = async () => {
     try {
-      const response = await api.get("/project/id", {
+      const email = localStorage.getItem('email');
+      const response = await api.get(`/project/id?email=${email}`, {
         withCredentials: true,
       });
       const res = await response.data;
@@ -99,8 +100,9 @@ function MainModal({
       toast.loading("Creating project...");
       const projectName = selectedProject;
       try {
+        const email = localStorage.getItem('email');
         const response = await api.post(
-          "/project/create",
+          `/project/create?email=${email}`,
           { projectName },
           {
             withCredentials: true,
@@ -188,7 +190,7 @@ function MainModal({
     for (let i = 0; i < selectedCSVFiles.length; i += 1) {
       const file = selectedCSVFiles[i];
       if (
-        file.name.includes("eg_") 
+        file.name.includes("eg_")
       ) {
         const labelName = file.name.replace(".csv", "");
         edgeFiles.push({ file, labelName });
@@ -272,7 +274,7 @@ function MainModal({
         const nodeQueries = fileInfos
           .filter((file) => file.type === "node")
           .map((file) => {
-            const labelName = file.name.split(".")[0]; 
+            const labelName = file.name.split(".")[0];
             const query = `
               SELECT create_vlabel('${selectedGraph}', '${labelName}')
               WHERE _label_id('${selectedGraph}', '${labelName}') = 0;
@@ -363,7 +365,7 @@ function MainModal({
               <div
                 style={{
                   border:
-                    selectedProject === "Graph for Car Specification"
+                    selectedProject === "Graph_for_Car_Specification"
                       ? "3px solid blue"
                       : "1px solid #e3e6f0",
                   padding: "30px",
@@ -375,15 +377,15 @@ function MainModal({
                   e.target.style.border = "3px solid blue";
                 }}
                 onMouseLeave={(e) => {
-                  if (selectedProject !== "Graph for Car Specification")
+                  if (selectedProject !== "Graph_for_Car_Specification")
                     e.target.style.border = "1px solid #e3e6f0";
                 }}
               >
-                Graph for Car Specification
+                Graph_for_Car_Specification
                 <input
                   type="radio"
                   name="projectType"
-                  value="Graph for Car Specification"
+                  value="Graph_for_Car_Specification"
                   style={{ transform: "scale(1.5)" }}
                   onChange={(event) =>
                     handleProjectSelection(event.target.value, event)
@@ -392,13 +394,13 @@ function MainModal({
                 <input
                   type="radio"
                   name="projectType"
-                  value="Graph for Car Specification"
+                  value="Graph_for_Car_Specification"
                   style={{ transform: "scale(1.5)" }}
                   onChange={(event) =>
                     handleProjectSelection(event.target.value, event)
                   }
                 />
-                
+
               </div>
             </label>
           </div> */}
@@ -407,7 +409,7 @@ function MainModal({
               <div
                 style={{
                   border:
-                    selectedProject === "Graph for Car Specification"
+                    selectedProject === "Graph_for_Car_Specification"
                       ? "3px solid blue"
                       : "1px solid #e3e6f0",
                   padding: "30px",
@@ -419,15 +421,15 @@ function MainModal({
                   e.target.style.border = "3px solid blue";
                 }}
                 onMouseLeave={(e) => {
-                  if (selectedProject !== "Graph for Car Specification")
+                  if (selectedProject !== "Graph_for_Car_Specification")
                     e.target.style.border = "1px solid #e3e6f0";
                 }}
               >
-                Graph for Car Specification
+                Graph_for_Car_Specification
                 <input
                   type="radio"
                   name="projectType"
-                  value="Graph for Car Specification"
+                  value="Graph_for_Car_Specification"
                   style={{ transform: "scale(1.5)" }}
                   onChange={(event) =>
                     handleProjectSelection(event.target.value, event)
@@ -439,11 +441,11 @@ function MainModal({
               <div
                 style={{
                   border:
-                    selectedProject === "Graph for P2P Evaluation"
+                    selectedProject === "Graph_for_P2P_Evaluation"
                       ? "3px solid blue"
                       : "1px solid #e3e6f0",
                   padding: "30px",
-                  
+
                   display: "flex",
                   borderRadius: "5px",
                   gap: "5rem",
@@ -452,15 +454,15 @@ function MainModal({
                   e.target.style.border = "3px solid blue";
                 }}
                 onMouseLeave={(e) => {
-                  if (selectedProject !== "Graph for P2P Evaluation")
+                  if (selectedProject !== "Graph_for_P2P_Evaluation")
                     e.target.style.border = "1px solid #e3e6f0";
                 }}
               >
-                Graph for P2P Evaluation
+                Graph_for_P2P_Evaluation
                 <input
                   type="radio"
                   name="projectType"
-                  value="Graph for P2P Evaluation"
+                  value="Graph_for_P2P_Evaluation"
                   style={{ transform: "scale(1.5)" }}
                   onChange={(event) =>
                     handleProjectSelection(event.target.value, event)
@@ -472,7 +474,7 @@ function MainModal({
               <div
                 style={{
                   border:
-                    selectedProject === "Graph for Cyber Security"
+                    selectedProject === "Graph_for_Cyber_Security"
                       ? "3px solid blue"
                       : "1px solid #e3e6f0",
                   padding: "30px",
@@ -484,15 +486,15 @@ function MainModal({
                   e.target.style.border = "3px solid blue";
                 }}
                 onMouseLeave={(e) => {
-                  if (selectedProject !== "Graph for Cyber Security")
+                  if (selectedProject !== "Graph_for_Cyber_Security")
                     e.target.style.border = "1px solid #e3e6f0";
                 }}
               >
-                Graph for Cyber Security
+                Graph_for_Cyber_Security
                 <input
                   type="radio"
                   name="projectType"
-                  value="Graph for Cyber Security"
+                  value="Graph_for_Cyber_Security"
                   style={{ transform: "scale(1.5)" }}
                   onChange={(event) =>
                     handleProjectSelection(event.target.value, event)
@@ -555,7 +557,7 @@ function MainModal({
               Please select a graph before choosing a project.
             </p>
           )}
-        </Modal.Body>   
+        </Modal.Body>
         <Modal.Footer>
           <Button
             variant="secondary"

@@ -20,6 +20,10 @@ import {
   /* getMetaChartData, */ getMetaData,
 } from '../../../features/database/MetadataSlice';
 
+import Cookies from 'js-cookie';
+import api from '../../../services/api';
+
+
 const FormInitialValue = {
   database: '',
   graph: '',
@@ -32,6 +36,7 @@ const FormInitialValue = {
 const ServerConnectionModal = () => {
   const [modalVisible, setModalVisible] = useState(false);
   const [connectionState, setConnectionState] = useState(false);
+  // const [connectionDetail, setConnectionDetail] = useState({});
   const dispatch = useDispatch();
 
   const openModal = () => {
@@ -40,6 +45,34 @@ const ServerConnectionModal = () => {
   const closeModal = () => {
     setModalVisible(false);
   };
+
+
+  useEffect(() => {
+    // const userDetails = JSON.parse(Cookies.get('userId').slice(2));
+    // const res = await api("/user/getUserDetails",)
+    // const userDetails = JSON.parse(Cookies.get('userId'));
+    // console.log('userDetails: ', userDetails);
+    const email = localStorage.getItem('email');
+    // console.log('email: ', email);
+    const username = email.split('@')[0];
+    // console.log('userDetails', JSON.parse(userDetails.slice(2)));
+    if (username) {
+      // connect to db
+      const connection = {
+        host: "24.199.126.236",
+        port: 5432,
+        // database: userDetails.firstName + "_database",
+        // user: userDetails.firstName,
+        database: username + "_database",
+        user: username,
+        // password: userDetails.password,
+        password: "123456Aa",
+        // password: "postgres",
+      }
+      connectToDatabase(connection);
+    }
+  });
+
 
   // Check Database Connection Status
   useEffect(() => {
@@ -53,6 +86,7 @@ const ServerConnectionModal = () => {
   }, [dispatch]);
 
   const connectToDatabase = (data) => {
+    // console.log('connect to db data', data);
     const loadingToastId = toast.loading('Connecting to database...');
 
     dispatch(connectToDatabaseApi(data)).then((response) => {
@@ -72,17 +106,41 @@ const ServerConnectionModal = () => {
     });
   };
 
+  // const userDetails = () => {
+  //   const userInfo = Cookies.get('userId');
+  //   console.log('userInfo', userInfo);
+  //   // return
+  // }
+
   const handleConnection = () => {
-    if (connectionState) {
+    if (connectionState) { // If connected
       // Calling disconnect API
       dispatch(disconnectToDatabase()).then((response) => {
         console.log('response', response);
         setConnectionState(false);
         toast.success('Disconnected successfully!');
       });
-    } else {
-      openModal();
+    } else { // If disconnected
+      // then connect automatically
+
+      const userDetails = JSON.parse(Cookies.get('userId').slice(2));
+      if (userDetails) {
+        // connect to db
+        const connection = {
+          host: "24.199.126.236",
+          port: 5432,
+          database: userDetails.firstName + "_database",
+          user: userDetails.firstName,
+          // password: userDetails.password,
+          password: "123456Aa",
+          // password: "123456Aa",
+        }
+        connectToDatabase(connection);
+      }
+
     }
+    // openModal();
+
   };
 
   return (
@@ -161,7 +219,7 @@ const ServerConnectionModal = () => {
                     <Input.Password placeholder="postgres" />
                   </Form.Item>
                   <Form.Item>
-                    <Button type="primary" htmlType="submit">
+                    <Button type="primary" htmltype="submit">
                       Connect
                     </Button>
                   </Form.Item>

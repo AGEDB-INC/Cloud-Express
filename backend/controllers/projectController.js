@@ -7,6 +7,7 @@ const { check, validationResult } = require("express-validator");
 
 exports.createProject = async (req, res) => {
   try {
+    const email = req.query.email;
     const { projectName } = req.body;
     const errors = validationResult(req);
     if (!errors.isEmpty()) {
@@ -17,22 +18,23 @@ exports.createProject = async (req, res) => {
     }
 
     // Get the userId from cookies
-    let userId = req.cookies["userId"];
+    const user = await userController.verifyUserByEmail(email);
 
-    if (!userId) {
+    if (!user) {
       // If userId is not present in cookies then return error
       console.log("User not logged in!");
       return res.status(401).send({ message: "User not logged in!" });
     } else {
       // Check if the user exists
-      const user = await userController.verifyUserById(userId);
+      const user = await userController.verifyUserByEmail(email);
       if (!user) {
         console.log("User not found!");
         return res.status(404).send({ message: "User not found!" });
       }
-      
+
     }
     // Check if User already has a project
+    const userId = user._id;
     const project = await Project.findOne({ userId });
     if (project) {
       return res.status(401).send({ message: "User already has a project!" });
@@ -48,7 +50,7 @@ exports.createProject = async (req, res) => {
     const createdProject = await Project.create(newProject);
     res.status(200).send({ message: "Project created successfully!" });
   } catch (err) {
-    console.log(err);
+    console.log("Project Error:->", err);
     res.status(500).send({ message: "Some error occurred. Try Again!" });
   }
 };
@@ -58,18 +60,21 @@ exports.createProject = async (req, res) => {
 
 exports.deleteProject = async (req, res) => {
   try {
-    let userId = req.cookies["userId"];
 
+    const email = req.query.email;
+    const user = await userController.verifyUserByEmail(email);
     // Validate User
-    if (!userId) {
+    if (!user) {
       return res.status(401).send({ message: "User not logged in!" });
     } else {
-      const user = await userController.verifyUserById(userId);
+      const user = await userController.verifyUserByEmail(email);
       if (!user) {
         return res.status(404).send({ message: "User not found!" });
       }
     }
     // Check if User has a project
+    //const user = await userController.verifyUserByEmail(email);
+    const userId = user._id;
     const project = await Project.findOne({ userId });
     if (!project) {
       return res.status(404).send({ message: "User doesn't have a Project!" });
@@ -83,27 +88,29 @@ exports.deleteProject = async (req, res) => {
 };
 
 
-// Get project by userId 
+// Get project by userId
 exports.getProjectByUserId = async (req, res) => {
-    try {
-        let userId = req.cookies["userId"];
-        // Validate User
-        if (!userId) {
-        return res.status(401).send({ message: "User not logged in!" });
-        } else {
-        const user = await userController.verifyUserById(userId);
-        if (!user) {
-            return res.status(404).send({ message: "User not found!" });
-        }
-        }
-        // Check if User has a project
-        const project = await Project.findOne({ userId });
-        if (!project) {
-        return res.status(404).send({ message: "User doesn't have a Project!" });
-        }
-        res.status(200).send(project);
-    } catch (err) {
-        console.log(err);
-        res.status(500).send({ message: "Some error occurred. Try Again!" });
+  try {
+    const email = req.query.email;
+    const user = await userController.verifyUserByEmail(email);
+    // Validate User
+    if (!user) {
+      return res.status(401).send({ message: "User not logged in!" });
+    } else {
+      const user = await userController.verifyUserByEmail(email);
+      if (!user) {
+        return res.status(404).send({ message: "User not found!" });
+      }
     }
+    // Check if User has a project
+    const userId = user._id;
+    const project = await Project.findOne({ userId });
+    if (!project) {
+      return res.status(404).send({ message: "User doesn't have a Project!" });
     }
+    res.status(200).send(project);
+  } catch (err) {
+    console.log(err);
+    res.status(500).send({ message: "Some error occurred. Try Again!" });
+  }
+}
