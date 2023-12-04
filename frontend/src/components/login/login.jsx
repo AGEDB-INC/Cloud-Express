@@ -138,7 +138,7 @@ const Login = () => {
                     Experience Graph Database
                     <br />
                     <span style={{ color: 'hsl(218, 81%, 95%)' }}>
-                      With Agedb Cloud
+                      With AGEDB Cloud
                     </span>
                   </h1>
                   <p
@@ -168,7 +168,7 @@ const Login = () => {
                 {' '}
                 <strong className="text-secondary">
                   {' '}
-                  Welcome to Agedb Cloud
+                  Welcome to AGEDB Cloud
                 </strong>
               </h1>
               <small
